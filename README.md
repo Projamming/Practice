@@ -1,2 +1,2 @@
 # Practice
-Post your daily practice gists here
+Post your daily practice gists here!
