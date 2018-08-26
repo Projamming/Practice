@@ -1,0 +1,99 @@
+# A music box sort of melody, coded by P-Rhyme, August 2018
+
+# Inspired by our initial attempt to give a harmony to Twinkle
+# where we put one note in between two others that were an octave
+# apart. I thought that sounded nice.
+
+# I made up this tune. Sounds like a music box to me.
+
+use_bpm 80
+
+# I like the sound of this synth, too:
+# use_synth :hollow
+
+# Someone asked after class about guitar sounds, and the synth :pluck
+# is the best I've found so far. Without any effects applied, I think
+# this synth sounds more like a harpsichord than a guitar:
+
+use_synth :pluck
+
+2.times do
+  
+  4.times do
+    
+    play :C4
+    play :G4
+    play :C5
+    sleep 0.5
+    
+    play :G4
+    play :B4
+    sleep 0.5
+    
+  end
+  
+  2.times do
+    
+    play :G4
+    play :C5
+    sleep 0.5
+    
+    play :G3
+    play :B4
+    sleep 0.5
+    
+    play :G4
+    play :C5
+    play :G5
+    sleep 0.5
+    
+    play :G3
+    play :B4
+    sleep 0.5
+    
+  end
+  
+  2.times do
+    
+    play :D3
+    play :D4
+    play :F4
+    sleep 0.5
+    
+    play :D3
+    play :E4
+    play :G4
+    sleep 0.5
+    
+    play :D3
+    play :F4
+    play :A4
+    sleep 0.5
+    
+    play :D4
+    play :A3
+    sleep 0.5
+    
+  end
+  
+  play :G3
+  play :B3
+  play :G4
+  sleep 1
+  
+  play :G3
+  play :C3
+  play :G4
+  sleep 1
+  
+  play :G3
+  play :Cs4
+  play :G4
+  sleep 1
+  
+  play :G3
+  play :D4
+  play :G4
+  sleep 1
+  
+end
