@@ -1,0 +1,60 @@
+## Fur Elise by Beethoven, coded by P-Rhyme, August 22 2018
+
+use_bpm 120
+
+# I included this hiss just for fun. Sounds olden days.
+sample :vinyl_hiss
+
+# I haven't taught you about rings yet. They act like a list that you can step through.
+my_notes = (ring :E5, :Eb5, :E5, :Eb5, :E5, :B4, :D5, :C5, :A4)
+
+# This is a counter that will count up by ones and let me play the notes in the ring my_notes.
+my_index = 0
+
+# I chose 9.times here because the ring my_notes has 9 notes in it:
+9.times do
+  
+  # I put sleep FIRST inside this loop in order to get overlap on the last note with the next loop:
+  sleep 0.5
+  
+  # Here is where I look up a note inside the ring my_notes. The "index" of the ring is just the spot
+  # in the ring that I want to pull a note from. A ring starts with index 0, not index 1. That's
+  # traditional for programming, to start counting at 0:
+  play my_notes[my_index] if my_index < 8
+  play my_notes[my_index], sustain: 1 if my_index == 8
+  
+  # Oh right, I also used an "if" statement! I forgot, when I sent you my most recent email. I bet you
+  # can figure out what it does, but if not, no worries -- we will talk on Tuesday.
+  
+  # Bump my_index up by 1 so that we move to the next note:
+  my_index = my_index + 1
+end
+
+# Most of what appears below just repeats the techniques above, so I won't comment further:
+
+bass_notes = (ring :A2, :E3, :A3, :C4, :E4, :A4, :B4)
+my_index = 0
+
+7.times do
+  play bass_notes[my_index] if my_index < 6
+  play bass_notes[my_index], sustain: 1 if my_index == 6
+  sleep 0.5 if my_index < 6
+  my_index = my_index + 1
+end
+
+next_notes = (ring :E2, :E3, :Gs3)
+my_index = 0
+
+3.times do
+  play next_notes[my_index]
+  my_index = my_index + 1
+  sleep 0.5
+end
+
+
+
+
+
+
+
+
