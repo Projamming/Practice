@@ -1,0 +1,45 @@
+#trying out the first few lines of Beauty and the Beast 
+
+use_bpm 88
+
+1.times do
+  play :D3, sustain: 2
+end
+
+def quick_changes
+  notes = [:r, :Fs5, :G5, :E5, :Fs5]
+  durations = [1, 0.5, 0.5, 0.5, 0.5]
+  sustain = [0, 0, 0, 0]
+  play_pattern_timed notes, durations, sustain
+end
+
+1.times do
+  quick_changes
+end
+
+1.times do
+  play :G2
+  1.times do
+    play :D5, sustain: 1
+    sleep 1
+    play :A4, sustain: 1
+  end
+end
+
+sleep 0.5
+
+play :D3, sustain: 2
+1.times do
+  quick_changes
+end
+
+sleep 0.1
+
+1.times do
+  play :G2, sustain: 1
+  1.times do
+    play :D5, sustain: 0.5
+    sleep 0.5
+    play :A5, sustain: 0.5
+  end
+end
