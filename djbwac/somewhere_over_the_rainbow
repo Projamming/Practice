@@ -1,0 +1,32 @@
+# Somewhere Over the Rainbow
+# BWAC
+# August 29, 2018
+
+def somewhere_over_the_rainbow
+  
+  use_bpm 120
+  
+  use_synth :pluck
+  notes = [:r, :c5, :r, :c4,:r, :b4, :r,
+           :g4, :r, :a4, :r, :b4, :r,:c4,
+           :r, :c4, :r, :a4, :r, :g4,
+           :r, :a4, :r, :f4, :r, :e4,
+           :r, :c4, :r, :d4, :r, :e4, :r, :f4,
+           :r, :d4, :r, :b4, :r, :c4,
+           :r, :d4, :r, :e4, :r, :c4, :r]
+  
+  
+  durations = [1, 2, 0.5, 2, 0.5, 1,
+               0.5, 0.5, 0.5, 0.5, 0.5, 1, 0.5, 1, 1,1,
+               0.5, 2, 0.5,3,2,
+               1, 0.5,2, 0.5, 1, 0.5, 0.5, 0.5, 0.5, 0.5,
+               1, 0.5, 1, 1,
+               1, 0.5, 0.5, 0.5, 0.5, 0.5,
+               0.5, 0.5, 0.5, 0.5, 2, 2]
+  
+  
+  play_pattern_timed notes, durations
+  
+end
+
+somewhere_over_the_rainbow
