@@ -1,0 +1,45 @@
+# -------------------------------------------------------------------------------------------------------- #
+# FILE   : Gymnopedie No. 1
+# AUTHOR : SnipeSauce
+# DATE   : 9/3/2018
+# DESC   : First practice code. 
+           Original song: https://open.spotify.com/track/5NGtFXVpXSvwunEIGeviY3?si=De-cQNdYT_6qS55Q59B0AA
+# -------------------------------------------------------------------------------------------------------- #
+
+use_bpm 70
+
+2.times do
+  play :G2
+  sleep 1
+  play :B3
+  play :D4
+  play :Gb4
+  sleep 2
+  
+  play :D2
+  sleep 1
+  play :A3
+  play :Db4
+  play :Gb4
+  sleep 2
+end
+
+sleep 1        #Next step is layering this part on top of the last
+play :Gb5
+sleep 1
+play :A5
+sleep 1
+play :G5
+sleep 1
+play :Gb5
+sleep 1
+play :Db5
+sleep 1
+play :B4
+sleep 1
+play :Db5
+sleep 1
+play :D5
+sleep 1
+play :A4
+sleep 3
