@@ -1,0 +1,61 @@
+#Young Dumb and Broke - Khalid
+#used https://www.youtube.com/watch?v=lsfj6lfiQTA
+
+use_bpm 100
+use_synth :pluck
+
+1.times do
+  play :Fs3, duration: 4
+  sleep 1
+end
+
+
+1.times do
+  play :Fs3, sustain: 3.5
+  1.times do
+    notes = [ :r, :Bb4, :Ab4, :Bb4,
+              :Db4,:Bb4, :Ab4, :Bb4]
+    durations = [0.5, 0.5, 0.5, 0.5,
+                 0.5, 0.5, 0.5, 0.5]
+    play_pattern_timed notes, durations
+  end
+end
+
+sleep 0.25
+
+1.times do
+  play :Fs3, sustain: 3.5
+  1.times do
+    notes = [ :r, :Bb4, :Ab4, :Bb4,
+              :Ab4, :Fs4, :r, :Fs4]
+    durations = [0.5, 0.5, 0.5, 0.5,
+                 0.5, 0.3, 0.2, 1]
+    play_pattern_timed notes, durations
+  end
+end
+
+sleep 0.25
+
+1.times do
+  play :Eb3, sustain: 3.5
+  1.times do
+    notes = [ :r, :Bb4, :Ab4, :Bb4,
+              :Db4, :Bb4, :Ab4, :Bb4]
+    durations = [0.5, 0.5, 0.5, 0.5,
+                 0.5, 0.5, 0.5, 0.5]
+    play_pattern_timed notes, durations
+  end
+end
+
+sleep 0.25
+
+1.times do
+  play :Db2, sustain: 3.5
+  1.times do
+    notes = [ :Db3, :Bb4, :Ab4, :Bb4,
+              :Ab4, :Fs4, :Fs4, :r]
+    durations = [0.5, 0.5, 0.5, 0.5,
+                 0.5, 0.5, 0.5, 0.5]
+    play_pattern_timed notes, durations
+  end
+end
