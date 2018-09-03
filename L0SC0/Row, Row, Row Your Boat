@@ -1,0 +1,74 @@
+#This is my first attempt at Row, Row, Row Your Boat
+
+use_bpm 190
+
+3.times do
+  
+  play :C3
+  sleep 1.5
+  
+end
+
+play :D3
+sleep 1
+
+play :E3, release: 1.5
+sleep 2
+
+play :E3
+sleep 1.5
+
+play :D3
+sleep 1.5
+
+play :E3
+sleep 1.5
+
+play :F3
+sleep 1.5
+
+play :G3, release: 3
+sleep 3
+
+3.times do
+  
+  play :C4
+  sleep 1.5
+  
+end
+
+3.times do
+  
+  play :G3
+  sleep 1.5
+  
+end
+
+3.times do
+  
+  play :E3
+  sleep 1.5
+  
+end
+
+3.times do
+  
+  play :C3
+  sleep 1.5
+  
+end
+
+play :G3, release: 2
+sleep 2
+
+play :F3
+sleep 1.5
+
+play :E3, release: 2
+sleep 2
+
+play :D3
+sleep 1.5
+
+play :C3, release: 3
+sleep 1.5
