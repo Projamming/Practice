@@ -1,0 +1,21 @@
+# First attepmt at using in threads
+# to harmonize a melody.
+
+
+use_synth :piano
+in_thread do
+  loop do
+    play :D3
+    sleep 1
+  end
+end
+
+loop do
+  play :Fs3
+  sleep 1
+end
+
+loop do
+  play :A3
+  sleep 1
+end
