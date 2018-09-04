@@ -1,0 +1,14 @@
+use_bpm 120
+use_synth :piano
+
+notes = [:C5, :G5, :C5, :G5,
+         :C5, :G5, :C5, :Gs5,
+         :C5, :Gs5, :C5, :G5,
+         :C5, :G5, :C5, :G5]
+
+durations = [0.5, 0.5, 0.5, 0.5,
+             0.5, 0.5, 0.5, 0.5,
+             0.5, 0.5, 0.5, 0.5,
+             0.5, 0.5, 0.5, 0.5]
+
+play_pattern_timed notes, durations
