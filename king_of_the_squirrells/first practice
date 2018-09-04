@@ -1,0 +1,8 @@
+# allstar by smashmouth class practice
+use_synth:piano
+def all_star
+  notes = [:f2, :r, :c2, :a2, :r, :g2,]
+  duration = [1, 1, 1, 1, 1, 1, 1,]
+  play_pattern_timed notes, duration
+end
+all_star
