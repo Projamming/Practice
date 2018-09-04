@@ -1,0 +1,71 @@
+# TITLE  : Practice 4/4 Rhythm
+# AUTHOR : SeaBreezeView
+# DATE   : August 31, 2018
+# DESC   : Practice new way of coding wth a song in 4/4 time.  I coded a part of the song from Frozen's Let it Go. 
+
+use_bpm 120
+def start
+  notes = [:G5, :E5, :E5, :E5, :D5]
+  durations = [1, 0.5, 0.5, 1, 1]
+  sustain = [0, 0, 0, 0, 0, 0, 0]
+  play_pattern_timed notes, durations, sustain
+end
+
+def what
+  notes = [:d5, :r, :c5, :c5]
+  durations = [1, 1, 1, 1]
+  sustain = [0, 0, 0, 0, 0, 0, 0]
+  play_pattern_timed notes, durations, sustain
+end
+
+def going
+  notes = [:g5, :e5, :e5, :c5]
+  durations = [1.5, 0.5, 1, 1,]
+  sustain = [0, 0, 0, 0, 0, 0, 0]
+  play_pattern_timed notes, durations, sustain
+end
+
+def say
+  notes = [:c5, :r, :r, :c5, :c5]
+  durations = [1, 1, 1, 0.5, 0.5]
+  sustain = [0, 0, 0, 0, 0, 0, 0]
+  play_pattern_timed notes, durations, sustain
+end
+
+def storm
+  notes = [:b4, :g4, :g4, :g4,]
+  durations = [1.5, 0.5, 1, 1]
+  sustain = [0, 0, 0, 0, 0, 0, 0]
+  play_pattern_timed notes, durations, sustain
+end
+
+def wind
+  notes = [:g4, :r, :f4]
+  durations = [3, 0.5, 0.5]
+  sustain = [0, 0, 0, 0, 0, 0, 0]
+  play_pattern_timed notes, durations, sustain
+end
+
+def cold
+  notes = [:f4, :f4, :e4, :f4, :e4, :f4, :f4]
+  durations = [1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+  sustain = [0, 0, 0, 0, 0, 0, 0]
+  play_pattern_timed notes, durations, sustain
+end
+
+def anyway
+  notes = [:e4, :c4, :r]
+  durations = [0.5, 1, 2.5]
+  sustain = [0, 0, 0, 0, 0, 0, 0]
+  play_pattern_timed notes, durations, sustain
+end
+
+
+start
+what
+going
+say
+storm
+wind
+cold
+anyway
