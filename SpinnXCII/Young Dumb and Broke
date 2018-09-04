@@ -2,7 +2,7 @@
 #used https://www.youtube.com/watch?v=lsfj6lfiQTA
 
 use_bpm 100
-use_synth :pluck
+use_synth :hollow 
 
 1.times do
   play :Fs3, duration: 4
