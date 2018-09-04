@@ -1,0 +1,98 @@
+# Welcome to Sonic Pi v3.1
+#Title: SAIL-Awolnation Intro
+# AUTHOR : CoreyandTrevor
+# DATE   : August 29, 2018
+# DESC   : Practice attempt
+
+#I would of liked to use an organ piano sound, but couldn't really figure it out
+
+use_bpm 60
+
+use_synth :piano
+
+2.times do
+  
+  4.times do
+    play :G4
+    play :E4
+    play :E2
+    sleep 0.5
+  end
+  
+  2.times do
+    play :G4
+    play :E4
+    play :E2
+    sleep 0.5
+  end
+  
+  2.times do
+    play :A4
+    play :E4
+    play :E2
+    sleep 0.5
+  end
+end
+
+8.times do
+  play :Fs4
+  play :D4
+  play :D2
+  sleep 0.5
+end
+
+4.times do
+  play :D4
+  play :C4
+  play :C2
+  sleep 0.5
+end
+
+4.times do
+  play :Fs4
+  play :D4
+  play :B2
+  sleep 0.5
+end
+
+2. times do
+  
+  2.times do
+    play :G4
+    play :E4
+    play :E2
+    sleep 0.5
+  end
+  
+  play :E4
+  play :E2
+  sleep 0.2
+  play :E4
+  sleep 0.2
+  play :E4
+  sleep 0.2
+  
+  play :G4
+  play :E4
+  sleep 0.2
+  play :G4
+  sleep 0.2
+  play :G4
+  sleep 0.2
+  
+  play :A4
+  play :E2
+  sleep 0.3
+  play :B4
+  play :E2
+  sleep 0.3
+  
+  play :A4
+  play :E2
+  sleep 0.5
+  play :G4
+  sleep 0.3
+  play :E4
+  play :E2
+  sleep 0.5
+end
