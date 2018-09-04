@@ -1,7 +1,7 @@
 #Young Dumb and Broke - Khalid
 #used https://www.youtube.com/watch?v=lsfj6lfiQTA
 
-use_bpm 100
+use_bpm 80
 use_synth :hollow 
 
 1.times do
