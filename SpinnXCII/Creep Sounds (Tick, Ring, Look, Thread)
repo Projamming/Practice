@@ -1,0 +1,53 @@
+#made some creepy background music using ticks, rings, looks, and threads
+
+use_synth :dark_ambience
+
+my_amps = (ring 0.1, 0.3, 0.5, 0.7)
+my_notes = (ring :C4, :D4, :E4, :F4)
+
+in_thread do
+  loop do
+    tick
+    play my_notes.look
+    play my_amps.look
+    sleep 0.5
+  end
+end
+
+
+in_thread do
+  loop do
+    sample :drum_tom_mid_hard, amp: 0.1
+    sleep 0.5
+  end
+end
+
+3.times do
+  sample :ambi_haunted_hum
+  sleep 0.5
+end
+
+sleep 0.5
+
+3.times do
+  sample :ambi_swoosh
+  sleep 0.5
+end
+
+sleep 0.5
+
+my_amps = (ring 0.5, 1.0, 1.5, 2.0)
+
+3.times do
+  tick
+  play my_amps.look
+  sample :loop_perc1
+  sleep 0.5
+end
+
+
+
+
+
+
+
