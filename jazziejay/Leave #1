@@ -1,0 +1,22 @@
+# Leave By Glen Hansard, from Once - #1
+# Matty Jackmauh, 9/4/18
+# credit to P-Rhyme's Landslide code!
+
+use_bpm 40
+
+use_synth :pluck
+
+def first_chord
+  
+  play :E2, amp: 1
+  sleep 0.025
+  play :E3, amp: 1
+  sleep 0.025
+  play :B4, amp: 1.5
+  sleep 0.025
+  play :E4, amp: 1.5
+  sleep 0.025
+  
+end
+
+first_chord
