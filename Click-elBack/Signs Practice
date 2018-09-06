@@ -1,0 +1,73 @@
+def signs
+  play :A3
+  play :F4
+  play :A4
+  play :C4
+  play :E4
+end
+
+
+def signs2
+  
+  play :A3
+  play :E4
+  play :A4
+  play :C4
+  play :E4
+end
+def signs3
+  play :A3
+  play :A4
+  play :C4
+  play :E4
+end
+
+def signs4
+  play :G3
+  play :G4
+  play :B4
+  play :E4
+end
+
+def signs5
+  play :F3
+  play :F4
+  play :A4
+  play :D4
+end
+
+def signs6
+  play :C3
+  play :E4
+  play :G4
+  play :C4
+end
+
+signs
+sleep 1.0
+signs2
+sleep 1.0
+signs
+sleep 1.0
+signs2
+sleep 1.0
+signs3
+sleep 1.0
+signs4
+sleep 1.0
+signs5
+sleep 1.0
+signs6
+sleep 1.0
+signs3
+sleep 1.0
+signs4
+sleep 1.0
+signs5
+sleep 1.0
+signs6
+sleep 1.0
+signs
+sleep 1.0
+signs2
+sleep 1.0
