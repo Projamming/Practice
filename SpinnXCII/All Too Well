@@ -1,0 +1,45 @@
+#all too well
+#would like to add to this and get some more sounds involved (bass and drum maybe) but here is the basic of the song for now 
+#these chords repeated throughout entire song 
+#https://www.azchords.com/t/taylorswift-tabs-34955/alltoowell-tabs-522982.html
+
+
+use_bpm 93
+def all_too_well
+  8.times do
+    play chord(:C, :major)
+    sleep 0.5
+  end
+  8.times do
+    play chord(:G, :major)
+    sleep 0.5
+  end
+  8.times do
+    play chord(:A, :minor)
+    sleep 0.5
+  end
+  8.times do
+    play chord(:F, :major)
+    sleep 0.5
+  end
+end
+
+in_thread do
+  loop do
+    all_too_well
+  end
+end
+
+in_thread do
+  loop do
+    use_synth :piano
+    all_too_well
+  end
+end
+
+in_thread do
+  loop do
+    use_synth :hollow
+    all_too_well
+  end
+end
