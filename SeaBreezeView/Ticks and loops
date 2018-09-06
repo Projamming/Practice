@@ -1,0 +1,27 @@
+# TITLE  : Rings, Ticks and Loops
+# AUTHOR : SeaBreezeView
+# DATE   : September 5, 2018
+# DESC   : Practice a random beat using rings, ticks and loops.  Not finished yet just got the
+# background in, but need to put the melody in.
+
+use_bpm 100
+
+use_synth :dark_ambience
+my_amps = (ring 1, 1.5, 2, 2.5, 3)
+my_notes = (ring :G3, :F3, :A3, :C3)
+
+define :chopsticks do
+  notes =[ :C4, :C4, :C4,
+           :C4, :B3, :A3, :B3, :C4, :D4]
+  durations = [ 1, 1, 2,
+                1, 0.5, 1, 0.5, 1, 0.5]
+end
+
+
+
+loop do
+  tick
+  play my_notes.look
+  play my_amps. look
+  sleep 1
+end
