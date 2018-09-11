@@ -1,0 +1,96 @@
+
+#----------------------------------------------------------------------#
+# FILE   : P1_Cumbia.rb
+# AUTHOR : DJ_Mito_Chondria
+# DATE   : September 7, 2018
+# DESC   : This is my rendition of the cumbia rhythm, which is a rhythm
+#          derived from Colombia. There are five primary African
+#          percussion instruments that are used to play the cumbia:
+#          the tambora, tambor alegre, llamador, maracones, and guache.
+#          I decided to code for the traditional tambora rhythm since it
+#          plays the most dominant cumbia pattern, and the llamador
+#          pattern since it serves as the base of the cumbia rhythm.
+#          The tambora is a low-pitched, two-headed drum where the
+#          quarter-note/two-8ths pattern is played on the head or shell,
+#          but can be substituted with a different drum in a drumset
+#          or a woodblock. The llamador is a high-pitched drum that
+#          traditionally plays a simple quarter-note rhythm played with
+#          an emphasis on beats 2 and 4, but can also be transferred to
+#          the hi-hat.
+#
+#         
+#          I decided to combine the traditional tambora and llamador 
+#          rhythms with the intro melody of the song, "Baila Esta Cumbia" 
+#          by Selena.
+#----------------------------------------------------------------------#
+
+define :baila_cumbia do  # Part of the intro verse of
+                         # "Baila Esta Cumbia" by Selena.
+  use_synth :pretty_bell
+  my_notes   = (ring :C4, :E4, :D4,  :D4,  :D4,  :D4,  :A4, :G4,
+                     :C4, :E4, :D4,  :D4,  :D4,  :D4,  :B3, :G3)
+  my_sustain = (ring   1,   1,   1, 0.02, 0.02, 0.02,    1,   1,
+                       1,   1,   1, 0.02, 0.02, 0.02,    1,   1)
+  my_sleep   = (ring 0.5,   2, 0.5, 0.03, 0.03, 0.03,  0.5, 0.5,
+                     0.5,   2, 0.5, 0.03, 0.03, 0.03,  0.5, 0.5)
+  tick
+  play my_notes.look, sustain: my_sustain.look; sleep my_sleep.look
+  sleep 0.49
+end
+
+define :tambora do    # Variation of tambora pattern
+  sample :tabla_na_s  # Sounds like a woodblock
+  tick
+  my_sleep = (ring 1, 0.5, 0.5, 1, 0.5, 0.5, 1, 0.5, 0.5, 1, 0.5, 0.5,
+                   1, 0.5, 0.5, 1, 0.5, 0.5, 1, 0.5, 0.5, 1,   1)
+  sleep my_sleep.look
+end
+
+define :llamador do  # Variation of llamador pattern
+  tick
+  my_beat  = (ring   1,   0,    1,   0)
+  my_snare = (ring   0,   0,    1,   0)
+  my_rest  = (ring 0.5, 0.5,  0.5, 0.5)
+  sample :drum_cymbal_pedal if my_beat.look == 1
+  sample :sn_dolf, amp: 0.5 if my_snare.look == 1
+  sample :drum_splash_soft, sustain: 0.4, release: 0.1,  # to shorten
+                                                         # the splash
+    amp: 0.7 if my_beat.look == 0
+  sleep my_rest.look
+  sleep 0.5
+end
+#----------------------------------------------------------------------#
+
+## Live_Loop Control Panel ##
+live_loop :the_cumbia do
+  
+  use_bpm 180   # The cumbia is an up-tempo song
+  
+  in_thread do  # So baila_cumbia, tambora, and the llamador patterns
+                # play at the same time.
+    loop do
+      baila_cumbia
+    end
+  end
+  
+  in_thread do
+    loop do
+      tambora
+    end
+  end
+  
+  loop do
+    llamador
+  end
+  
+end
+#----------------------------------------------------------------------#
+# References:
+# https://video.search.yahoo.com/search/video?fr=mcafee&p=baila+esta+
+# cumbia+selena#id=32&vid=5b2c17bbe5ef5b8c8459b702620a85f8&action=view
+# https://www.youtube.com/watch?time_continue=92&v=uWRIj_Y5mTI
+# https://www.moderndrummer.com/article/september-2015-cumbia-drumset-
+# adaptations-traditional-colombianpanamanian-rhythm/
+# https://www.youtube.com/watch?time_continue=92&v=uWRIj_Y5mTI
+# I received help from the great Jiin Jeong during her TA hours!
+#----------------------------------------------------------------------#
