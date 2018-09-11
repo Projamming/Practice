@@ -1,0 +1,19 @@
+use_synth :piano
+beat = (ring 1, 0, 1, 0, 2, 2, 1, 1)
+bell_beat = (ring, 2, 2, 1, 1, 0, 0, 2, 2)
+ 
+live_loop :drums do
+  tick
+  sample :drum_bass_soft if beat.look == 0
+  sample :drum_cymbal_open if beat.look == 1
+  sample :drum_roll if beat.look == 2
+  sleep 0.25
+end
+
+live_loop :bells do
+  tick
+  sample :ambi_choir, amp: 1.0 if bell_beat == 1
+  sample :ambi_swoosh, amp: 0.5 if bell_beat == 2
+  sample :ambi_glass_rub, amp: 0.5 if bell_beat == 0
+  sleep 0.25
+end
