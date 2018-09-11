@@ -1,6 +1,6 @@
 #----------------------------------------------------------------------#
-# FILE   : P1_JWeiss.rb
-# AUTHOR : Jodi Weiss
+# FILE   : Project1_Cumbia
+# AUTHOR : DJ-Mito-Chondria
 # DATE   : September 7, 2018
 # DESC   : This is my rendition of the cumbia rhythm, which is a rhythm
 #          derived from Colombia. There are five primary African
@@ -17,16 +17,9 @@
 #          an emphasis on beats 2 and 4, but can also be transferred to
 #          the hi-hat.
 #
-#          I chose the cumbia because, although I have not been to
-#          Colombia before, I have close family friends from Colombia
-#          and so grew up listening to music with rhythms such as the
-#          cumbia, and I really like how up-beat the rhythm is. One
-#          famous singer that I listened to often was Selena from
-#          Selenay Los Dinos, and I remembered that she had a song
-#          called, "Baila Esta Cumbia" and I had to see if it would
-#          overlay nicely with the cumbia rhythm I made. So, I decided
-#          to combine the traditional tambora and llamador rhythms with
-#          the intro melody of the song, "Baila Esta Cumbia" by Selena.
+#          I decided to combine the traditional tambora and llamador
+#          rhythms with the intro melody of the song, "Baila Esta Cumbia" 
+#          by Selena.
 #----------------------------------------------------------------------#
 
 define :baila_cumbia do  # Part of the intro verse of
