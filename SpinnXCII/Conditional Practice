@@ -1,0 +1,32 @@
+#practice 9/11
+#just playing around with conditionals
+
+use_bpm 20
+
+live_loop :bass_tabla do
+  beat = (ring 1, 2, 1, 2, 2, 1, 1, 2)
+  tick
+  sample :bass_voxy_c if beat.look == 1
+  sample :tabla_na if beat.look == 2
+  sleep 0.25
+end
+
+live_loop :loopsound do
+  sample :loop_drone_g_97
+  sleep 1
+end
+
+
+live_loop :robotglitch do
+  beat = (ring 3, 4, 3, 4, 4, 3, 4, 3)
+  tick
+  sample :mehackit_robot6 if beat.look == 3
+  sample :glitch_perc5 if beat.look == 4
+  sleep 0.5
+end
+
+
+
+
+
+
