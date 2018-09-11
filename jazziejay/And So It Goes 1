@@ -1,0 +1,45 @@
+# TITLE  : And So It Goes
+# FILE   : And So It Goes.rb
+# AUTHOR : Matty Jackmauh
+# DATE   : August 28, 2018
+# Thanks to the Mamma Mia code for reference!
+
+use_bpm 60# Beats per minute.
+
+def tenor_11
+  play :f3
+  sleep 0.5
+  play :a3
+  sleep 0.5
+  play :c4
+  sleep 0.5
+  play :d4, sustain: 1
+end
+
+def tenor_12
+  play :c4; sleep 0.5
+  play :d4, sustain: 0.25 ; sleep 0.75
+  play :c4; sleep 0.25
+  play :a3, sustain: 0.25 ;  sleep 0.5
+end
+
+# Test 1!
+
+tenor_11
+sleep 2
+tenor_12
+
+# Experimenting with a more pretty looking code...
+
+def tenor1
+  
+  notes = [:r, :e4, :d4, :e4, :d4, :r,
+           :r, :d4, :d4, :e4, :fs4, :e4, :d4]
+  
+  durations = [1, 0.5, 0.5, 0.5, 0.5, 1,
+               1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+  
+  play_pattern_timed notes, durations
+end
+
+# Not finished!
