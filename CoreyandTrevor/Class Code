@@ -1,0 +1,27 @@
+# Warmup for Tuesday, September 11
+
+# Messing around with Tuesday's code
+# Could be a cool intro to something
+
+loop do
+  tick
+  rest = 0
+  apple = (ring rest, 1, 2, 2, 3, 4, rest, 1, 2, 2, 3, 4)
+  
+  sample :drum_splash_hard if apple.look == 1
+  
+  sample :bass_thick_c if apple.look == 3
+  
+  sample :guit_e_slide if apple.look == 4
+  
+  if apple.look == 2
+    sample :drum_cowbell, amp: 0.1
+    sample :drum_bass_soft
+    sample :bass_thick_c if apple.look == 3
+  end
+  sleep 0.25
+  
+  
+  
+  
+end
