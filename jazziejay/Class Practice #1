@@ -1,0 +1,65 @@
+# Class Practice #1
+# Matty Jackmauh, 9/13/18
+
+# Written in class on Thursday, September 13.
+# We took the code for the Marinera rhythm (see below), which was
+# written in sample/sleep format, and compressed it into a couple
+# of rings. To simplify the rings, we also defined two variables:
+
+tom =  :drum_tom_hi_hard
+bass = :drum_bass_hard
+
+define :rhythm do
+  
+  7.times do
+  
+    tick :drums_clock
+    
+    drums = (ring tom, bass, tom, bass, tom, bass, tom)
+    drums_sleep = (ring 0.5, 0.25, 0.25, 0.5, 0.5, 0.5, 0.5)
+    drums_amps = (ring 2, 1, 1, 1, 2, 1, 1)
+    
+    sample drums.look, amp: drums_amps.look
+    sleep drums_sleep.look
+  end
+  
+end
+
+loop do
+  
+  bpm_ring = (ring 60, 80, 100, 120)
+  use_bpm bpm_ring.tick(:bpm_clock)
+  ##| print bpm_ring.look
+  
+  rhythm
+  
+end
+
+# Unfortunately, it doesn't work! It played the tom 7
+# times at each different tempo, which is something,
+# but it completely negated the bass drum! Interesting...
+  
+7.times do
+  use_bpm 60
+  rhythm
+end
+
+
+7.times do
+  use_bpm 80
+  rhythm
+end
+
+
+7.times do
+  use_bpm 100
+  rhythm
+end
+
+
+21.times do
+  use_bpm 120
+  rhythm
+end
+
+sleep 1
