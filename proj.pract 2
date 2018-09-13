@@ -1,0 +1,16 @@
+use_synth :piano
+use_bpm 120
+live_loop :piano do
+  10.times do
+    tick
+    beat = (ring 2, 1, 2, 0, 3, 4, 5, 6, 0, 7)
+    my_sleep = (ring 0.5, 1, 0.5, 1, 0.5, 0.2, 0.2, 0.2, 0.2, 0.2)
+    play  :a4 if beat.look == 2
+    play  :g4 if beat.look == 1
+    play  :g3 if beat.look == 3
+    play  :f3 if beat.look == 4
+    play  :e3 if beat.look == 5
+    play  :d3 if beat.look == 6
+    play  :c3 if beat.look == 7
+    
+    sleep my_sleep.look
