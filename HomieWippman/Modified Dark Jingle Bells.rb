@@ -1,6 +1,6 @@
 #TITLE: Modified Dark Jingle Bells
 #FILE: Song2.rb
-#AUTHOR: Alec Sherman
+#AUTHOR: HomieWippman
 #DATE: 8/29/18
 #DESC: Version 1-3
 
