@@ -1,0 +1,22 @@
+#rings and ticks practice
+#stranger things??
+
+loop do
+  tick
+  rest = 0
+  tune = (ring rest, 1, 2, 2, 3, 4, rest, 1, 1, 2, 3, 4)
+  
+  sample :drum_snare_hard if tune.look == 1
+  
+  sample :bass_hard_c if tune.look == 2
+  
+  sample :perc_snap if tune.look == 3
+  
+  if tune.look == 4
+    sample :drum_tom_hi_hard, amp: 0.1
+    sample :drum_cymbal_closed
+    sample :bass_thick_c if tune.look == 4
+  end
+  sleep 0.25
+  
+end
