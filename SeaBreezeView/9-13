@@ -1,0 +1,23 @@
+# Practice 9/13 multiple clocks with random rhythm 
+
+heavy = :drum_heavy_kick
+soft  = :drum_snare_soft
+tom   = :drum_tom_lo_hard
+
+define :rhythm do
+  8. times do
+    tick :drums_clock
+    drums= (ring heavy, heavy, soft, tom, tom, heavy, soft, heavy)
+    drums_time = (ring 1, 0.5, 0.5, 0.25, 0.5, 1, 0.5,  1 )
+    drums_amps = (ring 2, 1, 1, 2, 2, 1, 3, 1)
+    sample drums.look (:drums_clock) , amp: drums_amps.look(:drums_clock)
+    sleep drums_time.look(:drums_clock)
+  end
+end
+
+
+loop do
+  bpm_ring =(ring 70, 90, 110, 130)
+  use_bpm bpm_ring.tick (:bpm_clock)
+  rhythm
+end
