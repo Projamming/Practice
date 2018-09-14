@@ -1,0 +1,27 @@
+# ole_ole practice 9/30/2018
+
+use_synth :piano
+play :G4
+sleep 0.4
+play :A4, sustain:1
+sleep 1
+play :G4
+sleep 0.25
+play :A4
+sleep 0.25
+play :G4
+sleep 0.25
+play :A4
+sleep 0.25
+play :G4
+sleep 0.5
+play :E4
+sleep 1
+play :G4
+sleep 0.5
+play :D4, sustain:1
+sleep 1
+play :G4
+sleep 0.5
+play :E4, sustain:1
+sleep 1
