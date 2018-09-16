@@ -1,0 +1,64 @@
+# --------------------------------------------------------- #
+# FILE   : 9-13-practice.rb
+# AUTHOR : DJ-Mito-Chondria
+# DATE   : 9-16-18
+# DESC   : I'm practicing how to simplify rings and define
+#          variables like we learned in class on 9-13-18.
+#          I also practiced suing sync and cue.
+#          This is the begining percussion of Billie Jean
+#          by Michael Jackson.
+# --------------------------------------------------------- #
+
+bass = :drum_bass_hard
+hat = :drum_cymbal_closed
+snare = :drum_snare_hard
+snare2 = :drum_snare_soft
+
+define :drums do
+  4.times do
+    drum_beat = (ring bass, snare)
+    drum_sleep = (ring 1, 1)
+    drum_amps = (ring 6, 1)
+    sample drum_beat.tick, amps: drum_amps.look
+    sleep drum_sleep.look
+  end
+end
+
+define :hi_hat do
+  8.times do
+    closed_hi_hat_ring = (ring hat)  #Instead of writing it out 8 times
+    # I decided to see if this would work.
+    hi_hat_sleep_ring = (ring 0.5)
+    sample closed_hi_hat_ring.tick
+    sleep hi_hat_sleep_ring.look
+  end
+end
+
+live_loop :perc, sync: :percu do  #I wanted to introduce this part after
+                                  # 8 whole beats played by the drums and hi hat.
+  use_bpm 120  # Even though I had use_bpm 120 outside of the 2.times in the 
+               # live_loop :billie_jean, it was only playing at 60bpm.?
+  8.times do
+    snares_ring = (ring snare2)
+    snare_sleep = (ring 0.5)
+    sample snares_ring.tick
+    sleep snare_sleep.look
+  end
+end
+
+##-------Control Panel--------#
+live_loop :billie_jean do
+  
+  use_bpm 120
+  
+  2.times do
+    in_thread do
+      hi_hat
+    end
+    
+    drums
+  end
+  cue :percu   # I wanted the second percussion part to come in 
+               # after 8 whole beats.
+end
+##----------------------------#
