@@ -1,0 +1,88 @@
+use_bpm 500 #beats per minute
+use_synth :piano
+
+def right_hand
+  16.times do #I want to play each note twice. With just 2.times do it'll play only two notes instead of playing the whole ring twice
+    tick
+    notes = (ring :C5, :Eb4, :D4, :Eb4, :C4, :Eb4, :D4, :Eb4) #using rings is more efficient and makes the code easier to read
+    sleep_rest = (ring 1, 1, 1, 1, 1, 1, 1, 1)
+    play notes.look
+    sleep sleep_rest.look
+  end
+  16.times do
+    tick
+    notes_2 = (ring :Ab4, :F4, :E4, :F4, :C4, :F4, :Eb4, :F4)
+    sleep_rest_2 = (ring 1, 1, 1, 1, 1, 1, 1, 1)
+    play notes_2.look
+    sleep sleep_rest_2.look
+  end
+  16.times do
+    tick
+    notes_3 = (ring :B4, :F4, :Eb4, :F4, :D4, :F4, :Eb4, :F4)
+    sleep_rest_3 = (ring 1, 1, 1, 1, 1, 1, 1, 1)
+    play notes_3.look
+    sleep sleep_rest_3.look
+  end
+  16.times do
+    tick
+    notes_4 = (ring :C5, :G4, :F4, :G4, :Eb4, :G4, :F4, :G4)
+    sleep_rest_4 = (ring 1, 1, 1, 1, 1, 1, 1, 1)
+    play notes_4.look
+    sleep sleep_rest_4.look
+  end
+  16.times do
+    tick
+    notes_5 = (ring :Eb5, :Ab4, :G4, :Ab4, :Eb4, :Ab4, :G4, :Ab4)
+    sleep_rest_5 = (ring 1, 1, 1, 1, 1, 1, 1, 1)
+    play notes_5.look
+    sleep sleep_rest_5.look
+  end
+end
+
+def left_hand
+  16.times do
+    tick
+    notes_6 = (ring :C3, :G3, :F3, :G3, :Eb3, :G3, :F3, :G3)
+    sleep_rest_6 = (ring 1, 1, 1, 1, 1, 1, 1, 1)
+    play notes_6.look
+    sleep sleep_rest_6.look
+  end
+  16.times do
+    tick
+    notes_7 = (ring :C3, :Ab3, :G3, :Ab3, :F3, :Ab3, :G3, :Ab3)
+    sleep_rest_7 = (ring 1, 1, 1, 1, 1, 1, 1, 1)
+    play notes_7.look
+    sleep sleep_rest_7.look
+  end
+  16.times do
+    tick
+    notes_8 = (ring :C3, :Ab3, :G3, :Ab3, :F3, :Ab3, :G3, :Ab3)
+    sleep_rest_8 = (ring 1, 1, 1, 1, 1, 1, 1)
+    play notes_8.look
+    sleep sleep_rest_8.look
+  end
+  16.times do
+    tick
+    notes_9 = (ring :C3, :Eb3, :D3, :Eb3, :G3, :Eb3, :D3, :Eb3)
+    sleep_rest_9 = (ring 1, 1, 1, 1, 1, 1, 1, 1)
+    play notes_9.look
+    sleep sleep_rest_9.look
+  end
+  16.times do
+    tick
+    notes_10 = (ring :C3, :C4, :Bb3, :C4, :Ab3, :C4, :Bb3, :C4)
+    sleep_rest_10 = (ring 1, 1, 1, 1, 1, 1, 1, 1)
+    play notes_10.look
+    sleep sleep_rest_10.look
+  end
+end
+
+in_thread do #makes the right and left hand play together: harmonizing a melody
+  loop do
+    right_hand
+  end
+end
+
+loop do
+  left_hand
+end
