@@ -1,0 +1,76 @@
+##messing around with in_thread, conditionals, rings, and ticks
+## going to look to keep building off of this and hopefully condense it more
+
+
+
+use_bpm 120
+
+hat = :drum_cymbal_closed
+snare = :drum_snare_hard
+tom = :drum_tom_hi_soft
+hit = :bass_hit_c
+thick = :bass_thick_c
+
+
+define :hi_hat do
+  4. times do
+    hi_hat = (ring hat)
+    hi_hat_sleep = (ring 0.5)
+    sample hi_hat.tick
+    sleep hi_hat_sleep.look
+  end
+end
+
+
+define :snare_drum do
+  rest = 0
+  tick
+  snare = (ring rest, rest, 2, rest)
+  if snare.look == 2
+    sample :drum_snare_hard
+  end
+  sleep 0.5
+end
+
+define :tom_drum do
+  rest = 0
+  tick
+  tom_drum = (ring rest, 3, rest, 3)
+  if tom_drum.look == 3
+    sample :drum_tom_hi_soft
+  end
+end
+
+define :bass_sounds do
+  bass_beat = (ring hit, thick)
+  bass_sleep = (ring 2, 2)
+  bass_amps = (ring 3, 1)
+  sample bass_beat.tick, amps: bass_amps.look
+  sleep bass_sleep.look
+end
+
+
+
+in_thread do
+  loop do
+    snare_drum
+  end
+end
+
+in_thread do
+  loop do
+    hi_hat
+  end
+end
+
+in_thread do
+  loop do
+    tom_drum
+    sleep 0.5
+  end
+end
+
+loop do
+  bass_sounds
+  sleep 0.5
+end
