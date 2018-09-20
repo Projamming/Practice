@@ -1,0 +1,30 @@
+
+12.times do
+  tick
+  beat = (ring 1, 0, 0, 2, 1, 0, 0, 1, 2, 0, 0, 2)
+  if beat.look == 2
+    sample :drum_bass_hard
+  end
+  if beat.look == 1
+    sample :ambi_piano
+  end
+  sleep 0.25
+end
+
+def chords
+  use_synth :piano
+  use_bpm 120
+  tick
+  8.times do
+    my_chords = (ring chord(:C3, :major),
+                 chord(:D3, :major),
+                 chord(:E3, :major),
+                 chord(:F3, :major))
+    sleep_rest = (ring 1, 1, 1, 1)
+    play my_chords.look
+    sleep sleep_rest.look
+  end
+end
+
+
+chords
