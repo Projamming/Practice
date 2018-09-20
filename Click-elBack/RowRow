@@ -1,0 +1,21 @@
+use_bpm 300
+
+define :rowrow do
+  my_notes = (ring :C5, :C5, :C5, :D5, :E5, :E5, :D5, :E5, :F5, :G5,
+              :C5, :C5, :C5, :G5, :G5, :G5, :E5, :E5, :E5, :C5, :C5, :C5, :G5, :F5, :E5, :D5, :C5)
+  my_durations= (ring 3, 3, 2.25, 0.75, 3, 2.25, 0.75, 2.25, 0.75, 6,
+                 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2.25, 0.75, 2.25, 0.75, 6,)
+  play_pattern_timed my_notes, my_durations
+end
+
+in_thread do
+  use_synth :piano
+  rowrow
+  sleep 0.5
+end
+
+1.times do
+  use_synth :blade
+  rowrow
+  sleep 0.5
+end
