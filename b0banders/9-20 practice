@@ -1,0 +1,38 @@
+#Messing around with the beginning of class exercise on 9/20/2018.
+#Added a third element to the melody 
+
+use_bpm 100
+bong = :elec_bong
+wood = :elec_wood
+bass = :drum_bass_hard
+r = (ring 0, 1, 2, 2, 1, 2, 1, 0)
+
+live_loop :jungle do
+  
+  tick(:rc)
+  
+  if r.look(:rc) == 0
+    a = (ring 0, 0, 1, 2, 1, 2, 2, 2)
+    num_beats = 8
+  end
+  if r.look(:rc) == 1
+    a = (ring 1, 1, 1, 0, 1, 1, 2, 0)
+    num_beats = 8
+  end
+  if r.look(:rc) == 2
+    a = (ring 2, 2, 1, 0, 1, 1, 2, 2)
+    num_beats = 8
+  end
+  
+  num_beats.times do
+    
+    tick(:bc)
+    
+    sample bong if a.look(:bc) == 0
+    sample wood if a.look(:bc) == 1
+    sample bass if a.look(:bc) == 2
+    
+    sleep 0.25
+  end
+  
+end
