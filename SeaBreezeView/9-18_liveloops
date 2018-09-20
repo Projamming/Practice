@@ -1,0 +1,30 @@
+#Practice 9/18 live loops modification same format as class
+
+
+#define variables
+
+kick  = :drum_heavy_kick
+snare = :drum_snare_hard
+tom   = :drum_tom_lo_hard
+zzz   = :r
+
+#drum beats
+live_loop :dl , sync: :drumline do
+  tick :drums_clock
+  line1 = (ring kick, tom, tom, zzz, kick , kick, snare, tom)
+  sample line1.look(:drums_clock)
+  sleep 1
+end
+
+#bass line
+live_loop :bl , sync: :baseline do
+  use_synth_defaults amp: rrand(1.5, 1.8), cutoff: rrand(115, 125)
+  bnotes = ( ring :G2, :D2, :E2, :A3, :A3, :F3, :E3, :E3, :G2, :G2, :A2)
+  bass_sleep =(ring 0.5, 0.25, 0.25, 0.25, 0.5, 0.5, 0.25, 0.5, 0.5, 1, 0.25)
+  play bnotes.tick(:bass_clock)
+  sleep bass_sleep.look( :bass_clock)
+end
+
+sleep 0.5
+cue :drumline
+cue :baseline
