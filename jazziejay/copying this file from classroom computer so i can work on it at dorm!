@@ -1,0 +1,34 @@
+use_bpm 75
+
+define :metronome do
+  sample :drum_bass_soft
+  sleep 1
+end
+
+#live_loop :metronome do
+#  metronome
+#end
+
+dbs = :drum_bass_soft
+dcc = :drum_cymbal_closed
+dsh = :drum_snare_hard
+dtl = :drum_tom_lo_soft
+
+
+live_loop :dl, sync: :drum_line do
+  tick :drum_clock
+  drum_beat = (ring dbs, dbs, dcc, dbs, dsh, dbs, dcc, dbs)
+  drum_fill1 = (ring dbs, dbs, dbs, dbs, dcc, dbs, dsh, dbs, dcc, dbs)
+  drum_sleep1 = (ring 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1)
+  sample drum_beat.look(:drum_clock)
+  sample drum_fill1
+  sleep 0.25
+end
+
+cue :drum_line
+
+
+# STRUM - with live loops?
+# readymade?
+# fade-ins with cutoff?
+# drum fills? randomly cued?
