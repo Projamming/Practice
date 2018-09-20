@@ -1,0 +1,61 @@
+# Authors: Kara Pooley, Courtney Pierre, Sarah Kaiser
+# Description:
+# Sources
+
+
+use_bpm 320
+
+my_notes = [:C5, :C5, :C5, :D5, :E5, :E5, :D5, :E5, :F5, :G5]
+my_durations= [3, 3, 2.25, 0.75, 3, 2.25, 0.75, 2.25, 0.75, 6]
+
+my_notes2 = [ :C6, :C6, :C6, :G5, :G5, :G5, :E5, :E5, :E5, :C5, :C5, :C5]
+my_durations2 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+my_notes3 = [ :G5, :F5, :E5, :D5, :C5]
+my_durations3 = [ 2.25, 0.75, 2.25, 0.75, 6]
+
+define :play_song do
+  play_pattern_timed my_notes, my_durations
+  play_pattern_timed my_notes2, my_durations2
+  play_pattern_timed my_notes3, my_durations3
+end
+
+
+use_synth :piano
+
+in_thread do
+  2.times do
+    play_song
+  end
+end
+
+sleep 24
+
+in_thread do
+  #starting second round
+  use_synth :hollow
+  use_synth_defaults amp: 3
+  2.times do
+    play_song
+  end
+end
+
+sleep 24
+
+in_thread do
+  #starting third round
+  use_synth :pluck
+  2.times do
+    play_song
+  end
+end
+
+sleep 24
+
+in_thread do
+  #starting final round
+  use_synth :dark_ambience
+  1.times do
+    play_song
+  end
+end
