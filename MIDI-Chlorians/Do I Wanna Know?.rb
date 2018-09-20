@@ -1,5 +1,7 @@
 # Do I Wanna Know?, by Arctic Monkeys
 
+#This is only the drums and bass part, to be used as a backing track for playing guitar
+
 
 use_bpm 84
 
