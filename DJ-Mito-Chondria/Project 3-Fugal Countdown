@@ -1,0 +1,97 @@
+#-----------------------------------------------------------------------------------------#
+# FILE   : P2
+# AUTHOR : DJ-Mito-Chondria
+# DATE   : September 14, 2018
+# DESC   : I decided to code this piece because I thought it was an awesome classical
+#          twist on "The Final Countdown" by Europe. This code plays the first
+#          16 measures of "The Fugal Countdown" by Nick Kasprak. I decided to code
+#          the alto and soprano voices. The alto voice introduces the phrase
+#          and is then successively taken up by the soprano voice. As a fugue does,
+#          the parts played by the alto and soprano voices interweave and counter
+#          one another.
+
+#          Here is my rendition of "The Fugal Countdown!"
+#-----------------------------------------------------------------------------------------#
+
+# The alto voice introduces the intro melody of "The Final Countdown."
+# This voice then builds upon the meoldy and interweaves with the soprano voice.
+alto        = (ring :Cs5,  :B4, :Cs5, :Fs4,   :r,  :D5, :Cs5,  :D5, :Cs5,  :B4,   :r,  :D5,
+                    :Cs5,  :D5, :Fs4,   :r,  :B4,  :A4,  :B4,  :A4, :Gs4,  :B4,  :A4, :Gs4,
+                     :A4,  :B4,  :A4,  :B4, :Cs5,  :B4,  :A4, :Gs4, :Fs4,  :D5, :Cs5, :Cs5,
+                     :D5, :Cs5,  :B4, :Cs5,
+  # Cue soprano voice #
+                    :Bs4, :Ds5, :Cs5, :Ds5,  :E5, :Ds5, :Cs5,  :A4,
+                      :r, :Cs5,  :B4, :Cs5,  :A4, :Gs4, :Fs4,  :A4, :Gs4,  :A4, :Fs4, :Gs4,
+                     :A4, :Fs4,  :B4,  :A4, :Gs4,  :E4, :Fs4, :Gs4,  :A4,  :B4, :Cs5, :Ds5,
+                     :E5, :Bs4, :Cs5, :Gs4,  :A4, :Fs4, :Gs4,  :E5, :Ds5,  :E5, :Ds5, :Cs5,
+                    :Ds5, :Bs4, :Cs5,  :B4, :Cs5, :Fs5, :Es5, :Fs5, :Ds5, :Cs5, :Ds5, :Cs5,
+                    :Bs4, :Cs5, :Gs4, :r)
+
+a_durations = (ring 0.25, 0.25,    1,    2, 0.25, 0.25, 0.25,  0.5,  0.5,    2, 0.25, 0.25,
+                    0.25,    1,    2, 0.25, 0.25, 0.25,  0.5,  0.5,  0.5,  0.5,  1.5, 0.25, 
+                    0.25,  1.5, 0.25, 0.25,  0.5,  0.5,  0.5,  0.5,    1,    1,    3, 0.25, 
+                    0.25, 0.25, 0.25,    1,  0.5,  0.5,
+  # Cue soprano voice #
+                     0.5,  0.5,  0.5,  0.5,    1,    2,  0.5, 0.25, 0.25,    1,  0.5,  0.5,
+                     0.5, 0.25, 0.25,    1,  0.5,  0.5,  0.5,  0.5,    1,    1,  0.5,  0.5, 
+                     0.5,  0.5,  0.5,  0.5,  0.5,  0.5,  0.5,  0.5,  0.5,  0.5,    1,    1,  
+                     0.5, 0.25, 0.25,  1.5, 0.25, 0.25,    1,  1.5, 0.25, 0.25,  1.5, 0.25, 
+                    0.25,  1.5, 0.25, 0.25,  1.5, 0.25, 0.25,    1,    1,    2)
+
+# The soprano voice imitates the intro melody played
+# by the alto voice then begins to interweave with the alto voice.
+soprano = (ring  :r, :Gs5, :Fs5, :Gs5, :Cs5,   :r,  :A5, :Gs5,  :A5, :Gs5, :Fs5,   :r,
+                :A5, :Gs5,  :A5, :Cs5,   :r, :Fs5,  :E5, :Fs5,  :E5, :Ds5, :Fs5,  :E5,
+               :Ds5,  :E5, :Fs5,  :E5, :Fs5, :Gs5, :Fs5,  :E5, :Ds5, :Cs5,  :A5, :Gs5,
+               :Gs5,  :A5, :Gs5, :Fs5, :Gs5,  :A5, :Gs5,  :A5,  :B5,  :A5,  :B5, :Cs6,
+                :B5, :Cs6, :Gs5, :Fs5, :Gs5,   :r)
+
+s_durations = (ring  0.5, 0.25, 0.25,    1,    2,  0.5, 0.25, 0.25,  0.5,  0.5,   2,  0.5,
+                    0.25, 0.25,    1,    2,  0.5, 0.25, 0.25,  0.5,  0.5,  0.5, 0.5,  1.5,
+                    0.25, 0.25,  1.5, 0.25, 0.25,  0.5,  0.5,  0.5,  0.5,    1,   1,    3,
+                    0.25, 0.25, 0.25, 0.25,  2.5, 0.25, 0.25,  1.5, 0.25, 0.25, 1.5, 0.25,
+                    0.25,  1.5, 0.25, 0.25,    1, 28.75)  # 28.75 is the number of seconds
+                                                     # the soprano voice needs to
+                                                     # rest so the piece can start over and 
+                                                     # the alto will play by itself for the 
+                                                     # first 7 measures.
+
+# To be played when the alto voice introduces the intro phrase.
+define :background do
+  play :A3, sustain: 28, amp: 0.2
+  play :A4, sustain: 28, amp: 0.2
+end
+#-----------------------------------------------------------------------------------------#
+
+##----------CONTROL PANEL -----------##
+use_bpm 120  # I chose to put this outside the loop so that it
+             # controlled the bpm of both the live_loops.
+
+background   # I think this gives the beginning phrase a little more depth.
+
+live_loop :alto_voice do
+  40.times do
+    tick
+    use_synth :tri  # This synth is a little more crisp than :subpulse
+                    # so you can here this melody better.
+    use_synth_defaults release: 0.5  # This helped the sustains of each
+                                     # note from overlapping too much.
+    play alto.look, sustain: a_durations.look
+    sleep a_durations.look
+  end
+  cue :soprano
+end
+
+# Live loop of soprano voice. This was made separately so that I could
+# sync this loop and cue it in the :alto_voice live loop.
+live_loop :soprano_voice, sync: :soprano do
+  tick
+  use_synth :subpulse
+  use_synth_defaults release: 0.4
+  play soprano.look, sustain: s_durations.look
+  sleep s_durations.look
+end
+
+#-----------------------------------------------------------------------------------------#
+# "The Fugal Countdown" music score: http://www.nickkasprak.com/files/fugal_countdown.pdf
+# Jiin's amazing help during her Friday TA session!
