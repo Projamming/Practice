@@ -1,0 +1,53 @@
+#Practice Randomness with chords
+
+use_random_seed 1006
+
+d_chords = [chord(:D3, :major),
+            chord(:G3, :major),
+            chord(:A3, :major),
+            chord(:E3, :minor)]
+
+
+12. times do
+  play choose(d_chords)
+  sleep 0.5
+end
+#does not sound good but wanted practice with randomness
+4. times do
+  play rrand(70, 90)
+  sleep 0.25
+end
+
+#Practice defining ring as a variable as the warm up did and used b0banders 9-20 practice code
+#for help and inspiration
+
+#variables
+snare = :drum_snare_soft
+bass = :drum_bass_hard
+tom = :drum_tom_high_hard
+r = (ring 1, 2, 1, 1, 2)
+
+live_loop :beats do
+  use_bpm 100
+  tick(:rc)
+  
+  if r.look(:rc) == 1
+    a= ( ring 1, 1, 2, 0, 1, 0, 2, 2)
+    num_beats = 8
+  end
+  if r.look(:rc) == 2
+    a= (ring 2, 2, 1, 1, 0, 1, 2, 0)
+    num_beat = 8
+  end
+  
+  16. times do
+    
+    tick(:bc)
+    
+    sample snare if a.look(:bc) == 0
+    sample bass  if a.look(:bc) == 1
+    sample tom   if a.look(:bc) == 2
+    
+    sleep 0.25
+  end
+end
