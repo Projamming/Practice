@@ -1,0 +1,32 @@
+
+#pretty much organized chaos
+#just wanted to pracitce randomisation
+
+
+use_random_seed 100
+
+e_major = [:e4, :fs4, :gs4, :a5, :b5, :cs5, :ds5, :e5]
+
+chords = [chord(:e3, :major),
+          chord(:f3, :major),
+          chord(:g3, :major),
+          chord(:a4, :major),
+          chord(:b4, :major),
+          chord(:c4, :major),
+          chord(:d4, :major),
+          chord(:e4, :major)]
+
+
+in_thread do
+  loop do
+    use_synth :piano
+    play choose(e_major)
+    sleep 0.25
+  end
+end
+
+loop do
+  use_synth :pluck
+  play choose(chords)
+  sleep 1
+end
