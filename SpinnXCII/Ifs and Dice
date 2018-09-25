@@ -1,0 +1,45 @@
+def guitar_1
+  chords = [chord( :A, :minor), chord( :F, :major), chord( :C, :major), chord( :G, :major)]
+  sleeps = [ 1, 1, 1, 1]
+  play_pattern_timed chords, sleeps
+end
+
+def guitar_2
+  chords2 = [chord( :E, :minor), chord( :D, :major), chord( :A, :major), chord( :C, :major)]
+  sleeps2 = [ 1, 1, 1, 1]
+  play_pattern_timed chords2, sleeps2
+end
+
+def guitar_3
+  chords3 = [chord( :D, :major), chord( :G, :major), chord( :A, :major), chord( :D, :major)]
+  sleeps3 = [ 1, 1, 1, 1]
+  play_pattern_timed chords3, sleeps3
+end
+
+in_thread do
+  loop do
+    4.times do
+      use_bpm 120
+      use_synth :pluck
+      dice(3)
+      play guitar_3 if dice == 1
+      sleep 0.25
+      play guitar_1 if dice == 2
+      sleep 0.25
+      play guitar_2 if dice == 3
+      sleep 0.25
+    end
+  end
+end
+
+
+live_loop :sounds do
+  use_bpm 60
+  8.times do
+    tick
+    beat = (ring 0, 1, 0, 1, 0, 1, 0, 1)
+    sample :bd_boom if beat.look == 0
+    sample :drum_cymbal_closed if beat.look == 1
+    sleep 0.25
+  end
+end
