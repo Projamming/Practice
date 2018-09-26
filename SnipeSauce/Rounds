@@ -1,0 +1,111 @@
+#Project 3: Rounds
+#In the script below we took the popular round, Canon, and wrote it in D major. Canon is a popular round
+#in that everyone has heard and is most commonly played during graduations or weddings. It is a piece
+#that was composed by Johahn Pachelbel. It is said that the piece was written in 1694 for the wedding of
+#Johan Cristoph Bach. In a round, we approached the concept of multiple voices layered over each other with
+#each voice starting at a different section. So, we wrote a script that exhibits this using syncing and cueing
+#commands to bring in a new voice with its own set of notes and unique sound.
+#https://en.wikipedia.org/wiki/Pachelbel%27s_Canon
+#https://flat.io/score/572e412730eb9b12635014d3-canon-in-d-pachelbel
+
+
+use_bpm 120
+
+#We start with the “main” section that carries through the entirety of the piece as the crux and as somewhat
+#of the bass as well. We chose to use 120bpm so that writing the arpeggio would be easier math. That is, we
+#will be adding several 1s which serve as quarter notes, each which line up to one bass note of 4 beats.
+#Since the tempo is at 120, we have the main playing solo for 8 full measures, then we cue in the next layer/voice
+#which is simply the arpeggio of the main line.
+live_loop :main do
+  use_synth :fm
+  notes = [ :D4, :A3, :B3, :Fs3,
+            :G3, :D3, :G3, :A3]
+  durations = [4, 4, 4, 4,
+               4, 4, 4, 4 ]
+  play_pattern_timed notes, durations
+  cue :arpeggio
+end
+
+#The next voice starts on measure 9 of the whole piece and carries on for the remainder of the piece. It plays
+#along with the main for an additional 8 measures using the synth pluck to replicate the string sound often heard
+#in the original. We the proceed to cue in the next layer which is the “single melody.”
+live_loop :main_arpeggio, sync: :arpeggio do
+  use_synth :pluck
+  notes = [ :D3, :A3, :D4, :Fs4,
+            :A2, :D3, :A3, :Cs4,
+            :B2, :Fs3, :B3, :D4,
+            :G2, :Cs3, :Fs3, :A3,
+            :G2, :D3, :G3, :B3,
+            :D2, :A2, :D3, :Fs3,
+            :G2, :D3, :Fs3, :A3,
+            :A2, :E3, :A3, :Cs4 ]
+  durations = [1, 1, 1, 1,
+               1, 1, 1, 1,
+               1, 1, 1, 1,
+               1, 1, 1, 1,
+               1, 1, 1, 1,
+               1, 1, 1, 1,
+               1, 1, 1, 1,
+               1, 1, 1, 1]
+  play_pattern_timed notes, durations
+  cue :single_melody
+end
+
+#Following the same pattern of each section being introduced 8 measures apart, the “single melody” is composed
+#of single notes that act as a unique bright sound that accompanies the main and arpeggio with the voice beep.
+#We now have 3 voices playing.
+live_loop :single_notes, sync: :single_melody do
+  use_synth :beep
+  notes = [ :Fs4, :E4, :D4, :Cs4,
+            :B3, :A3, :B3, :Cs4, :D4, :E4]
+  durations = [4, 4, 4, 4,
+               4, 4, 4, 2, 1, 1]
+  play_pattern_timed notes, durations
+  cue :double_melody
+  cue :flare
+end
+
+#Cued up next after another 8 measures is the second melody of single notes. This is layered on top of what we
+#just introduced. All these notes are a major 3d apart, so we have a dynamic sound now in addition with the ongoing
+#main line and arpeggio.
+live_loop :double_notes, sync: :double_melody do
+  use_synth :beep
+  notes = [ :D4, :Cs4, :B3, :A3,
+            :G3, :Fs3, :G3, :A3]
+  durations = [4, 4, 4, 4,
+               4, 4, 4, 4 ]
+  play_pattern_timed notes, durations
+end
+
+#We cue up “flare” with “double melody” to add another section of different notes to fulfill more of the aspects of
+#a canon with multiple layered voices.
+live_loop :more_notes, sync: :flare do
+  use_synth :beep
+  use_synth_defaults amp: 0.5
+  notes = [ :Fs5, :E5, :G5, :Fs5, :E5, :D5, :Cs5, :E5, :D5, :Cs5,
+            :B4, :A4, :Cs5, :B4, :A4, :B4, :Cs5, :D5, :E5]
+  durations = [4, 1, 1, 1, 1, 4, 1, 1, 1, 1,
+               4, 1, 1, 1, 1, 4, 2, 1, 1]
+  play_pattern_timed notes, durations
+  cue :pizazz
+end
+
+#Our last cues in layer is a our “pizazz” with a triangle to add that extra fancy touch to the piece. Again, using the
+#same key and notes that the original canon use, but a little twist on it. At this point all layers and voices play
+#together and have started at different points.
+live_loop :final_notes, sync: :pizazz do
+  use_synth :tri
+  use_synth_defaults amp: 0.5
+  notes = [ :D5, :Cs5, :D5, :Fs4, :E4, :A4, :G4, :A4,
+            :D5, :D5, :Cs5, :B4, :Cs5, :Fs5, :A5, :B5,
+            :G5, :Fs5, :E5, :G5, :Fs5, :E5, :D5, :Cs5,
+            :B4, :A4, :B4, :D5, :D5, :Cs5]
+  durations = [1, 1, 1, 1, 1, 1, 1, 1,
+               1, 1, 1, 1, 1, 1, 1, 1,
+               1, 1, 1, 1, 1, 1, 1, 1,
+               1, 1, 1, 1, 2, 2]
+  play_pattern_timed notes, durations
+end
+
+#In total we have 6 layers that use 4 different voices all playing different things and cued in at different parts of the
+#piece. We have left this code so that there is no end once all layers have been added.
