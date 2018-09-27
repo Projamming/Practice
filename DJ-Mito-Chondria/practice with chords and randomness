@@ -1,0 +1,39 @@
+# ----------------------------------------------------------- #
+# FILE   :Practice with chords and randomness
+# AUTHOR :DJ-Mito-Chondria
+# DATE   :9-27-18
+# DESC   : I'm attempting to write code that will play the two
+#          rings at random and and the notes inside those rings
+#          at random!
+# ----------------------------------------------------------- #
+
+
+# This chooses a new 'pseudo-random' sequence of values:
+use_random_seed 66
+use_synth :piano
+
+r = (ring 0, 1)
+
+live_loop :rand do
+  
+  
+  tick(:r_clock)
+  
+  if r.look(:r_clock) == 0
+    c_major = (ring :C3, :E3, :G3, :C4, :E4)
+    num_beats = 8
+  end
+  
+  if r.look(:r_clock) == 1
+    c_major2 = (ring :C2, :E2, :G2, :C3, :E3)
+    num_beats = 8
+  end
+  
+  num_beats.times do
+    tick(:bc)
+    play choose(c_major) if r.look(:r_clock) == 0
+    
+    play choose(c_major2) if r.look(:r_clock) == 1
+    sleep 0.5
+  end
+end
