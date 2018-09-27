@@ -1,0 +1,44 @@
+#practicing randomness with chords using technique from 9/27 need to fix drum part though 
+
+chord_prog= [ chord(:Fs4, :minor),
+              chord(:D4, :major),
+              chord(:G4, :major),
+              chord(:Bb4, :minor)
+              ]
+
+#original pattern
+#live_loop :my_chords do
+# call= (ring 0, 1, 2, 3)
+#tick
+#play chord_prog[call.look]
+#sleep 0.55
+#end
+
+#reversing
+#live_loop :my_chords2 do
+# call= (ring 0,1,2,3)
+#tick=(:chords)
+#play_pattern_timed chord_prog[call.look(:chords)], 0.2
+#play_pattern_timed chord_prog[call.look].reverse, 0.2
+#end
+
+#adding some drums with the chords
+bass = sample :drum_bass_hard
+snare = sample :drum_snare_hard
+
+in_thread do
+  loop do
+    call= (ring 0,1,2,3)
+    tick=(:chords)
+    play_pattern_timed chord_prog[call.look(:chords)], 0.2
+  end
+end
+
+loop do
+  5.times do
+    tick(:drum)
+    drums = (ring bass, snare, snare, bass, snare)
+    sample drums.look(:drum)
+    sleep 0.5
+  end
+end
