@@ -1,0 +1,26 @@
+
+#Does anyone know why after the 12 times the second loop stops playing?
+my_chords1 = [chord(:g4, :major),
+              chord(:f4, :major),
+              chord(:a4, :minor),
+              chord(:g4, :major)
+              ]
+my_chords2 = [chord(:d3, :major),
+              chord(:b3, :minor),
+              chord(:d3, :major),
+              chord(:d3, :major),
+              ]
+in_thread do
+  12.times do
+    tick
+    beats = (ring 0, 1, 2, 3)
+    play_pattern_timed my_chords1[beats.look], 0.2
+  end
+  cue :jungle
+end
+sync :jungle
+loop do
+  beats = (ring 0, 1, 2, 3)
+  play_pattern_timed my_chords2[beats.look], 0.5
+end
+
