@@ -1,0 +1,54 @@
+# Credit to Ph_Rhyme
+# Trying to condense this code with more recent tools we have learned
+
+# Landslide (opening chords) by Fleetwood Mac, coded by P-Rhyme, August 26 2018
+
+# This song was submitted by one of you, and I thought I would practice listening
+# closely to guitar strum patterns by coding the opening chords.
+
+use_bpm 80
+
+use_synth :pluck
+
+
+ Loop_do 
+  3.times do 
+  
+  play :Eb3, amp: 0.7, sleep 0.25
+  play :Bb3, sleep 0.25
+  play :G3, sleep 0.25
+  play :Eb4, amp: 1.3, sustain: 2, sleep 0.25
+  play :Eb3, amp: 0.5, sleep 0.25
+  play :Bb3, sleep 0.25
+  play :G3, amp: 0.5, sustain: 2, sleep 0.25
+  play :Bb3, amp: 0.4, sleep 0.25
+  
+  play :D3, amp: 0.7, sleep 0.25
+  play :Bb3, sleep 0.25
+  play :F3, sleep 0.25
+  play :F4, amp: 1.3, sustain: 2, sleep 0.25 
+  play :D3, amp: 0.5, sleep 0.25
+  play :Bb3, sleep 0.25
+  play :F3, amp: 0.5, sustain: 2, sleep 0.25
+  play :Bb3, amp: 0.4, sleep 0.25
+  
+  play :C3, amp: 0.7, sleep 0.25
+  play :G3, sleep 0.25
+  play :Eb3, sleep 0.25
+  play :Eb4, amp: 1.3, sustain: 2, sleep 0.25
+  play :C3, amp: 0.5, sleep 0.25
+  play :G3, sleep 0.25
+  play :Eb3, amp: 0.5, sustain: 2, sleep 0.25
+  play :G3, amp: 0.4, sleep 0.25
+  
+  play :D3, amp: 0.7, sleep 0.25
+  play :Bb3, sleep 0.25
+  play :F3, sleep 0.25
+  play :F4, sustain: 2, sleep 0.25
+  play :D3, amp: 0.5, sleep 0.25
+  play :Bb3, sleep 0.25
+  play :F3, amp: 0.5, sustain: 2, sleep 0.25
+  play :Bb3, amp: 0.4, sleep 0.25
+  
+ end 
+end
