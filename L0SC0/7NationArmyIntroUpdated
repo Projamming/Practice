@@ -1,0 +1,35 @@
+##7 nation army intro
+##used prof. perkins class code as baseline
+
+use_synth :fm
+
+my_amps = (ring 4.0, 2.0, 3.0, 3.0, 3.0, 4.0, 4.0)
+
+my_notes =(ring :E3, :E3, :G3, :E3, :D3, :C3, :B2)
+
+my_sleeps = (ring 0.75, 0.25, 0.5, 0.25, 0.25, 1, 1)
+
+in_thread do
+  
+  loop do
+    tick
+    play my_notes.look, amp: my_amps.look
+    sleep my_sleeps.look
+  end
+end
+
+tom =  :bd_zum
+bass = :drum_bass_hard
+
+
+drums = (ring bass, tom)
+drums_sleep = (ring 0.5)
+drums_amps = (ring 4, 1)
+
+loop do
+  
+  tick :drums_clock
+  
+  sample drums.look(:drums_clock), amp: drums_amps.look(:drums_clock)
+  sleep drums_sleep.look(:drums_clock)
+end
