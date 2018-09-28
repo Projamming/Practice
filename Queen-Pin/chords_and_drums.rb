@@ -1,21 +1,19 @@
 use_bpm 60
 use_synth :piano
-chord_progress = [chord(:C3, :minor),
-                  chord(:Bb3, :major),
-                  chord(:Ab3, :major),
-                  chord(:Bb3, :major)
+chord_progress = [chord(:C4, :minor),
+                  chord(:Bb4, :major),
+                  chord(:Ab4, :major),
+                  chord(:Bb4, :major)
                   ]
-
-
 
 in_thread do
   
   loop do
     tick(:drum)
-    bs = sample :drum_bass_soft
-    snp = sample :perc_snap
+    bs = :drum_bass_hard
+    snp = :perc_snap
     drums = (ring bs, snp, bs, bs, snp)
-    drums.look(:drum)
+    sample drums.look(:drum)
     sleep 0.5
   end
 end
