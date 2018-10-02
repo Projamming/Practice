@@ -1,0 +1,230 @@
+#----------------------------------------------------------------------------------#
+# FILE   : Project4.rb
+# AUTHOR : DJ-Mito_Chondria
+# DATE   : September 21, 2018
+# DESC   : I decided to code a section of the intro of Pachelbel's Canon in D
+#          because it is the quintessence of a canon, (hence the name "Canon in D")
+#          and I thought it would serve as a good baseline for the song "Sugar, We're
+#          Goin' Down" by Fall Out Boy, which is a song that is also played in D major.
+#          I'm a huge fan of classical pop, well, really any song with a classical twist,
+#          so I thought it would be cool to mix these two pieces. I coded three
+#          violin voices that play the same "Canon in D" intro melody, but begin in
+#          different parts successively and as a result overlap throughout the piece.
+#          I also coded the intro chorus to "Sugar We're Goin' Down" so that it would
+#          play over Pachelbel's canon.
+#----------------------------------------------------------------------------------#
+
+# Intro to "Sugar, We're Goin' Down" by Fall Out Boy in D Major
+define :fallout_boy do
+  live_loop :sugar do
+    use_bpm 162  # The bpm given in the sheet music.
+    
+    use_synth :blade
+    
+    use_synth_defaults release: 0.6  # The blade synth tends to have a lengthy sustain,
+                                     # so this separates the notes a bit.
+    with_fx :tremolo do  # I wanted to make :blade sound more like a violin, so the
+                   # fx :tremolo resembles the wavering effect you hear in a musical
+                   # tone when a violinist plays.
+      with_fx :pitch_shift, window_size: 0.03 do  # Again, to make :blade sound more
+        # violin-like this fx changes the pitch and creates interesting textures and
+        # sounds. Although they say window size should be around 0.2 (200ms) or greater
+        # for pitched sounds like guitar or bass, I thought a smaller window size
+        # leveled out the harsh pitch changes in the :blade synth and made it sound a
+        # bit smoother.
+        
+        use_random_seed 45  # Although it was difficult to detect the exact difference
+            # between the different seed #s, I liked the frequency of the tremelo when I
+            # chose seed 45. Again, I think this made :blade sound a bit more like a violin.
+        
+        use_synth_defaults vibrato_depth: rrand(0.15, 0.25),  # Vibrato is a rapid,
+                                                              # slight variation in pitch.
+          
+        vibrato_rate: rrand(6, 8), cutoff: rrand(88, 90)  # rrand makes it sound more
+                                                          # human-like.
+        84.times do  # I want to play 84 notes of the Intro to the song.
+          tick :sugar_clock
+          sugar1 = (ring :Fs4,  :D4,  :E4, :Fs4, :E4,  :D4,  :E4, :Fs4,  :E4,  :D4, :Fs4,
+                          :A3, :Fs4,  :E4,  :D4, :E4,  :D4,  :E4, :Fs4, :Fs4,  :D4,  :E4,
+                         :Fs4, :Fs4,  :D4, :Fs4, :E4,  :D4, :Fs4,  :E4,  :D4,  :D4,
+                          :E4, :Fs4,  :D4,  :A3,  :r,  :E4, :Fs4,  :D4,  :A3, :Fs4,  :E4,
+                          :D4,   :r,  :A3,  :A3, :A3, :Fs4, :Fs4,  :G4, :Fs4,  :E4,  :D4,
+                         :Fs4, :Fs4,  :G4, :Fs4, :E4,  :D4,  :A3,   :r,  :A3, :Cs4,  :D4,
+                          :A3, :Cs4,  :D4,   :r, :D4,  :D4,  :D4,  :A4,  :G4, :Fs4,  :D4,
+                          :A4,  :G4, :Fs4,  :D4, :E4,  :D4,   :r)
+          
+          sugar1_sustain = (ring   2,   1,   1,   2,   1,   1,   1,   1,   1,   2,   2,   1,
+                                 0.5, 0.5,   1,   1,   1, 0.5, 0.5,   2,   1,   1, 0.5,   2,
+                                 0.5,   1,   1,   1,   1,   1,   1,   2, 0.5, 0.5, 0.5,   2,
+                                 0.5, 0.5, 0.5, 0.5, 1.5, 0.5,   1,   4, 2.5, 0.5, 0.5, 0.5,
+                                 0.5, 0.5, 0.5,   1,   1, 0.5, 0.5, 0.5, 0.5,   1, 0.5, 0.5, 
+                                   4,   4, 1.5, 1.5,   5, 1.5, 1.5,   3, 0.5, 0.5, 0.5, 0.5,
+                                 0.5,   1,   1,   1,   1,   2, 0.5, 0.5, 1.5,   4,   7)
+          
+          play sugar1.look(:sugar_clock), sustain: sugar1_sustain.look(:sugar_clock),
+            amp: rrand(1.6, 2)  # Again, I think it makes it sound more "human-like."
+          sleep sugar1_sustain.look(:sugar_clock)  # I want this solo to tick to its
+                                                   # own clock and not be affected by
+                                                   # the other clocks for violin voices 1, 2, and 3.
+        end
+      end
+    end
+  end
+end
+
+# Intro to Pachelbell's Canon in D Major with 3 violin voices #
+# Voice 1:
+define :violin1 do
+  live_loop :violin1 do  # I defined a live loop because I wanted to be able to make
+                         # changes that will go into affect right away.
+    use_bpm 81  # This is half the bpm that the Fall Out Boy solo is played at.
+                # I think it flows nicely with the pace of the solo.
+    
+    use_synth :piano  # I liked the dimension the piano sound added.
+    
+    115.times do  # I want to play the first 115 notes of the intro.
+      tick :violin1_clock
+      violin1 = (ring :Fs5,  :E5,  :D5, :Cs5,  :B4,  :A4,  :B4, :Cs5,
+                       :D5, :Cs5,  :B4,  :A4,  :G4, :Fs4,  :G4,  :E4,
+                       :D4, :Fs4,  :A4,  :G4, :Fs4,  :D4, :Fs4,  :E4,
+                       :D4,  :B3,  :D4,  :A4,  :G4,  :B4,  :A4,  :G4,
+                      :Fs4,  :D4,  :E4, :Cs5,  :D5, :Fs5,  :A5,  :A4,
+                       :B4,  :G4,  :A4, :Fs4,  :D4,  :D5,  :D5, :Cs5,
+                       :D5, :Cs5,  :D5,  :D4, :Cs4,  :A4,  :E4, :Fs4,
+                       :D4,  :D5, :Cs5,  :B4, :Cs5, :Fs5,  :A5,  :B5,
+                       :G5, :Fs5,  :E5,  :G5, :Fs5,  :E5,  :D5, :Cs5,
+                       :B4,  :A4,  :G4, :Fs4,  :E4,  :G4, :Fs4,  :E4,
+                       :D4,  :E4, :Fs4,  :G4,  :A4,  :E4,  :A4,  :G4,
+                      :Fs4,  :B4,  :A4,  :G4,  :A4,  :G4, :Fs4,  :E4,
+                       :D4,  :B3,  :B4, :Cs5,  :D5, :Cs5,  :B4,  :A4,
+                       :G4, :Fs4,  :E4,  :B4,  :A4,  :B4,  :A4,  :G4,
+                      :Fs4, :Fs5,   :r)
+      
+      violin1_sustain = (ring 1,    1,    1,    1,    1,    1,    1,    1,
+                              1,    1,    1,    1,    1,    1,    1,    1,
+                            0.5,  0.5,  0.5,  0.5,  0.5,  0.5,  0.5,  0.5,
+                            0.5,  0.5,  0.5,  0.5,  0.5,  0.5,  0.5,  0.5,
+                            0.5,  0.5,  0.5,  0.5,  0.5,  0.5,  0.5,  0.5,
+                            0.5,  0.5,  0.5,  0.5,  0.5,  0.5, 0.75, 0.25,
+                           0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25,
+                           0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25,
+                           0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25,
+                           0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25,
+                           0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25,
+                           0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25,
+                           0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25,
+                           0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25,
+                            0.5,  0.5,    3)
+      
+      play violin1.look(:violin1_clock), sustain: violin1_sustain.look(:violin1_clock),
+        amp: rrand(0.5, 0.8)
+      sleep violin1_sustain.look(:violin1_clock)
+    end
+  end
+end
+
+# Voice 2:
+define :violin2 do
+  live_loop :violin2 do
+    use_bpm 81
+    
+    use_synth :piano
+    
+    86.times do  # I want to play the first 86 notes of the intro.
+      tick :violin2_clock
+      violin2 = (ring :r, # The # of beats needed to rest until it is "cued."
+                          # Since there aren't long repeating phrases, I think
+                          # it would be difficult to sync and cue at the correct time.
+                     :Fs5,  :E5,  :D5, :Cs5,  :B4,  :A4,  :B4, :Cs5,
+                      :D5, :Cs5,  :B4,  :A4,  :G4, :Fs4,  :G4,  :E4,
+                      :D4, :Fs4,  :A4,  :G4, :Fs4,  :D4, :Fs4,  :E4,
+                      :D4,  :B3,  :D4,  :A4,  :G4,  :B4,  :A4,  :G4,
+                     :Fs4,  :D4,  :E4, :Cs5,  :D5, :Fs5,  :A5,  :A4,
+                      :B4,  :G4,  :A4, :Fs4,  :D4,  :D5,  :D5, :Cs5,
+                      :D5, :Cs5,  :D5,  :D4, :Cs4,  :A4,  :E4, :Fs4,
+                      :D4,  :D5, :Cs5,  :B4, :Cs5, :Fs5,  :A5,  :B5,
+                      :G5, :Fs5,  :E5,  :G5, :Fs5,  :E5,  :D5, :Cs5,
+                      :B4,  :A4,  :G4, :Fs4,  :E4,  :G4, :Fs4,  :E4,
+                      :D4,  :E4, :Fs4,  :G4,   :r)
+      
+      violin2_sustain = (ring   8,    1,    1,    1,    1,    1,    1,    1, 1,
+                                1,    1,    1,    1,    1,    1,    1,    1,
+                              0.5,  0.5,  0.5,  0.5,  0.5,  0.5,  0.5,  0.5,
+                              0.5,  0.5,  0.5,  0.5,  0.5,  0.5,  0.5,  0.5,
+                              0.5,  0.5,  0.5,  0.5,  0.5,  0.5,  0.5,  0.5,
+                              0.5,  0.5,  0.5,  0.5,  0.5,  0.5, 0.75, 0.25,
+                             0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25,
+                             0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25,
+                             0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25,
+                             0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25,
+                             0.25, 0.25, 0.25, 0.25,    3)
+      
+      play violin2.look(:violin2_clock), sustain: violin2_sustain.look(:violin2_clock),
+        amp: rrand(0.5, 0.8)
+      sleep violin2_sustain.look(:violin2_clock)
+    end
+  end
+end
+
+# Vioce 3:
+define :violin3 do
+  live_loop :violin3 do
+    use_bpm 81
+    
+    use_synth :saw
+    
+    use_synth_defaults attack: 0.1, release: rrand(0.3, 0.5)
+    
+    54.times do  # I want to play the first 54 notes of the intro
+      tick :violin3_clock
+      violin3 = (ring  :r, :Fs5, :E5,  :D5, :Cs5,  :B4,  :A4,  :B4, :Cs5,
+                      :D5, :Cs5, :B4,  :A4,  :G4, :Fs4,  :G4,  :E4,
+                      :D4, :Fs4, :A4,  :G4, :Fs4,  :D4, :Fs4,  :E4,
+                      :D4,  :B3, :D4,  :A4,  :G4,  :B4,  :A4,  :G4,
+                     :Fs4,  :D4, :E4, :Cs5,  :D5, :Fs5,  :A5,  :A4,
+                      :B4,  :G4, :A4, :Fs4,  :D4,  :D5,  :D5, :Cs5,
+                      :D5, :Cs5, :D5,  :D4,   :r)
+      
+      violin3_sustain = (ring  16,    1,    1,    1,   1,   1,    1,    1, 1,
+                                1,    1,    1,    1,   1,   1,    1,    1,
+                              0.5,  0.5,  0.5,  0.5, 0.5, 0.5,  0.5,  0.5,
+                              0.5,  0.5,  0.5,  0.5, 0.5, 0.5,  0.5,  0.5,
+                              0.5,  0.5,  0.5,  0.5, 0.5, 0.5,  0.5,  0.5,
+                              0.5,  0.5,  0.5,  0.5, 0.5, 0.5, 0.75, 0.25,
+                             0.25, 0.25, 0.25, 0.25,   3)
+      
+      play violin3.look(:violin3_clock), sustain: violin3_sustain.look(:violin3_clock),
+        amp: 0.2
+      sleep violin3_sustain.look(:violin3_clock)
+    end
+  end
+end
+
+
+##---------------------------------Control-Panel----------------------------------##
+
+live_loop :canon_in_D_major do
+  in_thread do  # I want to play all voices at the same time.
+    fallout_boy
+  end
+  
+  in_thread do
+    violin1
+  end
+  
+  in_thread do
+    violin2
+  end
+  
+  violin3
+  
+  sleep 1
+end
+
+##--------------------------------------------------------------------------------##
+
+##----------------------------------References------------------------------------##
+# Pachelbel's "Cannon in D Major" https://musescore.com/user/5012316/scores/4248241
+# Fall Out Boy's "Sugar We're Goin' Down" https://musescore.com/user/17534646/scores
+# /4990759
+##--------------------------------------------------------------------------------##
