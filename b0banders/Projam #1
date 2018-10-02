@@ -1,0 +1,72 @@
+#first projamming session
+
+#seven nation army
+
+# I figured out which notes I needed for the baseline and they play in the correct order
+# once you run the program. I am still trying to figure out how to sustain certain notes
+# in bass line so that it doesnt sound as choppy. Also need to add a drum sequence to
+# accompany the base line.
+
+##| live_loop :my_song, sync: :bass_line do
+##|   use_bpm 110
+##|   use_synth :tech_saws
+
+##|   bass_notes = (ring :E3, :E3, :G3, :E3, :D3, :C3, :B2)
+##|   bass_sleep = (ring 1.25, 0.5, 0.5, 1, 0.5, 1.25, 1)
+##|   play bass_notes.tick(:bass_clock)
+##|   sleep bass_sleep.look(:bass_clock)
+##| end
+
+
+##| sleep 1
+##| cue :bass_line
+
+
+
+# Next person!
+
+
+
+# I tinkered with the sleeps to make it sound a bit more like the original,
+# but I couldn't figure out the sustains! Sorry that I messed with the code a bit!
+# Also, I added a kick drum.
+
+use_bpm 120
+use_synth :tech_saws
+##| use_synth_defaults sustain 2
+
+define :bassline do
+  
+  
+  bass_notes = (ring :E3, :E3, :G3, :E3, :D3, :C3, :B2)
+  bass_sleep = (ring 1.5, 0.5, 0.75, 0.75, 0.5, 2, 2)
+  play bass_notes.tick(:bass_clock)
+  sleep bass_sleep.look(:bass_clock)
+end
+
+define :drumline do
+  sample :drum_bass_soft
+  sleep 1
+end
+
+
+2.times do
+  7.times do
+    bassline
+  end
+end
+
+live_loop :bass do
+  7.times do
+    bassline
+  end
+end
+
+live_loop :drum do
+  drumline
+end
+
+
+
+
+
