@@ -1,0 +1,98 @@
+# I was not able to code the chords and bass to play as a live loop together so I had
+# to thread them together instead
+
+##| live_loop :my_chords do
+##|   chords
+##|   bass
+##|   sleep 2
+##| end
+
+# By doing this it only plays once through rather than as a loop
+
+in_thread do
+  chords
+end
+
+in_thread do
+  bass
+end
+
+#I added my part to the in_thread here
+#This part plays after person1's part is finished
+#One could add a drum beat/other beat on top of my part to improve the rhythm
+#These parts could be added in between my 1.times do in the function called (person1)
+
+in_thread do
+  sleep 8.5
+  person2
+end
+
+
+# This the chord progression for the song, each chord lasting for 2 beats
+def chords
+  1.times do
+    play :D3, sustain: 1.75
+    play :A3, sustain: 1.75
+    play :Bb3, sustain: 1.75
+  end
+  sleep 2
+  1.times do
+    play :D3, sustain: 1.75
+    play :F3, sustain: 1.75
+    play :Bb3, sustain: 1.75
+  end
+  sleep 2
+  1.times do
+    play :C3, sustain: 1.75
+    play :F3, sustain: 1.75
+    play :A3, sustain: 1.75
+  end
+  sleep 2
+  1.times do
+    play :C3, sustain: 1.75
+    play :E3, sustain: 1.75
+    play :G3, sustain: 1.75
+  end
+end
+
+# These are the bass notes for the chords, each lasting 2 beats
+def bass
+  1.times do
+    notes = [ :G2, :Bb2, :F2, :C2]
+    durations = [:Db4, :Bb4, :Ab4, :Bb4]
+    durations = [2, 2, 2, 2]
+    play_pattern_timed notes, durations
+  end
+end
+
+define :person2 do
+  use_bpm 120
+  use_synth :sine
+  3.times do
+    1.times do
+      play :D4, sustain: 1.75, amp: 2
+      play :A4, sustain: 1.75, amp: 2
+      play :Bb4, sustain: 1.75, amp: 2
+    end
+    sleep 3
+    1.times do
+      play :D4, sustain: 1.75, amp: 2
+      play :F4, sustain: 1.75, amp: 2
+      play :Bb4, sustain: 1.75, amp: 2
+    end
+    sleep 3
+    1.times do
+      play :C4, sustain: 1.75, amp: 2
+      play :F4, sustain: 1.75, amp: 2
+      play :A4, sustain: 1.75, amp: 2
+    end
+    sleep 3
+    1.times do
+      play :C4, sustain: 1.75, amp: 2
+      play :E4, sustain: 1.75, amp: 2
+      play :G4, sustain: 1.75, amp: 2
+    end
+    sleep 3
+  end
+end
+
