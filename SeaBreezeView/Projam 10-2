@@ -1,0 +1,64 @@
+#just playig with chords and randomness
+
+r_chords = [ chord(:Gs4, :minor),
+             chord(:Cs4, :minor),
+             chord(:B4, :major),
+             chord(:A4, :major)
+             ]
+
+#this was just for practice, but feel free to use
+#live_loop :random_chords do
+# use_synth :piano
+# play choose(r_chords)
+# sleep 0.25
+#end
+
+#create ring
+
+in_thread do
+  
+  use_synth :piano
+  live_loop :ring_chords do
+    calling =(ring 0,1,3,2,2,1,0,3)
+    tick
+    play_pattern_timed r_chords[calling.look] , 0.25
+    play_pattern_timed r_chords [calling.look].reverse, 0.25
+  end
+end
+
+in_thread do
+  
+  ##I added a bass line to the note progression, based on code from class. Couldn't get good sound combo between bass and melody
+  
+  live_loop :bl do
+    
+    
+    
+    use_synth :chipbass
+    
+    
+    
+    use_synth_defaults amp: rrand(0, 0.25), cutoff: rrand(115, 125)
+    
+    
+    
+    bass_notes = (ring :B2, :A2, :E2, :E3, :E3, :E3, :E3, :E3, :A2,
+                  :G2, :D2, :D3, :C3, :C3, :C3, :C3, :C3)
+    
+    
+    
+    bass_sleep = (ring 0.5)
+    
+    
+    
+    play bass_notes.tick(:bass_clock)
+    
+    
+    
+    sleep bass_sleep.look(:bass_clock)
+    
+    
+    
+  end
+  
+end
