@@ -1,0 +1,54 @@
+
+use_bpm 101
+
+# This is part of the main rhythm to Dancing Queen.
+# This might be better in a ring?
+
+
+define :dancing_queen do
+  
+  ##| use_synth :piano  # I commented out this out this synth so that
+  # we could control the synth within the live loop
+  
+  notes = [ :cs5, :b4, :b4, :r,
+            :cs5, :b4, :b4, :cs5,
+            :a4, :b4, :gs4, :a4,:b4, :gs4,
+            :a4, :gs4, :fs4, :r]
+  durations = [ 1, 0.5, 1.5, 1,
+                1, 0.5, 1.5, 1,
+                0.75, 0.75, 0.5, 0.75, 0.75, 0.5,
+                0.25, 0.25, 1.5, 2]
+  play_pattern_timed notes, durations
+end
+
+# I started to put a background beat to go along with the rhythm.
+# By adding these definitions we can easily add another type of
+# drum to the rhythm by chanign the beat ring below.
+
+drum = :drum_heavy_kick
+tss = :drum_cymbal_pedal
+
+define :back_beats do
+  live_loop :beats do
+    tick(:beat_clock)
+    beat = (ring drum, tss, drum, tss)
+    sample beat.look(:beat_clock), amp: rrand(0.6, 0.8)
+    sleep 0.5  # This makes the drum beat a slower, but a sleep of
+    # 0.5 might make it sound more upbeat!
+    
+    #I changed the sleep from 1 to 0.5 ^^
+  end
+end
+
+
+live_loop :dance do
+  controller = 2  #I added the controller so we can change synth midperformance
+  use_synth :piano if controller == 0
+  use_synth :beep if controller == 1
+  use_synth :fm if controller == 2
+  in_thread do  # I wanted to play them at the same time.
+    back_beats
+  end
+  dancing_queen
+end
+
