@@ -1,0 +1,22 @@
+use_bpm 60
+
+in_thread do
+  loop do
+    tick
+    use_synth :piano
+    my_chords = [chord(:E3, :minor),
+                 chord(:C3, :major),
+                 chord(:C3, :major),
+                 chord(:A4, :minor)]
+    
+    calling = (ring 0, 1, 2, 3, 1, 2, 3, 0, 0)
+    play_pattern_timed my_chords [calling.look], 0.25
+  end
+end
+
+loop do
+  use_synth :pretty_bell
+  my_notes = (ring :C5, :C5, :D5)
+  my_durations = (ring 0.25, 0.25, 0.25)
+  play_pattern_timed my_notes, my_durations
+end
