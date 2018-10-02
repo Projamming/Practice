@@ -1,0 +1,139 @@
+Title: SAIL-Awolnation Intro
+
+chord_ = [ chord(:G4, :major),
+chord(:E4, :major),
+chord(:E4, :major),
+]
+
+chord2_ = [ chord(:A4, :major),
+chord(:E4, :major),
+chord(:E2, :major),
+]
+
+chord3_ = [ chord(:Fs4, :major),
+chord(:D4, :major),
+chord(:D2, :major),
+]
+
+
+chord4_ = [ chord(:C4, :major),
+chord(:D4, :major),
+chord(:C2, :major),
+]
+
+##| I added these second and third chords to add after the first section.  Not sure how to use it with
+##| calling, tick, and aply chord2[calling.look].
+##| not playing the right amount of notes - not sure why
+
+
+calling = (ring 0, 1, 2)
+
+tick
+play chord_[calling.look]
+sleep 0.5
+play chord2_[calling.look]
+sleep 0.5
+play chord3_ [calling.look]
+sleep 0.5
+play chord4_ [calling.look]
+sleep 0.5
+
+
+
+#The section above is me trying to clean up the code below
+#If you play the section below yo uwill see that the beginning is ok,
+#but then it becomes off beat
+
+
+##| use_synth :piano
+
+##| 2.times do
+  
+##|   4.times do
+##|     play :G4
+##|     play :E4
+##|     play :E2
+##|     sleep 0.5
+##|   end
+  
+##|   2.times do
+##|     play :G4
+##|     play :E4
+##|     play :E2
+##|     sleep 0.5
+##|   end
+  
+##|   2.times do
+##|     play :A4
+##|     play :E4
+##|     play :E2
+##|     sleep 0.5
+##|   end
+##| end
+
+##| 8.times do
+##|   play :Fs4
+##|   play :D4
+##|   play :D2
+##|   sleep 0.5
+##| end
+
+##| 4.times do
+##|   play :D4
+##|   play :C4
+##|   play :C2
+##|   sleep 0.5
+##| end
+
+##| 4.times do
+##|   play :Fs4
+##|   play :D4
+##|   play :B2
+##|   sleep 0.5
+##| end
+
+##| 2. times do
+  
+##|   2.times do
+##|     play :G4
+##|     play :E4
+##|     play :E2
+##|     sleep 0.5
+##|   end
+  
+##|   ## i think the code gets off beat because these sections do not add up to the same amount
+##|   ## of beats as the others in the "2.times do" sections
+  
+##|   play :E4
+##|   play :E2
+##|   sleep 0.2
+##|   play :E4
+##|   sleep 0.2
+##|   play :E4
+##|   sleep 0.2
+  
+##|   play :G4
+##|   play :E4
+##|   sleep 0.2
+##|   play :G4
+##|   sleep 0.2
+##|   play :G4
+##|   sleep 0.2
+  
+##|   play :A4
+##|   play :E2
+##|   sleep 0.3
+##|   play :B4
+##|   play :E2
+##|   sleep 0.3
+  
+##|   play :A4
+##|   play :E2
+##|   sleep 0.5
+##|   play :G4
+##|   sleep 0.3
+##|   play :E4
+##|   play :E2
+##|   sleep 0.5
+##| end
+
