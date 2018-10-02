@@ -1,0 +1,108 @@
+
+##| # this is the basic rythym for the song "signs"
+##| # from early on in the course - needs to be condensed using newer lessons and could introduce some meoldy on top
+
+##| use_bpm 80 #changed from 55 to 80
+##| use_synth :sine
+
+##| def signs
+##|   play :A3
+##|   play :F4
+##|   play :A4
+##|   play :C4
+##|   play :E4
+##| end
+
+##| def signs2
+##|   play :A3
+##|   play :E4
+##|   play :A4
+##|   play :C4
+##|   play :E4
+##| end
+
+##| def signs3
+##|   play :A3
+##|   play :A4
+##|   play :C4
+##|   play :E4
+##| end
+
+##| def signs4
+##|   play :G3
+##|   play :G4
+##|   play :B4
+##|   play :E4
+##| end
+
+##| def signs5
+##|   play :F3
+##|   play :F4
+##|   play :A4
+##|   play :D4
+##| end
+
+##| def signs6
+##|   play :C3
+##|   play :E4
+##|   play :G4
+##|   play :C4
+##| end
+
+##| signs
+##| sleep 1.0
+##| signs2
+##| sleep 1.0
+##| signs
+##| sleep 1.0
+##| signs2
+##| sleep 1.0
+##| signs3
+##| sleep 1.0
+##| signs4
+##| sleep 1.0
+##| signs5
+##| sleep 1.0
+##| signs6
+##| sleep 1.0
+##| signs3
+##| sleep 1.0
+##| signs4
+##| sleep 1.0
+##| signs5
+##| sleep 1.0
+##| signs6
+##| sleep 1.0
+##| signs
+##| sleep 1.0
+##| signs2
+##| sleep 1.0
+
+#condensing
+define lines do
+  notes = [:A3, :F4, :C4. :E4,
+           :A3, :E4, :A4, :C4, :E4,
+           :A3, :A4, :C4, :E4,
+           :G3, :G4, :B4, :E4,
+           :F3, :F4, :A4, :D4]
+  sleeps = [ring 1,1,1,1]
+  play_pattern_timed notes, sleeps
+end
+
+
+
+#introducing a drum beats i did not have time to thread them with the condensed  melody so just put them in an in thread loop
+kick = :drum_heavy_kick
+tom  = :drum_tom_hi_hard
+
+define :melody do
+  8.times do
+    tick
+    drums_start = (ring kick, kick, tom, kick, tom, tom, kick, tom)
+    drums_time  = (ring 0.5, 1, 0.25, 0.5, 1, 1, 0.5, 0.5,)
+    drums_amps  = (ring 2, 1, 1, 3, 1, 2, 3, 1)
+    
+    sample drums_start.look, amp: drums_amps.look
+    sleep drums_time.look
+  end
+end
