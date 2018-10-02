@@ -1,0 +1,69 @@
+# Just created a simple drum line! Laying the ground work for a melody...
+
+hi = :drum_cymbal_closed
+hio = :drum_cymbal_open
+snr = :drum_snare_hard
+k = :drum_bass_hard
+z = :r
+
+define :drums do
+  8.times do
+    tick :drum_clock
+    drum_part = (ring k, snr, hi, snr, z, hi, snr, hi)
+    sample drum_part.look(:drum_clock)
+    sleep 0.25
+  end
+end
+
+in_thread do
+  loop do
+    8.times do
+      drums
+    end
+  end
+end
+
+
+in_thread do
+  loop do
+    use_synth :piano
+    8.times do
+      notes= [:e2, :e2, :e2, :g2]
+      durations= [1, 0.25, 0.25, 1]
+      play_pattern_timed notes, durations
+      sleep 1
+    end
+  end
+end
+
+
+in_thread do
+  loop do
+    use_synth :blade
+    8.times do
+      notes= [:e3, :e3, :e3, :g3]
+      durations= [1, 0.25, 0.25, 1]
+      play_pattern_timed notes, durations, amp: 0.5
+      sleep 1
+    end
+  end
+end
+
+loop do
+  use_synth :pluck
+  8. times do
+    notes= [ :e4, :e4, :e4, :g4]
+    durations= [0.25, 1, 1, 0.25]
+    play_pattern_timed notes, durations, amp: 3
+    sleep 1
+  end
+end
+
+##i just layered a couple of sections on top of each other that
+##were different variations of each other
+
+
+
+
+
+
