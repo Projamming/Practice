@@ -1,0 +1,46 @@
+##| use_synth :pluck
+
+##| in_thread do
+##|   live_loop :p1 do
+##|     70.times do
+##|       tick :apple_clock
+##|       use_synth :piano
+##|       apple_part= ( ring :b3, :d3, :b3, :d3, :g3, :e2, :f2)
+##|       play apple_part.look(:apple_clock)
+##|       sleep (0.25)
+##|     end
+##|   end
+##| end
+
+
+
+live_loop :pluck do
+  in_thread do
+    5.times do
+      use_synth :pluck
+      tick(:pc)  # pc stands for pluck_clock...Just if we use it in
+      # conjunction with another ring.
+      beat = (ring 1, 2, 1, 2, 1)
+      play :A3 if beat.look(:pc) == 1
+      sample :ambi_glass_hum if beat.look(:pc) == 2  # I changed the ambi_choir
+      # to ambi_glass_hum because it meshed a little better with the A3.
+      sleep 0.25
+    end
+  end
+  notes
+end
+# if you can get this to work that would be swag
+# I got it to work but I'm not sure how it's supposed to run!
+
+define :notes do
+  use_synth :fm
+  tick(:notes_clock)
+  my_notes = (ring :D4, :Fs4)  # With these 2 notes and the A3 above, we make the
+  # D major chord!
+  play my_notes.look(:notes_clock), sustain: rrand(1.23, 1.25), amp: rrand(0.6, 0.85)
+  # The pluck ring runs for about 1.25 beats, so I want D4 and Fs4 to alternate every time the
+  # ring loops around. 
+  sleep rrand(1.23, 1.25)
+end
+
+
