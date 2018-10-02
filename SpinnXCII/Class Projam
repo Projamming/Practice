@@ -1,0 +1,42 @@
+use_synth :piano
+
+leftchords1 = (ring :g3, :g3, :a3, :a3, :g3, :g3, :a3, :a3, :a3)
+#maybe edit the chords?
+#the notes for the first two measures are below, see sheet music
+
+define :notes1 do
+  notes = [:r, :Eb4, :f4, :c4, :Eb4, :Bb3, :c4]
+  durations = [0.5, 0.5, 0.5, 0.5, 1, 0.5, 0.5]
+  
+  play_pattern_timed notes, durations
+end
+
+define :notes2 do
+  notes = [:db4, :db4, :db4, :eb4, :ab3, :Bb3]
+  durations = [1, 1, 0.5, 0.5, 0.5, 0.5]
+  
+  play_pattern_timed notes, durations
+end
+
+in_thread do
+  9.times do
+    tick
+    play leftchords1.look
+    sleep 1
+  end
+end
+#added the first and second measure of notes in a loop
+loop do
+  notes1
+  notes2
+end
+
+
+#started the left hand of somewhere over the rainbow (see youtube video)
+#didn't get very far
+
+
+
+
+
+
