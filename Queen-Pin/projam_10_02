@@ -1,0 +1,40 @@
+# I have no idea where I am going with this
+
+# chord progression below
+# can be used as a harmony part
+# or a melody maybe
+
+use_synth :blade #i thought this synth sounded kind of cool but you can change it back if you'd like
+# the synth isn't important, feel free to change if the mood strikes
+
+chords = [chord(:g4, :major),
+          chord(:a4, :minor),
+          chord(:f4, :major7),
+          chord(:c4, :major),
+          chord(:fs4, :minor), #I added more chords that sound nice together
+          chord(:d4, :major),
+          chord(:a4, :major),
+          chord(:e, :major)
+          ]
+calling = (ring 0, 1, 2, 3, 3, 2, 4, 2, 5, 7, 4, 2, 5, 6) #expanded both lists
+
+live_loop :chord_prog do
+  tick
+  play_pattern_timed chords[calling.look], 0.3
+end
+
+# drum section below
+# provides a rhythm
+
+tom = :drum_tom_mid_soft
+drm = :drum_snare_soft
+drm2 = :drum_bass_soft #i added another drum
+drums = (ring tom, drm2, drm, tom, tom, drm2, drm, drm, tom, drm2, tom, drm, drm2, drm)
+
+live_loop :drums do
+  # used a local bpm to make the drums faster
+  use_bpm 100
+  tick
+  sample drums.look
+  sleep 1
+end
