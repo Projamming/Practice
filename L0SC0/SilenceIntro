@@ -1,0 +1,21 @@
+##Silence by Khalid, Marshmello
+
+##These are chords from the song
+chord_prog = [chord(:A3, :minor),
+              chord(:C3, :major),
+              chord(:B3, :major),
+              chord(:G3, :major)
+              ]
+use_synth :tri
+live_loop :my_chords do
+  
+  calling = (ring 0, 1, 0, 3) ##this ring plays the intro chord progression
+  
+  
+  tick
+  
+  
+  play chord_prog[calling.look], sustain: 1.25
+  sleep 2
+  
+end
