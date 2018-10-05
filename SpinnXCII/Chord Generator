@@ -1,0 +1,36 @@
+##took inspiration from the warmup from class on october 5 to practice using calling
+##got the chord progression from the chord generator and tried to mimic the drums they put in the background 
+
+use_bpm 74
+
+chord_prog = [chord(:d4, :minor),
+              chord(:c4, :major),
+              chord(:f3, :major),
+              chord(:d4, :minor)
+              ]
+
+calling = (ring 3, 2, 1, 0, 1, 2)
+
+in_thread do
+  use_synth :blade
+  live_loop :chords do
+    tick
+    play chord_prog[calling.look]
+    sleep 1
+  end
+end
+
+
+live_loop :drums do
+  tick
+  rest = 0
+  drums = (ring 1, rest, 2, rest)
+  if drums.look == 1
+    sample :drum_bass_soft
+  end
+  if drums.look ==2
+    sample :drum_cymbal_closed
+  end
+  sleep 0.5
+end
+
