@@ -1,0 +1,214 @@
+#--------------------------------------------------------------------------------------------------------------#
+# FILE   : Project4.rb
+# AUTHOR : DJ-Mito-Chondria
+# DATE   : October 1, 2018
+# DESC   : For this project I decided to code three different repeating bassline
+#          phrases and two slightly different rhythms of the vocals to Love Lies by
+#          Khalid and Normani. Instead of using randomness to control the parameters
+#          of only the synths and fx, I decided to make the combination of rhythm part
+#          and bassline beat part random! I used two separate random di: one for the
+#          bassline parts (beat1, 2, and 3), and one for the vocal rhythm parts
+#          (rhythm01, 02, and 03). I was able to use in_thread to thread the beats
+#          and rhythm parts together so that they would play at the same time, just
+#          like they would normally do in the song. However, the vocal section may
+#          not be playing with its intended bassline, because each part will be
+#          selected at random! I'm super excited that this worked!
+#-------------------------------------------------------------------------------------------------------------#
+
+# Bassline beat repeating phrases from Love Lies by Khalid & Normani.
+# These three beat patterns were selected from different parts of the song.
+
+define :beat1 do  # One of the bassline repeating phrases in Love Lies
+  2.times do         # I want to play this phrase twice so it will align
+                            # with the 2 different rhythm parts.
+
+    13.times do        # There are 13 notes/rests that make up this
+      use_synth :fm  # I liked the deep sound of this synth.
+      
+      tick :beats1_clock
+      
+      beats1 = (ring :Ds4, :Fs4, :As4,  # I tried to break the rings up where there
+                                                          # were slight pauses.
+                :r, :Fs3, :Cs4, :Fs4,
+                :r, :B3, :Ds4, :Fs4, :As4, :r)
+      
+      beats1_sustain = (ring 0.25, 0.25, 0.25,
+                        0.5, 0.5, 0.25, 0.25,  # Some of the sustain notes are longer
+                                                         # than the sleep because I wanted it
+                                                         # to play with the next note too.
+                        0.25, 1, 0.75, 0.5, 0.25, 1)
+      beats1_sleep = (ring 0.25, 0.25, 0.25,
+                      0.5, 0.25, 0, 0.25,
+                      0.25, 0.25, 0.25, 0.25, 0.25, 1)
+      
+      play beats1.look(:beats1_clock), sustain: beats1_sustain.look(:beats1_clock),
+        amp: rrand(0.66, 0.93)   # To sound a little more human-like
+      sleep beats1_sleep.look(:beats1_clock)
+    end
+  end
+end
+
+
+define :beat2 do
+  2.times do
+    12.times do
+      use_synth :fm
+      with_fx :flanger do
+        
+        tick :beats2_clock
+        
+        beats2 = (ring :Ds4, :Fs4, :As4,
+                  :As3, :Fs4, :As4,
+                  :B3, :Ds4, :Fs4,
+                  :Fs3, :Cs4, :Fs4)
+        
+        beats2_sustain = (ring 0.25, 0.25, 0.25,
+                          0.75, 0.5, 0.25,
+                          0.75, 0.5, 0.25,
+                          0.75, 0.5, 0.25)
+        beats2_sleep = (ring 0.25, 0.25, 0.25,
+                        0.5, 0.25, 0.5,
+                        0.25, 0.25, 0.25,
+                        0.5, 0.25, 0.5)
+        
+        play beats2.look(:beats2_clock), sustain: beats2_sustain.look(:beats2_clock),
+          amp: rrand(0.66, 1)
+        sleep beats2_sleep.look(:beats2_clock)
+      end
+    end
+  end
+end
+
+
+define :beat3 do
+  2.times do
+    12.times do
+      use_synth :fm
+      with_fx :ixi_techno do
+        
+        tick :beats3_clock
+        
+        beats3 = (ring :Ds3, :Ds4, :r,
+                  :As2, :As3, :r,
+                  :B2, :B3, :r,
+                  :Fs2, :Fs3, :r)
+        
+        beats3_sustain = (ring 0.5, 0.5, 0.25,
+                          0.75, 0.75, 0.5,
+                          0.5, 0.5, 0.25,
+                          0.75, 0.75, 0.5)
+        
+        beats3_sleep = (ring 0, 0.5, 0.25,
+                        0, 0.75, 0.5,
+                        0, 0.5, 0.25,
+                        0, 0.75, 0.5)
+        
+        play beats3.look(:beats3_clock), sustain: beats3_sustain.look(:beats3_clock),
+          cutoff: rrand(76, 86), amp: rrand(0.86, 1)
+        sleep beats3_sleep.look(:beats3_clock)
+      end
+    end
+  end
+end
+
+####################################################################
+# Two short rhythm parts of the vocals from Love Lies:
+# Although they sound similar, they do vary slightly.
+
+define :rhythm01 do
+  14.times do
+    use_synth :prophet
+    with_fx :lpf do
+      
+      tick :rhythm1_clock
+      
+      rhythm1 = (ring :Gs4, :As4, :Gs4, :Gs4, :Gs4, :Gs4,
+                 :Fs4, :F4, :Ds4, :Ds4,
+                 :Cs4, :Cs4, :Cs4, :Cs4)
+      rhythm1_sus = (ring 0.3, 0.3, 0.25, 0.3, 0.3, 0.3,
+                     0.2, 0.3, 0.35, 3.25,
+                     0.8, 0.25, 0.25, 0.25, 0.25)
+      
+      rhythm1_sleep = (ring 0.25, 0.25, 0.25, 0.5, 0.5, 0.25,
+                       0.25, 0.5, 0.75, 3.25,
+                       0.5, 0.25, 0.25, 0.25)
+      
+      play rhythm1.look(:rhythm1_clock), cutoff: rrand(90, 96), amp: rrand(0.86, 1),
+        sustain: rhythm1_sus.look(:rhythm1_clock)
+      sleep rhythm1_sleep.look(:rhythm1_clock)
+    end
+  end
+end
+
+define :rhythm02 do
+  20.times do
+    use_synth :tri
+    with_fx :flanger do
+      
+      tick :rhythm2_clock
+      
+      rhythm2 = (ring :Gs4, :As4, :Gs4, :Gs4, :Gs4, :Gs4, :Gs4,
+                 :Fs4, :F4, :Ds4, :Ds4, :F4, :Ds4, :Cs4, :Gs4,
+                 :Cs4, :Cs4, :Cs4, :Cs4, :Cs4)
+      
+      rhythm2_sus = (ring 0.3, 0.3, 0.25, 0.5, 0.3, 0.3, 0.3,
+                     0.2, 0.3, 0.35, 0.75, 0.25, 0.25, 0.25, 1.3,
+                     0.3, 0.25, 0.75, 0.25, 0.3)
+      
+      rhythm2_sleep = (ring 0.25, 0.25, 0.25, 0.5, 0.25, 0.25, 0.25,
+                       0.25, 0.5, 0.75, 0.75, 0.25, 0.25, 0.5, 1,
+                       0.25, 0.25, 0.75, 0.23, 0.25)
+      
+      play rhythm2.look(:rhythm2_clock),
+        cutoff: rrand(88, 95),  # I wanted to dampen the sound a bit and make it
+                                          # less screechy
+        res: rrand(0.1, 0.25), mod_pulse_width: rrand(0.3, 0.6),  # I wanted to decrease
+                                                                                                 # the waviness
+        sustain: rhythm2_sus.look(:rhythm2_clock), amp: rrand(0.86, 1)
+      sleep rhythm2_sleep.look(:rhythm2_clock)
+    end
+  end
+end
+
+################################################
+# Control Panel #
+###############################################
+
+live_loop :love_lies do
+  use_bpm 70
+  
+  in_thread do  # I want to play the beat parts and the
+                        # rhythm parts at the same time.
+    
+    # Random dice roller for the beat parts:
+    random_number = dice(3) # I have three "beat" rhythms.
+    
+    use_this = beat1 if random_number == 1
+    use_this = beat2 if random_number == 2
+    use_this = beat3 if random_number == 3
+    
+    use_this  # Each variable has its own clock it's ticking to, 
+                   # so I didn't tick again here.
+  end
+  
+  # Random dice roll for the rhythm parts:
+  random_number = dice(2)
+  
+  use_this = rhythm01 if random_number == 1
+  use_this = rhythm02 if random_number == 2
+  
+  use_this
+  
+end
+
+#-------------------References--------------------------------------------------------------------------#
+# Love Lies by Khalid virtual piano tutorial:
+# https://video.search.yahoo.com/search/video?fr=mcafee&p=
+# full+sheet+music+for+love+lies+by+khalid
+# id=1&vid=eee869ab4fb90b51f970e6aad03dedcc&action=click
+#
+# Love Lies by Khalid & Normani Official Music Video:
+# https://video.search.yahoo.com/search/video?fr=mcafee&p=love+lies+khalid#id=2&
+#vid= b82966ebc7a5bb0e4f44f25147d9d324&action=click
+#------------------------------------------------------------------------------------------------------------#
+
