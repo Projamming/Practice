@@ -1,0 +1,27 @@
+##used chord progressions and practice with rings
+
+chord_prog = [chord(:a3, :major),
+              chord(:a4, :major),
+              chord(:a5, :major)]
+
+calling = (ring 0, 1, 2)
+
+in_thread do
+  live_loop :song do
+    6.times do
+      use_synth :piano
+      tick
+      play_pattern_timed chord_prog[calling.look], 0.1
+      sleep 1
+    end
+  end
+end
+
+live_loop :song2, sync: :apple do
+  use_synth :blade
+  tick
+  play_pattern_timed chord_prog[calling.look].reverse, 0.1
+  sleep 1
+end
+
+cue :apple
