@@ -1,0 +1,41 @@
+#practice with cue and sync
+
+live_loop :piano do
+  use_synth :piano
+  8.times do
+    my_chords = (ring :c4, :d4, :f3, :g3)
+    my_amps = (ring 2, 1, 1, 1)
+    my_sleeps = (ring 0.25, 0.25, 0.25, 0.25)
+    tick
+    play my_chords.look, amp: my_amps.look
+    sleep my_sleeps.look
+  end
+  cue :bass
+  cue :drums
+end
+
+live_loop :bassss, sync: :bass do
+  tick
+  beat = (ring 1, 0, 1, 1, 0, 1)
+  sample :bass_woodsy_c, amp: 2 if beat.look == 1
+  sleep 1
+end
+
+live_loop :drummms, sync: :drums do
+  use_bpm 120
+  hard = :drum_tom_lo_hard
+  cymbal = :drum_cymbal_closed
+  my_beat = (ring hard, cymbal, hard, hard, cymbal, hard)
+  tick
+  sample my_beat.look
+  sleep 1
+end
+
+
+
+
+
+
+
+
+
