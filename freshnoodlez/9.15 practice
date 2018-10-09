@@ -1,0 +1,30 @@
+##Practice w rings and ticks
+##used 9/06 class notes to practice formatting
+
+use_synth :pluck
+
+live_loop :pluck do
+  10.times do
+    tick
+    beat= (ring 1, 2, 1, 2, 1)
+    play :a3
+    sample :pluck if beat.look == 1
+    sample :ambi_choir if beat.look == 2
+    sleep 0.25
+  end
+  cue :apple
+end
+
+live_loop :pre, sync: :apple do
+  tick :apple_clock
+  use_synth :piano
+  apple_part= (ring :b3, :d3, :b3, :d3)
+  play apple_part.look(:apple_clock)
+  sleep (0.25)
+end
+##Tried to create a synch after creating a live loop ring, except it keeps saying there is an error in line 6
+
+
+## When you are creating a ring using symbols to match the sythesiser together
+## then you need to make sure you code a note that you want it to play
+
