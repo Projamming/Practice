@@ -1,0 +1,39 @@
+# Predict the output before you run the code. Then check!
+
+# What would you have to change about the code so that the two
+# harmony rings alternate as the melody plays?
+## add play_pattern_timed harmony_ring_2, duration ring under line 26
+# How could we bring harmony_ring_2 in to join both melody_ring
+# and harmony_ring_1 at the moment when melody_ring is beginning
+# its third playthrough?
+## create another thread and loop with sleep 8 and then cue harmony_2 or something
+# Finally, what must we do so that one of the two harmony_rings
+# is chosen at random each time the melody_ring restarts?
+## create a list of harmony rings and have sonic pi randomly choose
+use_synth :piano
+use_bpm 80
+
+melody_ring = (ring :E4, :D4, :C4)
+harmony_ring_1 = (ring :G3, :B2, :C3)
+harmony_ring_2 = (ring :C2, :G2, :C2)
+duration_ring = (ring 1, 1, 2)
+harmony_stuff = [harmony_ring_1, harmony_ring_2]
+
+live_loop :loop1 do
+  play_pattern_timed melody_ring, duration_ring
+end
+
+live_loop :loop2, sync: :harmony do
+  play_pattern_timed harmony_stuff.choose, duration_ring
+end
+
+##| live_loop :loop3, sync: :harmony_2 do
+##|   play_pattern_timed harmony_ring_2, duration_ring
+##| end
+
+loop do
+  sleep 4
+  cue :harmony
+  ##| sleep 4
+  ##| cue :harmony_2
+end
