@@ -1,0 +1,45 @@
+# Predict the output before you run the code. Then check!
+
+# What do you think will happen if we change 4.times to 8.times?
+## it doubles the number of times each drum ring is played
+# Bring the snares in: When we look at 1 in the snares ring, play
+# the sample :drum_snare_soft. The snares should play along with
+# the drums, using the :drum_clock.
+
+# What if we change drums_2 to (ring 1, 1, 0, 1, 0, 0) so that
+# it has six beats instead of four, but we keep drums_1 at four?
+# Can you figure out how to amend the code to handle this?
+## make the n.times do dependent on the drums
+
+use_bpm 30
+track = (ring 1, 2, 1, 2, 2)
+
+drums_1 = (ring 0, 1, 0, 1)
+drums_2 = (ring 1, 1, 0, 1, 0, 0)
+
+snares = (ring 0, 1, 0, 1, 1, 0, 1, 0)
+
+loop do
+  
+  tick(:track_clock)
+  
+  if track.look(:track_clock) == 1
+    use_this = drums_1
+    n = 4
+  end
+  
+  if track.look(:track_clock) == 2
+    use_this = drums_2
+    n = 6
+  end
+  
+  
+  n.times do
+    tick(:drum_clock)
+    sample :drum_bass_soft if use_this.look(:drum_clock) == 0
+    sample :tabla_ghe1 if use_this.look(:drum_clock) == 1
+    ##| sample :drum_snare_soft if snares.look(:drum_clock) == 1
+    sleep 0.25
+  end
+  
+end
