@@ -1,0 +1,19 @@
+##ring practice and sync practice 10/7
+
+live_loop :piano do
+  tick
+  p1= (ring 1, 0, 1, 1, 0, 1)
+  sample :ambi_choir if p1.look == 1
+  sample :drum_bass_hard if p1.look == 2
+  sleep 1
+end
+
+live_loop :p2, synch: :p2 do
+  tick
+  p2= (ring 0, 1, 0, 0, 1, 0)
+  sample :drum_bass_hard if p2.look == 0
+  sample :drum_roll if p2.look == 1
+  sleep 0.25
+end
+
+cue :p2
