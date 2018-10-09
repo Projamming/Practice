@@ -1,57 +1,85 @@
-#REFERENCES: Based off Another Sad Love Song by Khalid.
-#I used the layout from the warmup on 9/20
-#DESCRIPTION: I found the changing rhythm and
-#baseline in the song very interesting, so I used that as my model.
-#I added the randomness aspect into what section plays when.
+use_bpm 100
+use_synth :pluck #this synth sounded the most similar to the actual song
+use_synth_defaults amp: 2
+#made the amp a tad louder so the drums wouldn't be overpowering
 
-use_bpm 100 #this is the bpm of the song, according to the internets
-
-define :blip do
-  play :d4, sustain: 0.2
-  sleep 0.25
-  play :b3, sustain: 0.2
-  sleep 0.25
-  play :b3, sustain: 0.5
-  sleep 0.25
+#drum section
+def four_four
+  sample :drum_heavy_kick, amp: 1
+  sleep 1
+  sample :drum_snare_hard, amp: 1
+  sleep 1
 end
 
-el = :elec_fuzz_tom
-#this sample sounded similar to part of the percussion that sounds like a hand clap
-bs = :drum_bass_hard
-bs2 = :drum_heavy_kick
-use_random_seed 722
-#change the random seed and get a different ring.
-r_choice = [0, 1, 2]
-r = (ring choose(r_choice), choose(r_choice), choose(r_choice))
-live_loop :rhythm do
-  
-  tick(:rc)
-  
-  if r.look(:rc) == 0
-    bass = (ring 1, 0, 2, 0, 1, 0, 2, 0, 1, 0, 2, 0, 1, 0, 2, 0, 1, 0, 2, 0)
-    #each bass ring is 20 numbers long because I had to incorporate the rests
+#defining each measure until line 74
+define :part_one do
+  notes_one = [:b4, :b4, :b4, :d5, :e5, :fs5, :fs5, :e5,
+               :fs5, :fs5, :fs5, :cs5, :cs5, :cs5, :cs5]
+  durations_one = [0.5, 0.25, 0.25, 0.5, 0.5, 0.5, 1, 0.5,
+                   0.5, 0.5, 0.5, 0.5, 0.5, 1, 0.5]
+  play_pattern_timed notes_one, durations_one
+end
+
+define :part_two do
+  notes_two = (ring :fs5, :fs5, :cs4, :cs4)
+  durations_two = (ring 0.5, 1.5, 1, 1)
+  8.times do
+    tick
+    play notes_two.look, sustain: durations_two.look
+    sleep durations_two.look
   end
-  if r.look(:rc) == 1
-    bass = (ring 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 3, 0)
-  end
-  if r.look(:rc) == 2
-    bass = (ring 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 4, 0)
-  end
+end
+
+define :part_three do
+  notes_three = [:cs5, :b4, :b4, :r, :d5, :d5, :b4, :b4,
+                 :cs5, :b4, :a4, :a4, :cs5, :cs5, :a4]
+  durations_three = [0.75, 0.25, 1, 0.5, 0.5, 0.5, 0.25, 0.25,
+                     0.25, 0.25, 0.5, 0.5, 0.5, 1.5, 0.5]
+  play_pattern_timed notes_three, durations_three
+end
+
+define :part_four do
+  notes_one = [:b3, :b3, :b3, :d4, :e4, :fs4, :fs4, :e4,
+               :fs4, :fs4, :fs4, :cs4, :cs4, :cs4, :cs4]
+  durations_one = [0.5, 0.25, 0.25, 0.5, 0.5, 0.5, 1, 0.5,
+                   0.5, 0.5, 0.5, 0.5, 0.5, 1, 0.5]
   
-  20.times do
-    
-    tick(:bc)
-    sample bs if bass.look(:bc) == 1
-    sample el, amp: 0.5 if bass.look(:bc) == 2
-    #made the amp lower so it wasn't overpowering
-    blip if bass.look(:bc) == 3
-    if bass.look(:bc) == 4
-      sample bs2
-      sleep 0.25
-      sample bs2
-    end
-    sleep 0.25
-    
+  play_pattern_timed notes_one, durations_one
+end
+
+define :part_five do
+  notes_two = (ring :fs4, :fs4, :cs3, :cs3)
+  durations_two = (ring 0.5, 1.5, 1, 1)
+  8.times do
+    tick
+    play notes_two.look, sustain: durations_two.look
+    sleep durations_two.look
   end
-  
+end
+
+define :part_six do
+  notes_three = [:cs4, :b3, :b3, :r, :d4, :d4, :b3, :b3,
+                 :cs4, :b3, :a3, :a3, :cs4, :cs4, :a3]
+  durations_three = [0.75, 0.25, 1, 0.5, 0.5, 0.5, 0.25, 0.25,
+                     0.25, 0.25, 0.5, 0.5, 0.5, 1.5, 0.5]
+  play_pattern_timed notes_three, durations_three
+end
+
+#here's the real MEAT
+live_loop :round do
+  part_one
+  #here's where I overlay the two voices as rounds
+  in_thread do
+    part_two
+  end
+  part_four
+  in_thread do
+    part_three
+  end
+  part_five
+  part_six
+end
+
+live_loop :drums do
+  four_four
 end
