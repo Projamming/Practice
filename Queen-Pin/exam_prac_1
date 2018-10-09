@@ -1,0 +1,28 @@
+# Predict the output before you run the code. Then check!
+## the code plays a note and then the corresponding chord three times and repeats this process twice
+# Next, what would you have to change about the code so that the three notes
+# play, then the three chords play, and so on, alternating forever? Try to
+# change as few lines as possible.
+## add a new 3.times do with the chords and then make the 2.times do a loop instead
+use_synth :fm
+
+notes = (ring :D4, :F4, :A4)
+chords = (ring chord(:D4, :major), chord(:F4, :major), chord(:A4, :major))
+
+define :melody do
+  
+  3.times do
+    tick
+    play notes.look
+    sleep 0.5
+  end
+  3.times do
+    tick
+    play chords.look
+    sleep 0.5
+  end
+end
+
+loop do
+  melody
+end
