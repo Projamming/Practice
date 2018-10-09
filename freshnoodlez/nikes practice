@@ -1,0 +1,47 @@
+##Author: FreshNoodlez
+##September 6
+##Attempting at nikes by frank ocean, kind of sketchy
+
+use_synth :sine
+use_bpm 80
+
+def nikes
+  play :e2, duration: 4
+  play :c2, duration: 4
+end
+
+def nikes2
+  play :e4, duration: 2.0
+  play :g4, duration: 2.0
+  play :b5, duration: 2.0
+end
+
+def nikes3
+  play :e4, duration: 6.0
+  play :g4, duration: 6.0
+  play :b5, duration: 6.0
+  sleep 1
+end
+
+def nikes4
+  play :g3, duration: 5
+  play :g2, duratino: 5
+end
+
+nikes
+nikes2
+sleep 0.5
+nikes3
+sleep 0.5
+nikes
+nikes4
+sleep 0.5
+nikes3
+
+##How do I get nikes to play for the whole time that nikes 2 and 3 play? They need to overlap
+##because nikes is the base sound held and then nikes3 and nikes4 play on top of it
+
+
+
+
+
