@@ -1,0 +1,16 @@
+#Author: Freshnoodlez
+#Song: First part of Miss American Pie, aka: bye bye miss american pie, drove my chevy to my levy but the levy was dry
+#Note: Sorry I couldn't do the whole chorus, I am still learning how to read music and the notes start to get a
+#little funky after "dry", and it took me an 1.5 hours to do these two lines, but we are getting there!
+#Date: Monday September 3, 2018
+
+use_bpm 120
+
+use_synth :piano
+notes= [:d4, :c4, :r, :c4, :c4, :b3, :b3, :a3, :g3, :a3, :c4, :d4, :d4,
+        :d4, :d4, :d4, :c4, :c4, :c4, :c4, :b4, :b4, :a3, :g3, :fs3, :e3]
+
+durations= [ 1.5, 0.5, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 0.5, 0.5, 0.5,
+             0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.25]
+
+play_pattern_timed notes, durations
