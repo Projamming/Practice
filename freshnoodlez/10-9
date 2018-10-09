@@ -1,0 +1,30 @@
+##practice 10/9 
+
+drum1= :drum_snare_soft
+drum2= :drum_bass_hard
+bass1= :bass_drop_c
+bass2= :bass_hit_c
+
+define :play1 do
+  round1= (ring drum1, drum2, drum1, drum2)
+  sample round1.tick
+end
+
+define :play2 do
+  round2= (ring bass1, bass2, bass1, bass2)
+  sample round2.tick
+end
+
+loop do
+  5.times do
+    play1
+  end
+  sleep 1
+  10.times do
+    play2 do
+    end
+  end
+end
+
+##Sonic Pi doens't work on my computer and I downloaded it on lib computer, but the sound doesn't work, so I have no idea what this sounds like 
+##sorry if it is painful 
