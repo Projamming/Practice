@@ -1,0 +1,82 @@
+#Using rings and different clocks to make the two hands play separately
+
+def left_hand
+  use_bpm 100
+  use_synth :piano
+  10.times do
+    notes = (ring :r, :C5, :B4, :C5, :G4, :Ab4, :C5, :B4, :C5, :D5)
+    sleep_rest = (ring 0.5, 0.25, 0.25, 0.5, 0.5, 0.5, 0.25, 0.25, 0.5, 0.5)
+    play notes.tick(:left1) #I've named each tick to get multiple clocks to tick on their own
+    sleep sleep_rest.tick(:sleep1)
+  end
+  10.times do
+    notes = (ring :G4, :C5, :B4, :C5, :B4, :F4, :G4, :Ab4, :G4, :F4)
+    sleep_rest = (ring 0.5, 0.25, 0.25, 0.5, 0.5, 0.25, 0.25, 1, 0.25, 0.25)
+    play notes.tick(:left2)
+    sleep sleep_rest.tick(:sleep2)
+  end
+  12.times do
+    notes = (ring :E4, :C5, :B4, :Ab4, :G4, :F4, :E4, :D4, :C4, :E5, :F5, :C5)
+    sleep_rest = (ring 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.5, 0.5, 0.5, 0.5)
+    play notes.tick(:left3)
+    sleep sleep_rest.tick(:sleep3)
+  end
+  8.times do
+    notes = (ring :Bb4, :A4, :Bb4, :C5, :Fs4, :G4, :A4, :Fs4)
+    sleep_rest = (ring 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5)
+    play notes.tick(:left4)
+    sleep sleep_rest.tick(:sleep4)
+  end
+  12.times do
+    notes = (ring :G4, :r, :C4, :D4, :Eb4, :F4, :G4, :Ab4, :Ab4, :D4, :Eb4, :F4)
+    sleep_rest = (ring 1, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.5, 0.25, 0.25, 0.25, 0.25)
+    play notes.tick(:left5)
+    sleep sleep_rest.tick(:sleep5)
+  end
+  14.times do
+    notes = (ring :G4, :A4, :Bb4, :Bb4, :Eb4, :F4, :G4, :Ab4, :G4, :F4, :Eb4, :D4, :C5, :B4)
+    sleep_rest = (ring 0.25, 0.25, 0.5, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.5, 0.25, 0.25)
+    play notes.tick(:left6)
+    sleep sleep_rest.tick(:sleep6)
+  end
+end
+
+
+def right_hand
+  use_bpm 100
+  use_synth :piano
+  10.times do
+    notes = (ring :r, :G5, :Fs5, :G5, :C5, :Eb5, :G5, :Fs5, :G5, :A5)
+    sleep_rest = (ring 8.5, 0.25, 0.25, 0.5, 0.5, 0.5, 0.25, 0.25, 0.5, 0.5) #there's a rest for 8.5 because the left hand starts first and then the right hand follows
+    play notes.tick(:right1)
+    sleep sleep_rest.tick(:sleep1)
+  end
+  10.times do
+    notes = (ring :D5, :G5, :Fs5, :G5, :A5, :C5, :D5, :Eb5, :D5, :C5)
+    sleep_rest = (ring 0.5, 0.25, 0.25, 0.5, 0.5, 0.25, 0.25, 1, 0.25, 0.25)
+    play notes.tick(:right2)
+    sleep sleep_rest.tick(:sleep2)
+  end
+  10.times do
+    notes = (ring :Bb4, :Eb5, :D5, :Eb5, :G4, :Ab4, :F5, :Eb5, :F5, :A4)
+    sleep_rest = (ring 0.5, 0.25, 0.25, 0.5, 0.5, 0.5, 0.25, 0.25, 0.5, 0.5)
+    play notes.tick(:right3)
+    sleep sleep_rest.tick(:sleep3)
+  end
+  10.times do
+    notes = (ring :Bb4, :G5, :F5, :G5, :B4, :C5, :D5, :Eb5, :F5)
+    sleep_rest = (ring 0.5, 0.25, 0.25, 0.5, 0.5, 0.5, 0.25, 0.25, 1)
+    play notes.tick(:right4)
+    sleep sleep_rest.tick(:sleep4)
+  end
+end
+
+
+in_thread do #makes the right and left hand play together: harmonizing a melody
+  1.times do
+    left_hand
+  end
+end
+1.times do
+  right_hand
+end
