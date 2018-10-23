@@ -1,0 +1,115 @@
+#puts "hello"
+#print "what's your name?"
+#input = gets.chomp  # .chomp allows us to get the characters we want
+# without .chomp, the enter means a new line character
+##puts input.downcase  #makes everything lowercase
+#puts input.upcase
+
+# Integer. 
+# puts 40 + 20
+# puts 40 + "20".to_i
+# puts 40.to_s + "20"
+
+def greet
+print "What is your name?"
+name = gets.chomp
+puts "Hello, #{name}"
+end
+
+def until100
+print "Current age: "
+age = gets.chomp
+year100 = 2018 + (100 - age.to_i)
+puts "You will be 100 in year #{year100}."
+end
+
+# Rock paper scissor with the computer!
+def rps
+  print "Rock Paper or Scissor? "
+  response = gets.chomp
+
+  # List
+  options = ["Rock", "Paper", "Scissor"]
+  pc_choice = options.sample
+  puts "You chose #{response.upcase}"
+  puts "The computer chose #{pc_choice.upcase}"
+
+  # If statements
+  if pc_choice == "Rock"
+    if response == "Paper"
+       puts "You Win! :) "
+    elsif response == "Rock"
+       puts "Tie"
+    else
+        puts "You Lose :( "
+    end
+  
+   elsif pc_choice == "Paper"
+     if response == "Scissor"
+       puts "You Win! :) "
+     elsif response == "Paper"
+       puts "Tie"
+     else 
+       puts "You Lose :( "
+     end
+   
+   elsif pc_choice == "Scissor"
+     if response == "Rock"
+       puts "You Win! :) "
+     elsif response == "Scissor"
+       puts "Tie"
+     else 
+      puts "You Lose :( "
+    end
+  end  
+end
+
+
+# Q1
+def greet
+print "What is your name? "
+name = gets.chomp
+print "Where are you from? "
+place = gets.chomp
+puts "Hello, #{name} from #{place}!"
+end
+
+# Q2
+def password 
+  print "Frist name of one of your parents: "
+  name_of_parents = gets.chomp
+  print "Current age: "
+  age = gets.chomp
+  puts = "Your password is #{name_of_parents + age}"
+end
+
+# Q3
+def coinflip
+options = ["Heads", "Tails"]
+pc_option = options.sample
+puts = "The computer flipped #{pc_option.upcase}"
+end
+
+# Q4
+def cfgame
+print "Choose heads or tails: "
+response = gets.chomp.upcase
+options = ["Heads", "Tails"]
+pc_choice = options.sample
+puts "The computer flipped #{pc_choice.upcase} "
+if pc_choice == "Heads"
+  if response == "HEADS"
+   puts = "You guessed correctly! "
+  else
+   puts = "You guessed incorrectly! "
+  end
+
+elsif pc_choice == "Tails"
+  if response == "TAILS"
+   puts "You guessed correctly! "
+  else
+   puts "You guessed incorrectly!"
+  end
+end
+end
+
