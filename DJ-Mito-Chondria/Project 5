@@ -1,0 +1,451 @@
+#----------------------------------------------------------------------------------#
+# FILE   : Project 5
+# AUTHOR : DJ-Mito_Chondria
+# DATE   : October 18, 2018
+# DESC   : I decided to code a variation of the song "Thunderstruck" by ACDC! I love
+#          this song!! This variation of Thunderstruck was adapted from sheet music
+#          I found online. The online version had 4 guitar parts, but I only coded
+#          parts for Guitar 1 and Guitar 3. I also added a drum beat of my own, and
+#          a harmony beat to go along with the intro melody. I cut out measures 26-53
+#          to make the piece a little shorter. I also messed around with the synths
+#          and fx to try and make the guitar solos sound more like electric guitars.
+#----------------------------------------------------------------------------------#
+#### The code is WAY too big so if you just copy starting at "use_bpm 134" until
+#### the END function it will play in Sonic Pi...hopefully..:) 
+
+use_bpm 134
+################# Intro Melody ##################
+## Note: If I comment this intro melody out after it has played its part, then I can
+## make changes in the various loops and not have this part of the song play over again,
+## which will not sound pretty if it does!
+
+use_synth :blade
+with_fx :echo, max_phase: 1, decay: 0.5  do
+  
+  sleep 0.75
+  play :B3, sustain: 0.25
+  sleep 0.25
+  
+  2.times do
+    8.times do
+      4.times do
+        tick :beats1_clock
+        beats1 = (ring :Ds4, :B3, :Fs4, :B3)
+        
+        play beats1.look(:beats1_clock), sustain: 0.25
+        sleep 0.25
+      end
+    end
+    
+    8.times do
+      4.times do
+        tick :beats2_clock
+        beats2 = (ring :E4, :B3, :G4, :B3)
+        
+        play beats2.look(:beats2_clock), sustain: 0.25
+        sleep 0.25
+      end
+    end
+  end
+end
+
+########Background beats that sync with guitar1#########
+live_loop :b1noise, sync: :bnote do
+  use_synth :blade
+  play :B1, sustain: 4, amp: rrand(0.7, 0.8)
+  sleep 4
+end
+#######################################################
+live_loop :lefthand, sync: :bharm do  # B2 harmony note that plays with B3 notes in :melody live loop.
+  play :B2, sustain: 0.25, amp: rrand(1, 1.2)
+  sleep 0.5
+end
+#######################################################
+# Since this loop loops around more often, I can make live_coding changes in here!
+live_loop :drums, sync: :snares1 do
+  snare = :drum_snare_soft
+  bass = :drum_heavy_kick
+  4.times do  # After :bharm is cued, I can comment this out to have my changes go into effect faster.
+    2.times do
+      2.times do
+      with_fx :reverb, room: rrand(0.8, 0.9), damp: rrand(0.6, 0.8) do 
+        sample snare, amp: 6
+        sample bass, amp: 6
+        sleep 1
+      end
+      end
+      
+      sleep 1
+      
+      ## Personal Note: Start live-coding here to make a new drum beat:
+      
+      1.times do  #Change to 2.times do
+        with_fx :reverb, room: rrand(0.8, 0.9), damp: rrand(0.6, 0.8) do
+          sample bass, amp: 4
+          sleep 2  # Change this to 0.5 to get a double beat.
+        end
+      end
+      
+      # To make a different drum beat I can add a sleep 1 here
+      
+      1.times do
+        with_fx :reverb, room: rrand(0.8, 0.9), damp: rrand(0.6, 0.8) do
+          sample bass, amp: 4
+          sleep 2  # Change this to 1
+        end
+      end
+      
+      # Add a sleep 1 here
+      
+      # and then copy and paste another drum beat here:
+        #  1.times do
+        #   with_fx :reverb, room: rrand(0.8, 0.9), damp: rrand(0.6, 0.8) do
+        #    sample bass, amp: 4  # Change this out for the function snare.
+        #    sleep 1
+        #    end
+        #    end
+      
+      # And then I'd press run and wait for the beat to change! 
+      # From here I could change the last drum beat, which is a bass beat, to a snare or 
+      # I could redefine the functions 'snare' and/or 'bass' which would change the sound 
+      # of the drums.
+      
+    end
+    cue :bharm
+  end
+end
+
+##| ################## Guitar 1 Melody###################
+live_loop :guitar1 do
+  # By putting this at the beginning of the loop, I can call this
+  # ring at different times without having to write the ring out over again.
+  beats3 = (ring :B4, :B3, :A4, :B3,
+            :Gs4, :B3, :A4, :B3,
+            :Gs4, :B3, :Fs4, :B3,
+            :Gs4, :B3, :E4, :B3,
+            :Fs4, :B3, :Ds4, :B3,
+            :E4, :B3, :Ds4, :B3,
+            :E4, :B3, :Ds4, :B3,
+            :E4, :B3, :Ds4, :B3)
+  
+  use_synth :blade
+  with_fx :echo, max_phase: 1, decay: 0.5  do
+    6.times do  ## Personal Note: Brings us to the end of measure 61
+      2.times do # I want the snares1 and gnote loops to cue after this
+        # phrase is played twice.
+        ## Personal Note: Starts at 54
+        32.times do
+          tick :beats3_clock
+          play beats3.look(:beats3_clock), sustain: 0.25, amp: rrand(1, 1.2)
+          sleep 0.25
+        end
+      end
+      cue :snares1
+      cue :bnote
+    end
+    
+    sleep 8  # There is an 8 beat rest in between the repeating guitar1 melody.
+    
+    424.times do  # I want to play the 2 measure repeating melody 13.25 times.
+      tick :beats3_clock
+      play beats3.look(:beats3_clock), sustain: 0.25, amp: rrand(1, 1.2)
+      sleep 0.25
+    end
+    
+    play :Gs4, sustain: 1  # I needed a quarter note to play at the end of playing
+    # the beats3 phrase 13.25 times.
+    sleep 6  # Then Guitar 1 sleeps for 5 beats.
+    
+    8.times do
+      32.times do
+        tick :beats3_1_clock  # If I kept the clocks the same it was picking up at the last tick and not restarting
+        play beats3.look(:beats3_1_clock), sustain: 0.25, amp: rrand(1, 1.2)
+        sleep 0.25
+      end
+    end
+    
+    sleep 32  # Guitar 1 rests for 32 beats.
+    
+    13.times do
+      32.times do
+        tick :beats3_2_clock
+        play beats3.look(:beats3_2_clock), sustain: 0.25, amp: rrand(1, 1.2)
+        sleep 0.25
+      end
+    end
+  end
+  
+  ## Guitar 1 Solo!!##
+  117.times do
+    ae_chord = [:A5, :E5]  # I wanted to play these 2 notes at the same time at the end.
+    use_synth :prophet
+    with_fx :wobble, smooth_down: 2, smooth: 0.5, wave: 0  do  # I think this fx made the synth more fluid when switching
+      # between notes, and it gave it more depth. Wave 0 = a sine wave, which I thought sounded best, but you can play around with numbers 0-3.
+      with_fx :krush, gain: 2, res: 0.2, cutoff: rrand(102, 104) do  # Krush gave this synth a more electric guitar-sounding sound.
+        tick :beats4_clock
+        beats4_notes = (ring :r, :B4, :D5, :E5, :D5, :B4,
+                        :B4, :r,
+                        :E5, :E5, :D5, :E5, :D5, :B4, :D5,
+                        :Cs5, :B4 ,:A4, :Fs4, :B4, :Fs4,
+                        :r, :B4, :Fs5, :Fs5, :Fs5, :Fb5, :D5,
+                        :E5, :B4, :E5, :E5, :E5, :E5, :D5, :D5, :B4, :D5, :D5, :B4, :D5,
+                        :B4, :E5, :D5, :E5,
+                        :E5, :E5, :E5, :E5, :E5, :E5, :E5, :r,
+                        :E5, :E5, :E5, :E5, :E5, :E5, :E5, :E5, :E5,
+                        :E5, :E5, :D5, :B4, :Fs4, :B4, :E5, :E5,
+                        :E5, :Ds5, :B4, :E5, :D5, :E5, :D5, :B4, :D5, :E5, :E5, :A5, :E5,
+                        :A5, :E5, :E5, :E5, :D5, :B4,
+                        :r, :A5, :A5, :Fb5, :A5, :B5, :A5, :Fb5, :A5, :A5, :A5, :Fb5,
+                        :A5, :D6,
+                        :D6, :D6, :B5, :A5, :Fb5, :E5, :E5, :D5, :B4,
+                        :D5, :E5, :A5, ae_chord, ae_chord)
+        
+        beats4_sustain = (ring 0.5, 0.5, 0.5, 0.5, 0.25, 2.25,
+                          0.5, 3,
+                          0.5, 0.25, 0.25, 1.50, 0.5, 0.5, 0.5,
+                          0.5, 0.5, 0.5, 0.5, 0.5, 1.5,
+                          0.25, 0.25, 1.5, 0.5, 0.5, 0.5, 0.5,
+                          0.25, 0.75, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.5,
+                          1, 2, 0.5, 1.5,
+                          0.25, 0.5, 0.75, 0.25, 0.25, 0.25, 0.25, 0.5,
+                          0.5, 0.25, 0.25, 0.5, 0.5, 0.5, 0.25, 0.75, 0.5,
+                          0.25, 0.25, 0.25, 1.75, 0.25, 0.5, 0.5, 0.25,
+                          0.25, 0.25, 0.5, 0.25, 0.25, 0.25, 0.75, 0.25, 0.25, 0.25, 0.25, 0.25, 0.5,
+                          0.25, 0.75, 0.5, 0.15, 0.15, 2,
+                          1, 0.5, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25,
+                          3, 1, 0.5, 0.5, 0.5, 0.25, 0.25, 0.5, 0.25, 0.75, 0.5,
+                          0.25, 0.75, 0.5, 1.5, 1)
+        
+        play beats4_notes.look(:beats4_clock), sustain: beats4_sustain.look(:beats4_clock), amp: rrand(1.7, 1.85),
+          cutoff: rrand(87, 90)  # Makes the synth a little less screechy.
+          sleep beats4_sustain.look(:beats4_clock)
+      end
+    end
+  end
+ 
+  use_synth :blade
+  with_fx :echo, max_phase: 1, decay: 0.5  do
+    2.times do
+      32.times do
+        tick :beats3_3_clock
+        play beats3.look(:beats3_3_clock), sustain: 0.25, amp: rrand(1, 1.2)
+        sleep 0.25
+      end
+    end
+  end
+  
+  play :B3, sustain: 1  # Ends with a quarter note and then rests for 4 beats.
+  sleep 5
+  
+  # I don't want to play this loop over again, so I want it to sleep for 10 min.
+sleep 600
+end
+
+####################### Guitar 3 Loop #########################
+live_loop :guitar3 do
+  # I made my own chords into a function so I could call them later throughout the piece.
+  a_chord = [:A3, :E3, :A2]
+  b_chord = [:B3, :Fs3, :B2]
+  e_chord = [:E3, :B2, :E2]
+  f_chord = [:Fs3, :B3, :Fs4]
+  d_chord = [:D3, :A2, :E2]
+  e2_chord = [:E4, :B3, :E3, :E2]
+  c_chord = [:Cs4, :A3, :E3, :A2]
+  g_chord = [:E4, :B3, :Gs3, :E3, :B2, :E2]
+  e3_chord = [:B3, :E3, :B2, :E2]
+  
+  sleep 64  # So guitar 3 will start at measure 54 with Guitar 1
+  
+  # Personal Note: Guitar 3 starts at measure 54
+  use_synth :prophet
+  
+  4.times do
+    10.times do
+      tick :g3_clock
+      guitar3_notes = (ring a_chord, b_chord, a_chord, e_chord, :r,  # I tried to break it up by measure
+                       :r, a_chord, :r, a_chord, e_chord)
+      
+      guitar3_sustain = (ring 0.25, 1.75, 0.25, 0.25, 1.5,
+                         0.5, 0.5, 0.25, 0.75, 2)
+      
+      play guitar3_notes.look(:g3_clock), sustain: guitar3_sustain.look(:g3_clock), amp: rrand(1.55, 1.68)
+      sleep guitar3_sustain.look(:g3_clock)
+    end
+  end
+  
+  sleep 8
+  
+  play b_chord, sustain: 16, amp: rrand(2, 2.2)
+  sleep 16
+  
+  3.times do
+    tick :g3_2_clock
+    guitar3_notes2 = (ring f_chord, a_chord, f_chord)
+    guitar3_sustain2 = (ring 15.75, 0.25, 48)
+    
+    play guitar3_notes2.look(:g3_2_clock), sustain: guitar3_sustain2.look(:g3_2_clock), amp: rrand(1.55, 1.68)
+    sleep guitar3_sustain2.look(:g3_2_clock)
+  end
+  
+  play b_chord, sustain: 1
+  sleep 1
+  play a_chord, sustain: 1
+  sleep 1
+  play e_chord, sustain: 1
+  sleep 2
+  
+  2.times do
+    6.times do  # I want to play the 2 measure phrase 3 times, and then just the first measure one more time.
+      tick :g3_3_clock
+      
+      guitar3_notes3 = (ring :r, a_chord, b_chord, a_chord, e_chord,  # I separated by the chords/rests in one measure
+                        :r)
+      
+      guitar3_sustain3 = (ring 3, 1, 1, 1, 1,
+                          1)
+      play guitar3_notes3.look(:g3_3_clock), sustain: guitar3_sustain3.look(:g3_3_clock), amp: rrand(1.55, 1.68)
+      sleep guitar3_sustain3.look(:g3_3_clock)
+    end
+  end
+  
+  sleep 4
+  
+  4.times do
+    6.times do
+      tick :g3_4_clock
+      
+      guitar3_notes4 = (ring b_chord, a_chord, d_chord, e_chord,
+                        a_chord, e_chord)
+      
+      guitar3_sustain4 = (ring 1.5, 1.5, 0.5, 0.5, 1.5, 2.5)
+      
+      play guitar3_notes4.look(:g3_4_clock), sustain: guitar3_sustain4.look(:g3_4_clock), amp: rrand(1.55, 1.68)
+      sleep guitar3_sustain4.look(:g3_4_clock)
+    end
+  end
+  
+  4.times do
+    tick :g3_5_clock
+    
+    guitar3_notes5 = (ring b_chord, b_chord, b_chord, b_chord)
+    guitar3_sustain5 = (ring 8, 9.5, 8, 6.5)
+    
+    play guitar3_notes5.look(:g3_5_clock), sustain: guitar3_sustain5.look(:g3_5_clock), amp: rrand(1.55, 1.68)
+    sleep guitar3_sustain5.look(:g3_5_clock)
+  end
+  
+  139.times do
+    with_fx :krush, gain: rrand(1.5, 1.8), res: 0.2, cutoff: rrand(102, 104) do
+      with_fx :ixi_techno, phase: 6, res: 0.5, mix: rrand(0.3, 0.4) do
+        
+        tick :g3_6_clock
+        
+        guitar3_notes6 = (ring e2_chord, e2_chord, b_chord, :E2, :Fs2, a_chord,
+                          a_chord, a_chord, :r, e_chord,
+                          
+                          e2_chord, e2_chord, b_chord, :E2, :Fs2, a_chord,
+                          a_chord, e_chord,
+                          e2_chord, e2_chord, b_chord, :E2, :Fs2, a_chord,
+                          a_chord, e_chord,
+                          
+                          e2_chord, e2_chord, e2_chord, b_chord, :E2, :Fs2, a_chord,  #114
+                          c_chord, g_chord,
+                          b_chord, a_chord, :r,
+                          b_chord, a_chord, :r,
+                          b_chord, a_chord, :r,
+                          b_chord, a_chord, :r,
+                          
+                          b_chord, a_chord, d_chord, e_chord,
+                          a_chord, e_chord,
+                          b_chord, a_chord, d_chord, e_chord,
+                          a_chord, e_chord,
+                          b_chord, a_chord, d_chord, e_chord,
+                          a_chord, e_chord,
+                          b_chord, a_chord, d_chord, e_chord,
+                          a_chord, e_chord,
+                          
+                          b_chord, :Fs2, :Gs2, e3_chord,
+                          b_chord, :Fs2, :Gs2, e3_chord,
+                          b_chord, :Fs2, :Gs2, e3_chord,
+                          b_chord, :Fs2, :Gs2, e3_chord,
+                          
+                          b_chord, a_chord, d_chord, e_chord,
+                          a_chord, e_chord,
+                          b_chord, a_chord, d_chord, e_chord,
+                          a_chord, e_chord,
+                          b_chord, a_chord, d_chord, e_chord,
+                          a_chord, e_chord,
+                          b_chord, a_chord, d_chord, e_chord,
+                          a_chord, e_chord,
+                          b_chord, a_chord, d_chord, e_chord,
+                          a_chord, e_chord,
+                          b_chord, a_chord, d_chord, e_chord,
+                          a_chord, e_chord,
+                          b_chord, a_chord, d_chord, e_chord,
+                          a_chord, e_chord,
+                          b_chord, a_chord, d_chord, e_chord,
+                          a_chord, e_chord,
+                          
+                          b_chord, b_chord, b_chord, :r, :r  # This last rest is so that the loop will not play over again.
+                          )
+        
+        guitar3_sustain6 = (ring 0.5, 1, 1, 0.5, 0.5, 0.5,
+                            0.5, 0.5, 0.5, 2.5,
+                            
+                            0.5, 1, 1, 0.5, 0.5, 0.5,
+                            1.5, 2.5,
+                            0.5, 1, 1, 0.5, 0.5, 0.5,
+                            1.5, 2.5,
+                            
+                            0.5, 0.5, 0.5, 1, 0.5, 0.5, 0.5,
+                            1.5, 2.5,
+                            1.5, 0.5, 6,
+                            1.5, 0.5, 6,
+                            1.5, 0.5, 6,
+                            1.5, 0.5, 14,
+                            
+                            1.5, 1.5, 0.5, 0.5,
+                            1.5, 2.5,
+                            1.5, 1.5, 0.5, 0.5,
+                            1.5, 2.5,
+                            1.5, 1.5, 0.5, 0.5,
+                            1.5, 2.5,
+                            1.5, 1.5, 0.5, 0.5,
+                            1.5, 2.5,
+                            
+                            2.5, 0.5, 0.5, 4.5,
+                            2.5, 0.5, 0.5, 4.5,
+                            2.5, 0.5, 0.5, 4.5,
+                            2.5, 0.5, 0.5, 4.5,
+                            
+                            1.5, 1.5, 0.5, 0.5,
+                            1.5, 2.5,
+                            1.5, 1.5, 0.5, 0.5,
+                            1.5, 2.5,
+                            1.5, 1.5, 0.5, 0.5,
+                            1.5, 2.5,
+                            1.5, 1.5, 0.5, 0.5,
+                            1.5, 2.5,
+                            1.5, 1.5, 0.5, 0.5,
+                            1.5, 2.5,
+                            1.5, 1.5, 0.5, 0.5,
+                            1.5, 2.5,
+                            1.5, 1.5, 0.5, 0.5,
+                            1.5, 2.5,
+                            1.5, 1.5, 0.5, 0.5,
+                            1.5, 2.5,
+                            
+                            8, 8, 1.5, 2.5, 600  # This loop will rest for 10 minutes.
+                            )
+        
+        play guitar3_notes6.look(:g3_6_clock), sustain: guitar3_sustain6.look(:g3_6_clock), amp: rrand(1.55, 1.68)
+        sleep guitar3_sustain6.look(:g3_6_clock)
+      end
+    end
+  end
+end
+##################### Works Cited ###############################################
+# "Thunderstruck" by AC/DC piano sheet music:
+# https://www.youtube.com/redirect?v=thnF0zKIbk8&event=video_description&q=
+# https%3A%2F%2Fwww.jellynote.com%2Fsheet-music-tabs%2Fac-dc%2Fthunderstruck%2
+# F504a12c4d2235a3ff94ac8d3%23instr%3Apiano&redir_token=vmpPZX
