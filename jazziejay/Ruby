@@ -1,0 +1,118 @@
+# String: "" ''
+# print "What's your name?"
+# input = gets.chomp
+# puts input.downcase
+# puts input.upcase
+
+# Integer:
+# puts 40 + 20
+# puts 40 + "20" # Doesn't work - "20" is a string
+# puts 40 + "20".to_i # Turns the string into an integer --> 60
+# puts 40.to_s + "20" # Turns the integer into a string --> 4020
+
+def greet
+  print "What is your name?"
+  name = gets.chomp
+  puts "Hello, #{name}"
+end
+
+def until100
+  print "Current age: "
+  age = gets.chomp
+  year100 = 2018 + (100 - age.to_i)
+  puts "You will be 100 in year #{year100}."
+end
+
+# Rock paper scissor with the computer!
+def play
+  print "Rock, Paper, or Scissors?"
+  response = gets.chomp
+  # List
+  options = ["Rock", "Paper", "Scissors"]
+  comp_choice = options.sample
+  puts "You chose #{response.upcase}"
+  puts "The computer chose #{comp_choice.upcase}"
+  # If Statements
+  # Rock
+  if comp_choice == "Rock"
+    if response == "Paper"
+      puts "Win! :)"
+    elsif response == "Rock"
+      puts "Tie"
+    else
+      puts "Lose"
+    end
+  end
+  # Paper
+  if comp_choice == "Paper"
+    if response == "Scissors"
+      puts "Win! :)"
+    elsif response == "Paper"
+      puts "Tie"
+    else 
+      puts "Lose"
+    end
+  end
+  # Scissor
+  if comp_choice == "Scissors"
+    if response == "Rock"
+      puts "Win! :)"
+    elsif response == "Scissors"
+      puts "Tie"
+    else
+      puts "Lose"
+    end
+  end
+end
+
+# Q1. Modify the function 'greet' so that it asks where the user is from and greets them:
+
+def greeting
+  print "What is your name?"
+  name = gets.chomp
+  print "Where are you from?"
+  from = gets.chomp
+  puts "Hello, #{name} from #{from}!"
+end
+
+# Q2. Write a function 'password' that asks the user for the first name of one of their parents and then their age. Then your program should add the two strings and output the result as a password.
+
+def password
+  print "What is your dad's name?"
+  name = gets.chomp
+  print "How old are you?"
+  old = gets.chomp
+  puts "Your password is #{name}#{old}."
+end
+
+# Q3. Simulate the flip of a coin.
+
+def flip
+  options = ["heads", "tails"]
+  comp_choice = options.sample
+  puts "The computer flipped #{comp_choice}."
+end
+
+# Q4. Write a program that allows the user to guess whether the computer will flip heads or tails, and then report if the guess was successful or not.
+
+def guess
+  print "Choose heads or tails:"
+  response = gets.chomp
+  options = ["heads", "tails"]
+  comp_choice = options.sample
+  puts "The computer flipped #{comp_choice}."
+  if comp_choice == "heads"
+    if response == "heads"
+      puts "You guessed correctly! :)"
+    elsif response == "tails"
+      puts "You guessed incorrectly. :("
+      end
+    end
+  if comp_choice == "tails"
+    if response == "tails"
+      puts "You guessed correctly! :)"
+    elsif response == "heads"
+      puts "You guessed incorrectly. :("
+    end
+  end
+end
