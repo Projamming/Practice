@@ -1,0 +1,154 @@
+## Extra non-music practice 10/23
+
+## In this knock knock game, there is one joke but the comp comes up with a randomized witty reply at the end 
+
+def knock
+  puts "Knock knock"
+  answer = gets.chomp 
+  puts "Orange"
+  answer = gets.chomp
+  puts "Orange you glad I didn't say banana"
+  answer = gets.chomp
+
+  puts "now it's you turn, type: knock knock" 
+  answer = gets.chomp 
+
+  options = ["I'm just kidding, a computer can't understand jokes","nevermind, let's leave off on a high note"]
+  comp_choice = options.sample 
+
+  puts comp_choice 
+end 
+
+
+## In this knock knock game, the computer has two options of jokes it could tell you 
+
+def kk
+  puts "knock knock"
+  answer = gets.chomp
+
+  options1 = ["orange", "cow says"]
+  comp_choice1 = options1.sample 
+
+  puts comp_choice1
+  answer = gets.chomp 
+
+  if comp_choice1 == "orange"
+    puts "orange you glad I didn't say banana"
+  elsif comp_choice1 == "cow says"
+    puts "no, cow says MOOOO"
+  end 
+end 
+ 
+## This dice game, much like flipping a coin, involves the human guessing and the computer rolling 
+## The computer lets you know if you were right or wrong 
+
+def dicegame 
+print "guess the number this dice will roll? "
+response = gets.chomp 
+
+options = ["1", "2", "3", "4", "5", "6"]
+comp_choice = options.sample 
+
+puts "You chose #{response}"
+puts "The computer chose #{comp_choice} "
+
+
+#If Statements 
+if comp_choice == "1"
+  if response == "1"
+    puts "great work"
+  elsif response == "2"
+    puts "you failed"
+  elsif response == "3"
+    puts "you failed"
+  elsif response == "4"
+    puts "you failed"
+  elsif response == "5"
+    puts "you failed"
+  else response == "6"
+    puts "you failed"
+  end 
+end 
+
+if comp_choice == "2"
+  if response == "1"
+    puts "you failed"
+  elsif response == "2"
+    puts "great work"
+  elsif response == "3"
+    puts "you failed"
+  elsif response == "4"
+    puts "you failed"
+  elsif response == "5"
+    puts "you failed"
+  else response == "6"
+    puts "you failed"
+  end 
+end 
+
+if comp_choice == "3"
+  if response == "1"
+    puts "you failed"
+  elsif response == "2"
+    puts "you failed"
+  elsif response == "3"
+    puts "great work"
+  elsif response == "4"
+    puts "you failed"
+  elsif response == "5"
+    puts "you failed"
+  else response == "6"
+    puts "you failed"
+  end 
+end 
+
+if comp_choice == "4"
+  if response == "1"
+    puts "you failed"
+  elsif response == "2"
+    puts "you failed"
+  elsif response == "3"
+    puts "you failed"
+  elsif response == "4"
+    puts "great work"
+  elsif response == "5"
+    puts "you failed"
+  else response == "6"
+    puts "you failed"
+  end 
+end 
+
+if comp_choice == "5"
+  if response == "1"
+    puts "you failed"
+  elsif response == "2"
+    puts "you failed"
+  elsif response == "3"
+    puts "you failed"
+  elsif response == "4"
+    puts "you failed"
+  elsif response == "5"
+    puts "great work"
+  else response == "6"
+    puts "you failed"
+  end 
+end 
+
+if comp_choice == "6"
+  if response == "1"
+    puts "you failed"
+  elsif response == "2"
+    puts "you failed"
+  elsif response == "3"
+    puts "you failed"
+  elsif response == "4"
+    puts "you failed"
+  elsif response == "5"
+    puts "you failed"
+  else response == "6"
+    puts "great work"
+  end 
+end 
+end 
+
+
