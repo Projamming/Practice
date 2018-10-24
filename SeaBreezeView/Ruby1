@@ -1,0 +1,44 @@
+def greet 
+  print "What is your name ? "
+  answer1 = gets.chomp
+  print "Where are you from ? "
+  answer2 = gets.chomp 
+  puts "Hello, #{answer1} from #{answer2}."
+end 
+
+def word 
+  print "What is your mom's name ?" 
+  mom = gets.chomp 
+  print "How old are you ? "
+  age = gets.chomp
+  puts "your password is #{mom + age}."  
+end 
+
+
+def coin 
+  options = [ "Heads" , "Tails"]
+  pc_choice = options.sample
+  puts "The computer flipped #{pc_choice.upcase}."
+end 
+
+def coin_guess 
+  print "Heads or Tails ?" 
+  response = gets.chomp
+  options = [ "Heads" , "Tails"]
+  pc_choice = options.sample
+  puts "You guessed #{response.upcase}"
+  puts "The computer flipped #{pc_choice.upcase}."
+  if pc_choice == "Heads" 
+    if response == "Heads" 
+      puts "Win !"
+    elsif response == "Tails"
+      puts "Lose :("
+    end 
+  elsif pc_choice == "Tails"
+    if response == "Tails"
+      puts "Win !"
+    elsif response == "Heads"
+      puts "Lose :("
+    end 
+  end
+end 
