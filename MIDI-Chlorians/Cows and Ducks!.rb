@@ -1,3 +1,5 @@
+# A Cows and Ducks program for Repl Ruby
+
 def cows_and_ducks
 
   print "How many ducks do you have?"
