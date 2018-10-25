@@ -1,0 +1,66 @@
+def choose 
+  print "Select a number between 1 and 20."
+  player_choice_1 = gets.chomp.to_i
+  print 'Select another number between 1 and 20.'
+  player_choice_2 =gets.chomp.to_i  
+  ai_range = (player_choice_1 ... player_choice_2).to_a
+  ai_pick = ai_range.sample
+    ai_pick.times do 
+    puts "Quack!"
+  end 
+end 
+
+
+def how_many 
+  print "how many sheep do you have?"
+  num_sheep = gets.chomp.to_i
+  print "how many wolves do you have?"
+  num_wolves = gets.chomp.to_i 
+  
+  
+  if num_sheep > num_wolves  
+    num_sheep.times do 
+      puts "baaaaa!"
+    end
+  elsif num_wolves > num_sheep 
+    num_wolves.times do 
+      puts "awooooooo!"
+    end 
+  end
+end 
+  
+
+#boolean data type: true or false 
+
+def range_and_sample 
+  # ai_choice = [1, 2, 3, 4, 5].sample
+  ai_range = (1 ... 101).to_a # a = array 
+  puts ai_range.sample
+end 
+
+# Let's write a guessing game in which the AI chooses
+# a number between 1 and 100 and then we try to guess 
+# what it is! 
+
+def guess
+  ai_range = (1 ... 101).to_a # a = array
+  ai_pick = ai_range.sample 
+  counter = 0 # initialize a counter 
+  # puts ("The AI picked #{ai_pick}")#line of debugging code
+  loop do  
+    print "Enter a guess: "
+    player_guess = gets.chomp.to_i 
+    counter += 1 # increment the counter 
+    if player_guess > ai_pick 
+      puts "You guessed too high!"
+    elsif player_guess < ai_pick 
+      puts "You guessed too low!"
+    else 
+      puts "You got it in #{counter} guesses!"
+      break
+    end 
+  end  
+end
+
+
+
