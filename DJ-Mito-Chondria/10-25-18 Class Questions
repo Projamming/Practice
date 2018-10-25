@@ -1,0 +1,120 @@
+# Loops: they are a procedure
+# Ruby has lists, not rings
+
+# This is a loop
+def how_many
+ print "How many ducks do you have?"
+ num_ducks = gets.chomp.to_i
+ num_ducks.times do
+   puts "Quack!"
+  end
+end
+
+# Involves loops and conditionals
+#Ask the user how many ducks they have and how many cows they have
+# If one is greater, you with quack or moo that many times
+def farm
+ print "How many ducks do you have?"
+ num_ducks = gets.chomp.to_i
+ print "How man cows do you have?"
+ num_cows = gets.chomp.to_i
+
+  if num_ducks > num_cows
+    num_ducks.times do
+      puts "Quack!"
+    end
+ elsif num_cows > num_ducks
+    num_cows.times do 
+      puts "Moo!"
+    end
+ else
+    puts "QuackMoo!"
+ end
+end
+
+def farm2
+  print "How many ducks do you have?"
+  num_ducks = gets.chomp.to_i
+  print "How man cows do you have?"
+  num_cows = gets.chomp.to_i
+
+  num_ducks.times do
+    puts "Quack!" if num_ducks > num_cows
+  end
+
+  num_cows.times do
+    puts "Moo!" if num_cows > num_ducks
+  end
+
+  puts "Chaos!" if num_cows == num_ducks
+
+end
+
+# Boolean data type: They are either true or false 
+def range_and_sample
+  ai_range = (1 ... 100).to_a # a is short for array
+  puts ai_range.sample
+end
+
+# Let's write a guesisng game in which the ai chooses a # between 1-100 and then we try to guess what it is
+def guess
+  ai_range = (1 ... 100).to_a
+  ai_pick = ai_range.sample
+  counter = 0 # initialize a counter
+  #puts ("The AI picked #{ai_pick}")
+  
+  loop do
+    print "Enter a guess: "
+    player_guess = gets.chomp.to_i
+    counter += 1 # increment counter
+    if player_guess > ai_pick
+      puts "You guessed too high! "
+    elsif player_guess < ai_pick
+     puts "You guessed too low! "
+    else
+      puts "You got it in #{counter} guesses! "
+      break
+    end
+  end
+end
+
+# Q1
+def q1
+  print "Enter a number: "
+  number1 = gets.chomp.to_i
+  print "Enter a second number: "
+  number2 = gets.chomp.to_i
+
+  ai_range = (number1 ... number2).to_a
+  ai_pick = ai_range.sample
+
+  ai_pick.times do
+    puts "Quack!"
+  end
+end
+
+# Q2
+
+def q2
+ai_range = ("a" ... "z").to_a
+  ai_pick = ai_range.sample
+  counter = 0 # initialize a counter
+  #puts ("The AI picked #{ai_pick}")
+  
+  loop do
+    print "Choose a letter of the alphabet: "
+    player_guess = gets.chomp
+    counter += 1 # increment counter
+    if player_guess > ai_pick
+      puts "You guessed too high! "
+    elsif player_guess < ai_pick
+     puts "You guessed too low! "
+    else
+      puts "You got it in #{counter} guesses! "
+      break
+    end
+  end
+end
+
+# Q3
+# s.chars.shuffle.join jumbles the words
