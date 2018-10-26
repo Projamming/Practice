@@ -1,0 +1,16 @@
+use_synth :tb303
+
+my_amps = (ring 3.0, 1.0, 2.0, 2.0, 2.0, 3.0, 3.0)
+
+
+my_notes =(ring :E3, :E3, :G3, :E3, :D3, :C3, :B2)
+
+my_sleeps = (ring 0.75, 0.25, 0.5, 0.25, 0.25, 1, 1)
+
+loop do
+  tick
+  play my_notes.look, amp: my_amps.look
+  sleep my_sleeps.look
+end
+
+#7nations code 10.15
