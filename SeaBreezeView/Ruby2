@@ -1,0 +1,62 @@
+def numbers
+  print "Pick a number:"
+  num1 = gets.chomp.to_i 
+  print "Pick a higher number: "
+  num2 = gets.chomp.to_i
+  com_range = (num1 ... num2).to_a
+  com_pick = com_range.sample
+  com_pick.times do 
+    puts "quack"
+  end 
+end 
+
+puts "a" < "b"
+puts "c" < "d"
+("a" ... "z").to_a.sample
+
+def letters 
+  ai_range = ("a" ... "z").to_a
+  ai_pick = ai_range.sample
+  counter = 0 
+  puts "The AI chose #{ai_pick}"
+  loop do
+    print "Enter your guess: "
+    player_guess = gets.chomp
+    counter += 1 
+    if player_guess > ai_pick 
+      puts "you guessed too high!"
+    elsif player_guess < ai_pick 
+      puts "you guessed too low!"
+    else 
+      puts "you got it in #{counter} guesses!"
+      break  
+    end
+  end
+end
+
+
+s = "david"
+t = s.chars.shuffle.join
+
+
+def game 
+  print "Type in a word: "
+  word = gets.chomp
+  50.times do 
+    puts ""
+  end  
+  scramble = word.chars.shuffle.join
+  puts "Clue: #{scramble}"
+  counter = 0 
+
+  loop 
+    print "What is your guess?"
+    counter += 1 
+    answer = gets.chomp 
+    if answer == word 
+      puts "Congrats! You got it in #{counter} guesses!"
+      break
+    else
+      puts "nope guess again"
+    end 
+  end 
