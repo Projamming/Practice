@@ -1,0 +1,20 @@
+#Messing around with some of the code from our midterm projects 10/10
+
+twang = :elec_twang
+safari = :loop_safari
+bass = :drum_bass_hard
+r = (ring 2, 1, 3, 2, 1, 2, 2, 1)
+
+live_loop :jungle do
+  use_bpm 5
+  tick
+  
+  sample twang if r.look == 1
+  sample safari if r.look == 2
+  sample bass if r.look == 3
+  
+  sleep 0.25
+end
+
+
+
