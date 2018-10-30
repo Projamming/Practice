@@ -1,0 +1,90 @@
+;; Welcome to Clojure!
+
+;; The syntax in Clojure is: (function arguments)
+;; The function is either a math operation or a
+;; built-in algorithm that will run on the 
+;; arguments 
+;; (+ 1 1)
+;; (+ 10 20)
+;; (+ 1 2 3 4 5 6 7 8 9 10)
+;; (+ 4 (+ 3 7))
+
+;; What if we want (1 - 2) + 3
+;; (+ (- 1 2) 3)
+;; ((- 1 2) + 3) ;; -> (-1 + 3) error: so + must be 
+;; before
+
+;; (* 4 5)
+;; (/ 15 5)
+;; (/ 5 4)
+;; (/ 18 12)
+
+;; What is 1/2 + 1/4?
+
+;; (+ 0.5 0.25)
+;; (+ 1/2 1/4)
+
+;; Another data type os float (think: decimals)
+;; (float 1/2)
+;; (float (+ 1/2 1/4))
+
+;; To check is things are equal: True/False
+;; (= 1/2 4/8) ;; -> true
+;; (= 1/2 4/7) ;; -> false
+;; (> 1/2 4/7) ;; -> false
+
+;; (mod a b) return the remainder of dividing b 
+;; into a
+;; (mod 10 3) ;; -> 1
+;; (mod 12 2) ;; -> 0
+;; (mod 909 132) ;; -> 117
+;; (mod 30 11 3) ;; -> error
+;; Arity error = the count of something/ number of 
+;; arguments
+
+;; I want (mod 30 11 3). It should be 2.
+;; (mod (mod 30 11) 3)
+
+;; Lists are a big deal in Clojure. Whe we create
+;; a list, we use parentheses, but in Clojure the 
+;; first entry must be a function, so this is a 
+;; quandary..
+;; we solve this issue with a quate mark:
+;; '(1 2 3 4)
+;; (list 1 2 3 4)
+;; (first '(1 2 3 4))
+;; (last '(1 2 3 4))
+;; (nth '(1 2 3 4 5 6 7) 5) ;; start at 0
+;; (take 4 '(1 2 3 4 5 6 7))
+;; (drop 5 '(1 2 3 4 5 6 7))
+
+;; Let's try to grab the sub-list (5 6 7) from
+;; the master-list (1 2 3 4 5 6 7 8 9)
+
+;; (drop 4 '(1 2 3 4 5 6 7 8 9)) ;; -> (5 6 7 8 9)
+;; (take 3 (drop 4 '(1 2 3 4 5 6 7 8 9))) ;; (5 6 7)
+
+;; To make this faster:
+;; (range 30)
+;; (range 10, 20) ;; The ending # is not included in the list
+
+;; Create variables that will store some data:
+;; (def bananas '(1 2 3 4 5 6))
+;; ;; Type bananas in the repl
+;; (first bananas)
+;; (def apples (range 100))
+
+;; Q1. Predict the output of this statement before you check
+;; (- (/ 18 3) (* 3 2))
+;; (18/3) - (3*2) 
+
+;; Q2. Write a little math puzzle like that one and give it to you rneighbor
+;; (+ (/ (+ 4 8) (- 8 2)) (+ 1 3))
+
+;; Q3. What is a number that could go in the blank
+;; to make this statement return "true"?
+;; (> (mod 11 4) (mod 5 2))
+
+;; Q5. Predict the output before you check:
+(drop 5 (take 5 (range 20)))
+;; get ()
