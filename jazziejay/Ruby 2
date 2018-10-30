@@ -1,0 +1,117 @@
+def quack
+  print "How many ducks do you have?"
+  num_ducks = gets.chomp.to_i
+  num_ducks.times do
+    puts "Quack!"
+  end
+  puts "you have #{num_ducks} ducks!"
+end
+
+def animals
+  print "How many ducks do you have?"
+  num_ducks = gets.chomp.to_i
+  print "How many cows do you have?"
+  num_cows = gets.chomp.to_i
+# If Statements
+  if num_ducks > num_cows
+    num_ducks.times do
+      puts "Quack!"
+    end
+    puts "You have more ducks than cows!"
+  else num_ducks < num_cows
+    num_cows.times do
+      puts "Moo!"
+    end
+    puts "You have more cows than ducks!"
+  end
+end
+
+def animals2
+  print "How many ducks do you have?"
+  num_ducks = gets.chomp.to_i
+  print "How many cows do you have?"
+  num_cows = gets.chomp.to_i
+# If Statements
+  num_ducks.times do
+    puts "Quack!" if num_ducks > num_cows
+  end
+  num_cows.times do
+    puts "Moo!" if num_cows > num_ducks
+  end
+  puts "Chaos!" if num_cows == num_ducks
+end
+
+# Boolean data type: true or false
+def range_and_sample
+  # ai_choice = [1,2,3,4,5].sample
+  ai_range = (1 ... 100).to_a # a = array
+  puts ai_range.sample
+end
+
+def guess
+  ai_range = (1 ... 100).to_a
+  ai_pick = ai_range.sample
+  # puts ("The AI picked #{ai_pick}.")
+  # debugging ^
+  counter = 0 # intializing the counter
+  loop do
+    print "Guess which number the AI picked!"
+    player_guess = gets.chomp.to_i
+    counter += 1 # increment the counter
+  # If Statements
+    if player_guess > ai_pick
+      puts "You guessed too high."
+    elsif player_guess < ai_pick
+      puts "You guessed too low."
+    else player_guess == ai_pick
+      puts "You got it in #{counter} guesses!"
+      break
+    end
+  end
+end
+
+# Q1
+def q1
+  print "Choose a number!"
+  num_1 = gets.chomp.to_i
+  print "Choose another number!"
+  num_2 = gets.chomp.to_i
+  ai_range = (num_1 ... num_2).to_a
+  ai_pick = ai_range.sample
+  ai_pick.times do
+    puts "Quack!"
+  end
+end
+
+# Q2
+def q2
+  # puts "a" < "b"
+  # puts "c" < "b"
+  # ("a" ... "z").to_a.sample
+  ai_range = ("a" ... "z").to_a
+  ai_pick = ai_range.sample
+  # puts ("The AI picked #{ai_pick}.")
+  # debugging ^
+  counter = 0 # intializing the counter
+  loop do
+    print "Guess which letter the AI picked!"
+    player_guess = gets.chomp
+    counter += 1 # increment the counter
+  # If Statements
+    if player_guess > ai_pick
+      puts "You guessed too high."
+    elsif player_guess < ai_pick
+      puts "You guessed too low."
+    else player_guess == ai_pick
+      puts "You got it in #{counter} guesses!"
+      break
+    end
+  end
+end
+
+# Q3
+def q3
+  # s = "david"
+  # t = s.chars.shuffle.join
+
+end
