@@ -1,0 +1,98 @@
+;; Comments use semicolons instead of hashes
+
+;; The syntax in Clojure is: (function arguments)
+;; the functoin is either a moath operation or a built-in
+;; algorithm that will run on the arguments
+;; (+ 1 1)
+;; (+ 10 20)
+;; (+ 1 2 3 4 5 6 7 8 9 10)
+;; (+ 4 (+ 3 7))
+
+;; What if we want (1 - 2) + 3
+;; (+ (- 1 2) 3)
+;; OR
+;; (+ 3(- 1 2))
+
+;; (* 4 5)
+;; (/ 15 5)
+;; (/ 5 4)
+;; (/ 18 12)
+;; Automatic reducing ratios
+
+;; What is 1/2 + 1/4?
+;; (+ 1/2 1/4)
+;; (+ (/ 1 2) (/ 1 4))
+
+;; Another data type is float (think: decimals)
+;; (float 1/2) - Changes 1/2 to 0.5
+;; (float (+ 1/2 1/4))
+
+;; (= 1/2 4/8) ;; -> True
+;; (= 1/2 4/7) ;; -> False
+;; (> 1/2 4/7)
+
+;; (mod a b) return the remainder of dividing b into a
+;; (mod 10 3) ;; -> 1
+;; (mod 12 2) ;; -> 0
+;; (mod 30 11 3) ;; -> Error
+;; (mod (mod 30 11) 3) ;; -> 2
+
+;; Lists are a big deal in Clojure. When we create a 
+;; list, we use parentheses, but in Clojure the first 
+;; entry must be a function, so this is a quandry! We 
+;; love this entry with a quote mark:
+;; '(1 2 3 4)
+;; (list 1 2 3 4)
+;; (first '(1 2 3 4))
+;; (last '(1 2 3 4))
+;; (nth '(1 2 3 4 5 6 7) 5)
+;; (take 4 '(1 2 3 4 5 6 7))
+;; (drop 5 '(1 2 3 4 5 6 7))
+
+;; Let's try to grab the sub list (5 6 7) from
+;; the master list (1 2 3 4 5 6 7 8 9):
+
+;; (drop 4 '(list 1 2 3 4 5 6 7 8 9))
+;; ^ Gives us (5 6 7 8 9)
+;; (take 3 (drop 4 (list 1 2 3 4 5 6 7 8 9)))
+;; ^ Gives us (5 6 7)
+
+;; To make this faster:
+;; (range 30)
+;; (range 10, 20) -> List with starting point
+;; Ending number is not included in lists
+;; ^ 0-99 is 100 numbers!
+
+;; Creating variables that will store data:
+;; (def applesauce '(1 2 3 4 5 6))
+;; (first applesauce)
+;; (def pie (range 100))
+
+;; Questions!
+
+;; Q1. Predict the output of this statement 
+;; before you check.
+;; (- (/ 18 3) (* 3 2))
+;; It would be 0!
+;; Answer: Correct!
+
+;; Q2. Write a little math puzzle like that one 
+;; and give it to your neighbor to try.
+;; (/ (/ 63 7) (+ 6 3))
+
+;; Q3. Predict the output of this statement 
+;; before you check.
+;; (= (mod 14 3) (mod 19 5))
+;; It would be false! 2 is not equal to 4!
+;; Answer: Correct!
+
+;; Q4. What is the number that could go in the 
+;; blank to make this statement return "true"?
+;; (> (mod 11 4) (mod 5 __))
+;; (> (mod 11 4) (mod 5 5))
+;; Answer: Correct!
+
+;; Q5. Predict the output before you check:
+;; (drop 5 (take 5( range 20)))
+;; It would be nothing!
+;; Answer: Correct!
