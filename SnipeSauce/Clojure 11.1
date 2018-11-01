@@ -1,0 +1,69 @@
+(range(last(range 10)))
+
+;; using " ' " notates a list
+;; using "conj" followed by a list and another number adds that number to the beginning of the list 
+
+(conj '(1 2 3 4) 9) ;; (9 1 2 3 4)
+
+;; A symbol is a string preceded by a colon:
+(list :C4 :D4 :E4 :F4)
+(def notes (list :C4 :D4 :E4 :F4))
+
+;; neither "play-chord" nor "chord" run in this environment, but next week will have code like the following
+;; (play-chord (chord (:C4 :major)))
+
+;; The big deal in Clojure is defining our own functions:
+
+;; "defn" means "define function", while "def" is a nickname for data
+;; syntax: (defn <function-name> [argument(s)] body) where body is the code we want to run on the arguments
+(defn doubler [n] (* n 2))
+
+;; Clojure data is "immutable", meaning we cannot change it permanently once it is assigned to a variable
+
+(defn tripler [n] (* n 3))
+
+;; Without using * we can write a function that multiples n by 6
+(defn sixtimes [n] (tripler (doubler n)))
+
+;; Using a string ("str")
+(defn greet [name] (str "Hello " name))
+(defn greeter [name city] (str "Hello " name " from " city "."))
+(def my_name "Jack")
+
+;; Q: What is this function?
+(defn lc [lst1 lst2] (> (count lst1) (count lst2)))
+
+;; We usually write long functions with indentation, and we can add an in-function comment called a 'docstring':
+(defn lc_snazzy
+  "Returns true if the length of lst1 exceeds that of lst2"
+  [lst1 lst2]
+  (> (count lst1) (count lst2)))
+
+;; Q: Write a function that takes two arguments [m n] and returns true if n divides evenly into m
+
+(defn even_divide 
+"Returns true if n divides evenly into m."
+[m n] 
+(= (mod m n) 0))
+
+;; Q: Write a function that takes two list [lst1 lst2] and returns true if the last element of lst1 equals the first element of lst2
+
+(defn match
+"Returns true if the last element of lst1 equals the first element of lst2."
+[lst1 lst2]
+(= (last lst1) (first lst2)))
+
+;; End of class
+;; Q1: Write the funcction 'addy' that takes three arguments [i j k] and returns 'true' if i = j + k
+
+(defn addy 
+"Returns true if the first element equals the sum of the last two"
+[i j k]
+(= i (+ j k)))
+
+;; Q2: Write thef unction 'longer_than' that takes two arguments [lst n] and returns 'true' if the length of lst is longer than n
+
+(def longer_than
+"Returns 'true' if the length of lst is longer than n"
+[lst n]
+(> (count lst) n))
