@@ -1,0 +1,21 @@
+;; Q1 
+(defn addy 
+  "Returns true if i = j + k"
+  [i j k ]
+  (=(+ j k)))
+
+;; q2 
+(defn longer_than
+  "Returns true if the length of lst is longer than n"
+  [lst n]
+  (> (count lst) n))
+
+  ;; practice from day 1 
+
+  ;;Q1. Predict the output of this statement before you check
+;; (- (/ 18 3) (* 3 2)) 
+;; i think it will do 18/3 - 3*2
+
+;; Q3. What is a number that could go in the blank
+;; to make this statement return "true"? 
+;; (> (mod 11 4) (mod 5 2))
