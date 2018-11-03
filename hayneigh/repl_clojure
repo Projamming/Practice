@@ -1,0 +1,26 @@
+DESC: Practice
+
+;; Q1. Write a function that takes two arguments [m n] and
+;;    returns true if n divides evenly into m. Hint: (mod)
+
+  (defn lc_n 
+  "Returns true if n divides evenly into m"
+  [m n]
+  (= (mod m n) 0)) ;;means that when they're divided, the remainder is 0
+
+;; Q2. Write a function that takes two lists [lst1 lst2]
+;;    and returns true if the last element of lst1 equals
+;;    the first element of lst2
+
+  (defn lst_one
+  "Returns true if the last element of lst1 equals the first element of lst2"
+  [lst1 lst2]
+  (= (last lst1) (first lst2)))
+
+;; Q3. Write the function "addy" that takes three arguments [i j k] and 
+;;    returns 'true' if i = j+k
+
+(defn addy
+"Returns true if i = j + k"
+[i j k]
+( = i ( + j k)))
