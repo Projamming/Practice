@@ -1,0 +1,37 @@
+def q1
+  kilos_to_pounds = 2.205
+  pounds_to_kilos = 0.454
+  print "1. From kilograms to pounds
+2. From pounds to kilograms
+Choose the conversion you want to make:"
+  choice = gets.chomp.to_i
+  print "Enter a number of pounds:"
+  user_num = gets.chomp.to_i
+  if choice == 1
+    result = (user_num * pounds_to_kilos)
+    user_to = "pounds"
+    user_from = "kilograms"
+  end
+  if choice == 2
+    result = (user_num * kilos_to_pounds)
+    user_to = "kilograms"
+    user_from = "pounds"
+  end
+    puts "There are #{result} #{user_to} in #{user_num} #{user_from}."
+end
+
+def q2
+  my_list = [1, 2, 4]
+  length = my_list.length.to_i
+  rubyring = my_list [0, length]
+  3.times do
+    print rubyring.join 
+  end
+end
+
+def q3
+  print "Enter a word:"
+  word = gets.chomp
+  scramble = word.chars.shuffle.join
+  puts "Scrambled version: #{scramble}"
+end
