@@ -1,0 +1,14 @@
+Practice with clojure 
+
+;; class code: 
+;;(for [i (range 10)] (* i 2))
+;; my version 
+(for [i (range 4 12)] (* i 2))
+;; I tried to do a range between 4 and 12 and then the second half of the 
+list be muliplied by 2 but didnt work --> (8 10 12 14 16 18 20 22) 
+;; i think it's multiplying the different numbers in the range by 2
+(range 4 12) ;; this has the range correct, but can't get to go like class code 
+
+(def bananas '(1 2 3 4 5 6))
+(* bananas[1] bananas[4]) ;; would it be possible to muliply 
+within the list using indexes calling the numbers from bananas' list? Did not work 
