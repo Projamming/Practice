@@ -1,3 +1,5 @@
+# LANG: Ruby
+
 #puts "hello"
 #print "what's your name?"
 #input = gets.chomp  # .chomp allows us to get the characters we want
