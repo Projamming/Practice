@@ -1,8 +1,11 @@
-#Title   :Practice 1 (Practice using chords, loops, and Class 2 skills)
-#File    :Dont_stop.rb
-#Author  :DJ-Mito-Chondria
-#Date    :August 28, 2018
-#Descr.  :Attempt to recreate intro verse of Don't Stop Believin' by Journey
+#-----------------------------------------------------------------------------#
+#TITLE   :Practice 1 
+#FILE    :Dont_stop.rb
+#AUTHOR  :DJ-Mito-Chondria
+#DATE    :August 28, 2018
+#DESC    :Practice using chords, loops, and Class 2 skills.
+#         Attempt to recreate intro verse of Don't Stop Believin' by Journey.
+#-----------------------------------------------------------------------------#
 
 
 # Intro verse in treble clef
