@@ -1,7 +1,7 @@
 # ----------------------------------------------------------- #
 # FILE   :Practice 3 SAIL remix.rb
 # AUTHOR :DJ-Mito-Chondria
-# DATE   :9-4-18
+# DATE   :09-04-18
 # DESC   :Modification of "SAIL-Awolnation Intro" originally posted by CoreyandTrevor. I introduced a thread to play the same phrase of a song using different synths at the same time.
 # --------------------------------------------------------- #
 
