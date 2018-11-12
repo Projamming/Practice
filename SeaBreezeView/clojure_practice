@@ -1,0 +1,16 @@
+;; warm up 2 write a function called 'fact' (short for factorial) that accepts a number n and returns n!
+(defn fact 
+"returns n factorial"
+[n]
+(apply * (rest (range (inc n)))))
+;; or 
+
+(defn fact1 
+"resturns n factorial "
+[n]
+(apply * ( conj (rest (range n)) n)))
+
+;;warmup 3 what is the out put 
+(defn s 
+[n]
+(apply + (map inc (range 6))))
