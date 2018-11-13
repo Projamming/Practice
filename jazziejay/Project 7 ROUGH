@@ -1,0 +1,20 @@
+(defn q1
+  "Returns the denominator of the ratio if the numbers are not divisible, but returns the denominator (1/x) of the quotient of the ratio and the numerator if they are!"
+  [my_ratio]
+  (int (/ 1 (/ my_ratio (numerator my_ratio))))
+)
+
+(defn longer
+  "Returns true if word1 is longer than word2."
+  [word1 word2]
+  (if (> (count word1) (count word2))
+    "True"
+    "False")
+)
+
+(defn first_longer
+  "returns true if the nth entry of lst1 is longer than the nth entry of lst2."
+  [lst1 lst2 n]
+  (if (> (count word1) (count word2))
+    "True"
+    "False"))
