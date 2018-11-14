@@ -18,3 +18,5 @@
   (if (> (count word1) (count word2))
     "True"
     "False"))
+
+use nth function
