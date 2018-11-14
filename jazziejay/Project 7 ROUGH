@@ -13,10 +13,12 @@
 )
 
 (defn first_longer
-  "returns true if the nth entry of lst1 is longer than the nth entry of lst2."
+  "Returns true if the nth entry of lst1 is longer than the nth entry of lst2."
   [lst1 lst2 n]
-  (if (> (count word1) (count word2))
-    "True"
-    "False"))
+  (longer (nth lst1 n) (nth lst2 n))
+)
 
-use nth function
+(defn shuffler
+"Returns a shuffled version of strg."
+[strg]
+(apply str (shuffle (seq strg))))
