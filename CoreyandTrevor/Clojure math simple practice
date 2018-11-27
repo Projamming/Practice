@@ -1,0 +1,14 @@
+;; Notes for Clojure
+;;(* 4 5)  ;; Gives 20.
+;;(/ 15 5)  ;; Gives 3.
+;;(/ 5 4)  ;; Gives 5/4, a ratio.
+;;(/ 18 12)  ;; Gives 3/2, a simplified ratio.
+;;(+ 1/2 1/4)  ;; Gives 3/4, can add ratios.
+
+;; In clojure insert function before the numbers
+;;I should get 25, 12 and -37
+
+(* 5 5)
+(/ 144 12)
+
+(dec -36)
