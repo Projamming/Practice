@@ -1,0 +1,8 @@
+;;Using MidiChlorians notes to get a better understanding of Lists
+
+;;Ingredients for Chocolate chip cookies
+;; 1st define list by inserting quotation mark " ' ", then write first to get the first ingredient in the list. Should spit out "Chip"
+
+'(chips vanilla powder sugar)
+
+(first '(chips vanilla powder sugar))
