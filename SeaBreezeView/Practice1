@@ -1,0 +1,44 @@
+This includes everything i worked on even the few lines of mistakes. 
+
+user=> (midi->hz 72)
+523.2511306011972
+user=> (midi->hz 85)
+1108.7305239074883
+user=> (midi->hz 69))
+440.0
+
+RuntimeException Unmatched delimiter: )  clojure.lang.Util.runtimeException (Util.java:221)
+user=> (midi->hz 69))
+440.0
+
+RuntimeException Unmatched delimiter: )  clojure.lang.Util.runtimeException (Util.java:221)
+user=> (midi->hz 69))
+440.0
+
+RuntimeException Unmatched delimiter: )  clojure.lang.Util.runtimeException (Util.java:221)
+user=> (guitar (midi->hz 74))
+#<synth-node[loading]: practice1.core/guitar 41>
+user=> (guitar (midi->hz 74))
+#<synth-node[loading]: practice1.core/guitar 42>
+user=> (guitar (midi->hz 74))
+#<synth-node[loading]: practice1.core/guitar 43>
+user=> (guitar (midi->hz 74))
+#<synth-node[loading]: practice1.core/guitar 44>
+user=> (notes-to-freq '(:A4 :C4))
+(440.0 261.6255653005986)
+user=> (notes-to-freq '(:A4 :C4 :F4))
+(440.0 261.6255653005986 349.2282314330039)
+user=> (play-guitar '(:A4 :C4 :F4))
+playing guitar chord!
+(#<synth-node[loading]: practice1.core/guitar 45> #<synth-node[loading]: practice1.core/guitar 46> #<synth-node[loading]: practice1.core/guitar 47>)
+user=> (play-guitar '(:A4 :C4 :F4))
+playing guitar chord!
+(#<synth-node[loading]: practice1.core/guitar 48> #<synth-node[loading]: practice1.core/guitar 49> #<synth-node[loading]: practice1.core/guitar 50>)
+user=> (single-note (now) 500))
+#<ScheduledJob id: 1, created-at: Fri 03:11:41s, initial-delay: 199, desc: "Overtone delayed fn", scheduled? true>
+
+RuntimeException Unmatched delimiter: )  clojure.lang.Util.runtimeException (Util.java:221)
+user=> late 0.018361972
+(stop0      )
+nil
+user=> 
