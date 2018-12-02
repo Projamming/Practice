@@ -1,0 +1,10 @@
+;;Clojure practice
+
+;; How would you obtain the 6th value in this list? (0 1 2 3 4 5 6 7 8 9)
+(take 1 (drop 5 '(0 1 2 3 4 5 6 7 8 9)))
+
+;;How would you obtain the last 2 values in this list? (0 1 2 3 4 5 6 7 8 9)
+(take 2 (drop 8 '(0 1 2 3 4 5 6 7 8 9)))
+
+;;How would you obtain the first 3 values from this list? (0 1 2 3 4 5 6 7 8 9)
+(take 3 '(0 1 2 3 4 5 6 7 8 9))
