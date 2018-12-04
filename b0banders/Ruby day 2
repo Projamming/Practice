@@ -38,10 +38,6 @@ def range_and_sample
   puts ai_range.sample
 end 
 
-# Let's write a guessing game in which the AI chooses
-# a number between 1 and 100 and then we try to guess 
-# what it is! 
-
 def guess
   ai_range = (1 ... 101).to_a # a = array
   ai_pick = ai_range.sample 
