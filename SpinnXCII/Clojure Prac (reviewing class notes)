@@ -1,0 +1,24 @@
+;; "Practicing with Clojure" 
+;; "Get sublist (8 10 12) from list (2 4 6 8 10 12 14 16 18)"
+
+;; (take 3 (drop 3 '(2 4 6 8 10 12 14 16 18)))
+
+;; Q5. Predict the output before you check:(drop 5 (take 5 (range 20)))
+;; answer will be nothing
+;; yep! answer = ()
+
+;; Q3. Predict the output of this statement before you check:(= (mod 14 3) (mod 19 5))
+;; prediction: false
+;; correct!
+
+;; Q4. What is a number that could go in the blank to make this statement return "true"?
+;; answer: 4
+;; check: works!
+;; (> (mod 11 4) (mod 5 4))
+
+;;(defn halfer [n] (/ n 2))
+;; rememember to type (halfer [n] into window on side)
+
+;; (str "Hello, please type your name and question below")
+;; (defn fortune [name question]
+;; (str "well " name " , " question " is a very good question. You have good fortune and whatever the outcome is, it will be the right one"))
