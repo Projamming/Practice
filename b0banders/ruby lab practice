@@ -1,0 +1,18 @@
+# Question 1
+# # print "What is your name? "
+# # username = gets.chomp
+# # print "What is your hometown? "
+# # home = gets.chomp
+# # puts "hey, #{username} from #{home}, nice to meet you!"
+
+# # Question 4
+# options = ["heads", "tails"]
+# pc_choice = options.sample
+# print "heads or tails?: "
+# selection = gets.chomp
+# puts "It is #{pc_choice}."
+# if pc_choice = selection.downcase
+#    print "Would you like to kick or receive?"
+# else
+#    print "Which said would you like to defend?"
+# end
