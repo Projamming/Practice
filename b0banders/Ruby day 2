@@ -1,3 +1,5 @@
+#Used class code from 10/25 as the main template for this. 
+
 def choose 
   print "Select a number between 1 and 20."
   player_choice_1 = gets.chomp.to_i
