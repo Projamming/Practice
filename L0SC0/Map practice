@@ -1,0 +1,12 @@
+;;I used the map function to multiply multiple values in a list
+
+(defn map_multi
+“Multiplies each value in lst”
+[lst 1 lst 2]
+(map * lst1 lst2))
+
+(map_multi `(2 4 6) `(3 6 9))
+   
+;;examples copy and pasted
+
+;;=> (6 24 54)
