@@ -1,0 +1,33 @@
+;; using a website called 4clojure to practice Clojure problems 
+;; http://www.4clojure.com/
+
+;; Q1: (= (list __) '(:a :b :c))
+;; (= (list :a :b :c) '(:a :b :c))
+;; *lists can be constructed with either a function (list) or a quoted form (')
+
+;; Q2: (= __ (conj '(2 3 4) 1))
+;; (= '(1 2 3 4) (conj '(2 3 4) 1))
+;; *conj will return the list with one or more items "added" to the front 
+;; *answer had to also be in the format of a list --> let's try the other way we can list items 
+;; (= (list 1 2 3 4) (conj '(2 3 4) 1))
+;; works!
+
+;; Q3: (= __ (conj [1 2 3] 4))
+;; (= '(1 2 3 4) (conj [1 2 3] 4))
+;; *when operating on a Vector, the conj function will return a new vector with one or more items "added" to the end 
+;; *answer still in form of list 
+
+;; Q4: sequences 
+;; (= __ (first '(3 2 1)))
+;; (= __ (second [2 3 4]))
+;; (= __ (last (list 1 2 3)))
+;; answer to make all true = 3
+
+;; Q5: sequences (rest)
+;; (= __ (rest [10 20 30 40]))
+;; (= '(20 30 40) (rest [10 20 30 40]))
+;; *rest function wll return all the items of a sequence except the first 
+
+;; Vectors 
+;; (= [__] (list :a :b :c) (vec '(:a :b :c)) (vector :a :b :c))
+;; Answer = [:a :b :c]
