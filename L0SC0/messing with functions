@@ -1,0 +1,16 @@
+(defn subtract
+  "Returns true if i = j + k"
+  [i j k]
+  (= i  (- j k))
+  )
+
+;;examples copy and pasted  
+ ;;(subtract 10 15 5)
+   
+;;=> true
+   ;;(subtract 20 4 2)
+   
+;;=> false
+   ;;(subtract 100 350 250)
+   
+;;=> true
