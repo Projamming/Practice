@@ -1,0 +1,24 @@
+I just copied the code from class and played around with it.
+
+(sequencer (now) plucked-string (cycle [1 1 0 0 1 1 0 1]) 200)
+
+(def my-pattern (cycle [1 1 1 0 0 1 0 1])) 
+(def my-sleeps (cycle [200 200 200 200 200 200 200 1600]))
+
+I played around with the 1 and 0 for a bit to practice different combinations as well as different sleeps to vary the pattern and rhythm.
+
+(def string-pattern (cycle [1 1 0 0 1 1 0 1]))
+(def piano-pattern (cycle [0 1 1 0 1 0 1 0]))
+
+I also messed with the pattern of 0 and 1 to create new sounds.  They weren’t also pleasant sounding, but thought it was good practice.  I also learned that you can play more than just 2 rhythms at once by changing the instrument name in the function.  For example, i threw the guitar into the mix by just changing it in the repl.  
+
+(sequencer (now) guitar string-pattern 200)
+
+I also messed the with the amps in the defined instruments as well as the duration to see how that could alter the pattern.  
+
+Using the sequencer two function, i also played around with the sleep durations to figure out how that would impact the melody.  Instead of consisting keeping it 200’s i threw in some 100 and 400.  
+
+(def my-pattern (cycle [1 0 0 1 1 1 0 1]))
+(def my-sleeps (cycle [200 400 200 200 100 100 200 1600]))
+
+overall through this practice i learned more details about the code and some interesting features that I did not realize in class.  I also was able to more clearly determine how the larger chunks of code worked with the different functions and instruments.  
