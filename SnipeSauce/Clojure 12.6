@@ -1,0 +1,17 @@
+;; warmup 12/6
+;; what would we type into the REPL window so that the output would be:
+
+;; ("hihi" "therethere")
+(defn doubler
+  "Returns the string s as two concatenated copies: ss"
+  [s]
+  (str s s))
+;; need a space between both s elements or it won't run properly
+(defn list-doubler
+  "Accepts a list of strings, and returns the list with each string doubled."
+  [lst]
+  (map doubler lst))
+
+;; A: (list-doubler '(hi there))
+;;    (list-doubler '("hi" "there"))
+;;    (list-doubler (list "hi" "there"))
