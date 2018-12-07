@@ -1,0 +1,59 @@
+;; (defn greet [name] 
+;; (str "hello " name));;
+(defn mood [feeling]
+  (str "it's okay to be " feeling))
+
+(defn forecast [adj]
+  (str "today is " adj))
+
+  (apply str [ 1 2 3])
+  (apply str '[f i n a l s])
+  (str '[f i n a l s]) ;; why doesnt str link them without apply? a str value is text
+  
+  repl: 
+  
+  
+123456789101112
+
+;; (defn greet [name] 
+;; (str "hello " name));;
+(defn mood [feeling]
+  (str "it's okay to be " feeling))
+
+(defn forecast [adj]
+  (str "today is " adj))
+
+  (apply str [ 1 2 3])
+  (apply str '[f i n a l s])
+  (str '[f i n a l s]) ;; why doesnt str link them without apply? a str value is text
+
+Clojure 1.8.0
+Java HotSpot(TM) 64-Bit Server VM 1.8.0_91-b14
+   
+=> #'user/mood
+#'user/forecast
+"123"
+"finals"
+"[f i n a l s]"
+
+   
+=> #object[clojure.core$char 0x7a1907d2 "clojure.core$char@7a1907d2"]
+97
+   (char 97) --> ;; trying to figure out what char actually, still confused
+   
+=> \a
+   (map char (67 68 69))
+   
+ClassCastException java.lang.Long cannot be cast to clojure.lang.IFn  user/eval1231 (form-init60529921688887293.clj:1)
+   (map char [67 68 69]))
+   
+RuntimeException Unmatched delimiter: )  clojure.lang.Util.runtimeException (Util.java:221)
+   (map char [67 68 69])
+   
+=> (\C \D \E)
+   (map char [1 2 3]_
+   
+RuntimeException EOF while reading, starting at line 1  clojure.lang.Util.runtimeException (Util.java:221)
+   (map char [1 2 3])
+   
+=> (\ \ \)
