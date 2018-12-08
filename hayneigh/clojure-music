@@ -1,0 +1,60 @@
+(ns myproj.core
+ (:use [overtone.live]))
+(definst baz [freq 440] (sin-osc freq))
+
+(defn string
+  [freq duration]
+        (with-overloaded-ugens
+        (* (line:kr 1 1 duration FREE)
+        (pluck (* (white-noise) (env-gen (perc 0.001 5) :action FREE))
+        1 1 (/ 1 freq) (* duration 2) 0.25))))
+
+(definst harpsichord [freq 440 dur 1]
+  "Requires the string defn above."
+  (let [duration dur
+           snd  (string freq duration)
+           t1   (* 0.2 (string (* 2/1 freq) duration))
+           t2   (* 0.15 (string (* 3/2 freq) duration))
+           t3   (* 0.1 (string (* 4/3 freq) duration))
+           t4   (* 0.1 (string (* 5/4 freq) duration))
+           snd  (+ snd (mix [t1 t2 t3 t4]))]
+           snd))
+
+(defn to-freq
+  "Converts a note in :A4 form to its frequency."
+    [my-note]
+    (midi->hz (note my-note))
+    )
+
+(defn mamma-mia
+   "Plays a melody using sleeps as durations on instrument."
+      [time sleeps melody instrument]
+      (at time (instrument (to-freq (first melody)) :dur (first sleeps)))
+      (let [new-time (+ time (* 1000 (first sleeps)))]
+        (apply-by new-time
+                  mamma-mia [new-time
+                                 (rest sleeps)
+                                 (rest melody)
+                                 instrument])))
+
+(mamma-mia (now)
+        (cycle [1.0 1.0 0.5 0.5 0.5 1.0 0.5 0.5 0.5 0.5 0.5 0.5 3.0
+                1.0 1.0 0.5 0.5 0.5 1.0 0.5 0.5 0.5 0.5 0.5 0.5 3.0
+                0.5 0.5 0.5 2.5 0.5 0.5 0.5 0.5 1.0 0.5 0.5 0.5 0.5
+                2.0 0.5 0.5 0.5 0.5 0.5 1.0 1.0 0.25 0.25 2.0 0.5 0.5
+                0.5 0.5 0.5 1.0 0.5 3.5 1.0 1.0 0.5 0.5 0.5 0.5 0.5
+                0.5 0.5 2.5 1.0 1.0 0.5 0.5 0.5 0.5 0.5 0.5 0.5
+                2.5 0.5 0.5 0.5 1.5 0.5 0.5 0.5 0.5 1.5 0.5 0.5 0.5
+                0.5 0.5 1.5 1.0 1.0 1.0 0.5 0.5 0.5 1.0 1.5 0.5 0.5
+                0.5 1.5 0.5 0.5 0.5 0.5 0.5 1.5 1.0 1.0 1.0 0.5 0.5 0.5
+                1.0 1.0])
+        (cycle [:A3 :D4 :C#4 :D4 :E4 :F#4 :D4 :D4 :C#4 :D4 :C#4 :C#4 :B3
+                :A3 :D4 :C#4 :D4 :E4 :F#4 :D4 :D4 :C#4 :D4 :C#4 :C#4 :B3
+                :F#3 :A3 :B3 :F#4 :F#4 :E4 :F#4 :E4 :D4 :F#3 :A3 :B3 :F#4
+                :E4 :F#4 :E4 :G4 :F#4 :D4 :E4 :F#4 :F#4 :E4 :D4 :F#4 :F#4
+                :F#4 :E4 :D4 :E4 :F#4 :A3 :G4 :F#4 :E4 :A3 :A3 :A3 :A3 :A3 :A3
+                :A3 :G4 :F#4 :E4 :A3 :A3 :A3 :A3 :A3 :A3 :A3 :A3 :F#4 :D4 :E4
+                :D4 :E4 :D4 :E4 :D4 :D4 :D4 :E4 :F#4 :E4 :D4 :E4 :D4 :G4 :G4
+                :G4 :G4 :F#4 :D4 :E4 :D4 :E4 :D4 :D4 :D4 :E4 :F#4 :E4 :D4 :E4
+                :D4 :G4 :G4 :G4 :G4 :F#4 :D4])
+        harpsichord)
