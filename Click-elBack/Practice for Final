@@ -1,0 +1,26 @@
+;; (drop 3 '(1 2 3 4 5 6 7 8 9))
+;; (map inc (range 20))
+;; (map inc (list 1 5 8))
+;; (subs "lacrosse" 1 7)
+;; (str "I play lacrosse")
+;; (conj (list 1 2 3 4 5) 8)
+(rest (list 3 4 5 6 7 8 9))
+(rest '(1 2 3 4))
+(rest (range 10))
+
+
+;; (def primes ‘(2 3 5 7 11 13)
+;; (conj (range 5)(last primes))
+
+;; (defn longer_than
+;;   "returns true if the length of the first list is longer than n"
+;;   [lst n]
+;;  (> (count lst) n))
+
+;; (defn strings)
+;;   "Combines every element in the list"
+;;   [lst1]
+;;   (apply str lst)
+;;   )
+
+(apply_string '("1" "2" "3" "4" "5"))
