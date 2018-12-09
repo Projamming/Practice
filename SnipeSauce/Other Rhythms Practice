@@ -1,0 +1,99 @@
+use_bpm 120
+
+def main
+  loop do
+    sample :drum_tom_hi_hard, amp: 0.5
+    sleep 0.5
+    sample :drum_tom_hi_hard, amp: 0.5
+    sleep 1
+    sample :drum_tom_hi_hard, amp: 0.5
+    sleep 0.5
+    sample :drum_tom_hi_hard, amp: 0.5
+    sleep 1
+    sample :drum_tom_hi_hard, amp: 0.5
+    sleep 0.5
+    sample :drum_tom_hi_hard, amp: 0.5
+    sleep 1
+    sample :drum_tom_hi_hard, amp: 0.5
+    sleep 0.5
+    sample :drum_tom_hi_hard, amp: 0.5
+    sleep 1
+    sample :drum_tom_hi_hard, amp: 1
+    sleep 1
+    sample :drum_tom_hi_hard, amp: 1
+    sleep 1
+  end
+end
+
+def cymbal
+  loop do
+    sample :drum_cymbal_closed, amp: 1
+    sleep 0.5
+    sample :drum_cymbal_closed, amp: 0.25
+    sleep 0.5
+    sample :drum_cymbal_closed, amp: 0.25
+    sleep 0.5
+    sample :drum_cymbal_closed, amp: 1
+    sleep 0.5
+    sample :drum_cymbal_closed, amp: 0.25
+    sleep 0.5
+    sample :drum_cymbal_closed, amp: 0.25
+    sleep 0.5
+    sample :drum_cymbal_closed, amp: 1
+    sleep 0.5
+    sample :drum_cymbal_closed, amp: 0.25
+    sleep 0.5
+    sample :drum_cymbal_closed, amp: 0.25
+    sleep 0.5
+    sample :drum_cymbal_closed, amp: 1
+    sleep 0.5
+    sample :drum_cymbal_closed, amp: 0.25
+    sleep 0.5
+    sample :drum_cymbal_closed, amp: 0.25
+    sleep 0.5
+    sample :drum_cymbal_closed, amp: 1
+    sleep 0.5
+    sample :drum_cymbal_closed, amp: 0.25
+    sleep 0.5
+    sample :drum_cymbal_closed, amp: 1
+    sleep 0.5
+    sample :drum_cymbal_closed, amp: 0.25
+    sleep 0.5
+  end
+end
+
+def cowbell
+  1.times do
+    sleep 1
+    sample :drum_cowbell, amp: 0.25
+    sleep 1.5
+    sample :drum_cowbell, amp: 0.25
+    sleep 4
+    sample :drum_cowbell, amp: 0.25
+    sleep 0.5
+    sample :drum_cowbell, amp: 0.25
+    sleep 0.5
+    sample :drum_cowbell, amp: 0.25
+    sleep 0.5
+  end
+end
+
+
+
+in_thread do
+  main
+end
+
+in_thread do
+  sleep 8
+  cymbal
+end
+
+in_thread do
+  sleep 16
+  cowbell
+end
+
+
+
+
