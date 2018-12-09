@@ -1,0 +1,122 @@
+use_bpm 210
+use_synth :piano
+
+def right_1
+  use_synth :pluck
+  10.times do
+    notes = [ :Ds5, :As4, :G4, :Ds5, :As4, :G4, :Ds5, :As4,
+              :Cs5, :As4, :F4, :Cs5, :As4, :F4, :Cs5, :As4,
+              :Cs5, :As4, :F4, :Cs5, :As4, :F4, :Cs5, :As4,
+              :C5, :Gs4, :F4, :C5, :Gs4, :F4, :C5, :Gs4  ]
+    durations = [1, 1, 1, 1, 1, 1,1,1,
+                 1, 1, 1, 1, 1, 1,1,1,
+                 1, 1, 1, 1, 1, 1,1,1,
+                 1, 1, 1, 1, 1, 1,1,1]
+    play_pattern_timed notes, durations
+  end
+end
+
+def right_2
+  use_synth :pluck
+  3.times do
+    notes = [ :Ds4, :As3, :G3, :Ds4, :As3, :G3, :Ds4, :As3,
+              :Cs4, :As3, :F3, :Cs4, :As3, :F3, :Cs4, :As3,
+              :Cs4, :As3, :F3, :Cs4, :As3, :F3, :Cs4, :As3,
+              :C4, :Gs3, :F3, :C4, :Gs3, :F3, :C4, :Gs3  ]
+    durations = [1, 1, 1, 1, 1, 1,1,1,
+                 1, 1, 1, 1, 1, 1,1,1,
+                 1, 1, 1, 1, 1, 1,1,1,
+                 1, 1, 1, 1, 1, 1,1,1]
+    play_pattern_timed notes, durations
+  end
+end
+
+def left_1
+  use_synth :fm
+  8.times do
+    notes = [ :Ds3,
+              :As3,
+              :As3,
+              :F3  ]
+    durations = [8,
+                 8,
+                 8,
+                 8]
+    play_pattern_timed notes, durations
+  end
+end
+
+def right_3
+  use_synth :pluck
+  2.times do
+    notes = [ :G3,:As3,:Ds4,:G3,:As3,:Ds4,:G3,:As3,
+              :F3,:As3,:Cs4,:F3,:As3,:Cs4,:F3,:As3,
+              :F3,:As3,:Cs4,:F3,:As3,:Cs4,:F3,:As3,
+              :F3,:Gs3,:C4,:F3,:Gs3,:C4,:F3,:Gs3 ]
+    durations = [1, 1, 1, 1, 1, 1,1,1,
+                 1, 1, 1, 1, 1, 1,1,1,
+                 1, 1, 1, 1, 1, 1,1,1,
+                 1, 1, 1, 1, 1, 1,1,1]
+    play_pattern_timed notes, durations
+  end
+end
+
+def right_4
+  use_synth :piano
+  2.times do
+    notes = [ :Gs6, :G6, :Ds6, :Gs6, :G6, :Ds6,:Gs6, :G6,
+              :Gs6, :G6, :Cs6, :Gs6, :G6, :Cs6, :Gs6, :G6,
+              :Gs6, :G6, :Cs6, :Gs6, :G6, :Cs6, :Gs6, :G6,
+              :Gs6, :G6, :C6, :Gs6, :G6, :C6, :Gs6, :G6 ]
+    durations = [1, 1, 1, 1, 1, 1,1,1,
+                 1, 1, 1, 1, 1, 1,1,1,
+                 1, 1, 1, 1, 1, 1,1,1,
+                 1, 1, 1, 1, 1, 1,1,1]
+    play_pattern_timed notes, durations
+  end
+end
+
+def right_5
+  use_synth :piano
+  2.times do
+    notes = [ :Ds6,:G6,:Gs6,:Ds6,:G6,:Gs6,:Ds6,:G6,
+              :Cs6,:G6,:Gs6,:Cs6,:G6,:Gs6,:Cs6,:G6,
+              :Cs6,:G6,:Gs6,:Cs6,:G6,:Gs6,:Cs6,:G6,
+              :C6,:G6,:Gs6,:C6,:G6,:Gs6,:C6,:G6   ]
+    durations = [1, 1, 1, 1, 1, 1,1,1,
+                 1, 1, 1, 1, 1, 1,1,1,
+                 1, 1, 1, 1, 1, 1,1,1,
+                 1, 1, 1, 1, 1, 1,1,1]
+    play_pattern_timed notes, durations
+  end
+end
+
+
+in_thread do
+  right_1
+end
+
+in_thread do
+  sleep 32
+  right_2
+end
+
+##| in_thread do
+##|   sleep 64
+##|   left_1
+##| end
+
+in_thread do
+  sleep 128
+  right_3
+end
+
+in_thread do
+  sleep 192
+  right_4
+end
+
+in_thread do
+  sleep 256
+  right_5
+end
