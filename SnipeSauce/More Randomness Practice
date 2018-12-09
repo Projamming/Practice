@@ -1,0 +1,29 @@
+def p1
+  use_synth_defaults
+  6.times do
+    tick :alto_clock
+    alto_part = (ring :E3, :C3)
+    play alto_part.look(:alto_clock)
+    sleep 1
+  end
+end
+
+
+
+def p2
+  6.times do
+    alto_part = (ring :E3, :C3)
+    play alto_part.tick
+  end
+end
+
+def notes
+  list = [rrand_i(50,60), rrand_i(61,70), rrand_i(71,80)].ring
+  play list.tick, amp: 4
+  sleep 1
+end
+
+
+loop do
+  notes
+end
