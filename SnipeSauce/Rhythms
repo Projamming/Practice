@@ -1,0 +1,87 @@
+Bambuco
+def deep_drum
+  24.times do
+    sample :drum_tom_hi_hard, amp: 0.5
+    sleep 0.5
+    sample :drum_tom_hi_hard, amp: 0.25
+    sleep 0.25
+    sample :drum_tom_hi_hard, amp: 0.25
+    sleep 0.25
+    sample :drum_tom_hi_hard, amp: 0.25
+    sleep 0.5
+  end
+end
+
+def knock
+  18.times do
+    sample :elec_tick, amp: 2
+    sleep 0.25
+    sample :elec_tick, amp: 1
+    sleep 0.5
+    sample :elec_tick, amp: 2
+    sleep 0.25
+    sample :elec_tick, amp: 1
+    sleep 0.5
+  end
+end
+
+def cymbal
+  16.times do
+    sample :drum_cymbal_closed, amp: 0.25
+    sleep 0.5
+    sample :drum_cymbal_closed, amp: 0.25
+    sleep 0.5
+    sample :drum_cymbal_closed, amp: 0.25
+    sleep 0.5
+  end
+end
+
+def cowbell
+  8.times do
+    sleep 0.5
+    sample :drum_cowbell, amp: 0.5
+    sleep 1.5
+    sample :drum_snare_hard
+    sleep 0.5
+    sample :drum_snare_hard
+    sleep 0.5
+  end
+end
+
+def tabla
+  6.times do
+    sample :tabla_te1, amp: 1
+    sleep 0.25
+    sample :tabla_te1, amp: 0.5
+    sleep 0.5
+    sample :tabla_te1, amp: 1
+    sleep 0.25
+    sample :tabla_te1, amp: 0.5
+    sleep 0.5
+  end
+end
+
+
+in_thread do
+  deep_drum
+end
+
+in_thread do
+  sleep 6
+  knock
+end
+
+in_thread do
+  sleep 12
+  cymbal
+end
+
+in_thread do
+  sleep 18
+  cowbell
+end
+
+in_thread do
+  sleep 24
+  tabla
+end
