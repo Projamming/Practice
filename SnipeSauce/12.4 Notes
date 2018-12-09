@@ -1,0 +1,10 @@
+12.4 miscellaneous notes
+
+(sequencer (now) plucked-string (cycle [1 1 0 0 1 1 0 1]) 200)
+
+Can change around the 1s and 0s to change up the patterns 
+
+(def my-pattern (cycle [1 1 1 0 0 1 0 1]))
+(def my-sleeps (cycle [200 200 200 200 200 200 200 1600]))
+
+(sequencer (now) guitar string-pattern 200)
