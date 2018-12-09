@@ -1,0 +1,319 @@
+# Predict the output before you run the code. Then check!
+
+# Next, what would you have to change about the code so that the three notes
+# play, then the three chords play, and so on, alternating forever? Try to
+# change as few lines as possible.
+
+use_synth :fm
+
+notes = (ring :D4, :F4, :A4)
+chords = (ring chord(:D4, :major), chord(:F4, :major), chord(:A4, :major))
+
+define :melody do
+  3.times do
+    tick
+    play notes.look, amp: 3
+    sleep 0.5
+  end
+  3.times do
+    play chords.look, amp: 3
+    sleep 0.5
+  end
+end
+
+2.times do
+  melody
+end
+
+
+# Predict the output before you run the code. Then check!
+
+# What would you have to change about the code so that the two
+# harmony rings alternate as the melody plays?
+
+# How could we bring harmony_ring_2 in to join both melody_ring
+# and harmony_ring_1 at the moment when melody_ring is beginning
+# its third playthrough?
+
+# Finally, what must we do so that one of the two harmony_rings
+# is chosen at random each time the melody_ring restarts?
+
+use_synth :fm
+use_bpm 80
+
+melody_ring = (ring :E4, :D4, :C4)
+harmony_ring_1 = (ring :G3, :B2, :C3)
+harmony_ring_2 = (ring :C2, :G2, :C2)
+duration_ring = (ring 1, 1, 2)
+harmony_choose = dice(2)
+
+
+
+live_loop :loop1 do
+  play_pattern_timed melody_ring, duration_ring, amp: 3
+end
+
+live_loop :loop2, sync: :harmony do
+  play_pattern_timed harmony_ring_1, duration_ring, amp: 3 if harmony_choose == 1
+  play_pattern_timed harmony_ring_2, duration_ring, amp: 3 if harmony_choose == 2
+  
+end
+
+loop do
+  sleep 4
+  cue :harmony
+end
+
+
+# Predict the output before you run the code. Then check!
+
+# What do you think will happen if we change 4.times to 8.times?
+
+# Bring the snares in: When we look at 1 in the snares ring, play
+# the sample :drum_snare_soft. The snares should play along with
+# the drums, using the :drum_clock.
+
+# What if we change drums_2 to (ring 1, 1, 0, 1, 0, 0) so that
+# it has six beats instead of four, but we keep drums_1 at four?
+# Can you figure out how to amend the code to handle this?
+
+track = (ring 1, 2, 1, 2, 2)
+
+drums_1 = (ring 0, 1, 0, 1)
+drums_2 = (ring 1, 1, 0, 0)
+
+snares = (ring 0, 1, 0, 1, 1, 0, 1, 0)
+
+loop do
+  
+  tick(:track_clock)
+  
+  use_this = drums_1 if track.look(:track_clock) == 1
+  use_this = drums_2 if track.look(:track_clock) == 2
+  
+  8.times do
+    tick(:drum_clock)
+    sample :drum_bass_soft if use_this.look(:drum_clock) == 0
+    sample :tabla_ghe1 if use_this.look(:drum_clock) == 1
+    sleep 0.25
+  end
+  
+end
+
+On Sun, Dec 9, 2018 at 5:30 PM John (Jack) Warren <jpwarren@hamilton.edu> wrote:
+# Welcome to Sonic Pi v3.1
+use_bpm 95
+use_synth :piano
+#piano sounds most like the original, but lacks the ability to sustain the note
+#another synth might sound less choppy
+play :B4
+sleep 0.25
+play :B5
+play :E4, sustain: 1.5, amp: 0.5 #harmony
+sleep 0.25
+play :B4
+sleep 0.25
+play :B5
+sleep 0.25
+play :Bb5
+play :Gb4, sustain: 1.5, amp: 0.5 #harmony
+sleep 0.25
+play :B4
+sleep 0.25
+play :Bb5
+sleep 0.25
+play :Gb5, sustain: 2.5
+play :Eb4, sustain: 2.5, amp: 0.5 #harmony
+sleep 1.5
+play :Eb5, sustain: 2
+play :E4, sustain: 2, amp: 0.5 #harmony
+sleep 0.5
+play :Db5
+sleep 0.25
+play :B4        #second time
+sleep 0.25
+play :B5
+play :E4, sustain: 1.5, amp: 0.5 #harmony
+sleep 0.25
+play :B4
+sleep 0.25
+play :B5
+sleep 0.25
+play :Bb5
+play :Gb4, sustain: 1.5, amp: 0.5 #harmony
+sleep  0.25
+play :B4
+sleep 0.25
+play :Bb5
+sleep 0.25
+play :Gb5, sustain: 2.5
+play :Eb4, sustain: 2.5, amp: 0.5 #harmony
+sleep 0.25
+play :B4
+sleep 0.25
+play :Gb5
+sleep 0.25
+play :B4
+sleep 0.25
+play :Gb5
+sleep 0.25
+play :B4
+sleep 0.25
+play :Db5           #piano run
+play :E4, sustain: 2
+sleep 0.25
+play :Eb5
+sleep 0.25
+play :Db5
+sleep 0.25
+play :B4
+sleep 0.25
+2.times do  #add percussion
+  
+  play :B5;  sample :drum_heavy_kick, amp: 2
+  play :E4, sustain: 1.5, amp: 0.5 #harmony
+  sleep 0.25
+  
+  play :B4
+  sleep 0.25
+  
+  play :B5;  sample :drum_cymbal_closed, amp: 2
+  sleep 0.25
+  
+  play :Bb5;  sample :drum_heavy_kick, amp: 2
+  play :Gb4, sustain: 1.5, amp: 0.5 #harmony
+  sleep  0.25
+  
+  play :B4
+  sleep 0.25
+  
+  play :Bb5;  sample :drum_heavy_kick, amp: 2
+  sleep 0.25
+  
+  play :Gb5, sustain: 2.5;  sample :drum_cymbal_closed, amp: 2
+  play :Eb4, sustain: 2.5, amp: 0.5 #harmony
+  sleep 0.25
+  
+  play :B4
+  sleep 0.25
+  
+  play :Gb5
+  sleep 0.25
+  
+  play :B4;  sample :drum_heavy_kick, amp: 2
+  sleep 0.25
+  
+  play :Gb5;  sample :drum_cymbal_closed, amp: 2
+  sleep 0.25
+  
+  play :B4;  sample :drum_heavy_kick, amp: 2
+  sleep 0.25
+  
+  play :Db5;  sample :drum_heavy_kick, amp: 2        #run
+  play :E4, sustain: 2
+  sleep 0.25
+  
+  play :Eb5;  sample :drum_heavy_kick, amp: 2
+  sleep 0.25
+  
+  play :Db5;  sample :drum_cymbal_closed, amp: 2
+  sleep 0.25
+  
+  play :B4
+  sleep 0.25
+  
+end
+
+
+On Sun, Dec 9, 2018 at 5:27 PM John (Jack) Warren <jpwarren@hamilton.edu> wrote:
+
+use_bpm 80
+use_synth :hollow
+1.times do
+  play :Fs3, duration: 4
+  sleep 1
+end
+
+
+1.times do
+  play :Fs3, sustain: 3.5
+  1.times do
+    notes = [ :r, :Bb4, :Ab4, :Bb4,
+              :Db4,:Bb4, :Ab4, :Bb4]
+    durations = [0.5, 0.5, 0.5, 0.5,
+                 0.5, 0.5, 0.5, 0.5]
+    play_pattern_timed notes, durations
+  end
+end
+
+sleep 0.25
+
+1.times do
+  play :Fs3, sustain: 3.5
+  1.times do
+    notes = [ :r, :Bb4, :Ab4, :Bb4,
+              :Ab4, :Fs4, :r, :Fs4]
+    durations = [0.5, 0.5, 0.5, 0.5,
+                 0.5, 0.3, 0.2, 1]
+    play_pattern_timed notes, durations
+  end
+end
+
+sleep 0.25
+
+1.times do
+  play :Eb3, sustain: 3.5
+  1.times do
+    notes = [ :r, :Bb4, :Ab4, :Bb4,
+              :Db4, :Bb4, :Ab4, :Bb4]
+    durations = [0.5, 0.5, 0.5, 0.5,
+                 0.5, 0.5, 0.5, 0.5]
+    play_pattern_timed notes, durations
+  end
+end
+
+sleep 0.25
+
+1.times do
+  play :Db2, sustain: 3.5
+  1.times do
+    notes = [ :Db3, :Bb4, :Ab4, :Bb4,
+              :Ab4, :Fs4, :Fs4, :r]
+    durations = [0.5, 0.5, 0.5, 0.5,
+                 0.5, 0.5, 0.5, 0.5]
+    play_pattern_timed notes, durations
+  end
+end
+
+On Sun, Dec 9, 2018 at 5:27 PM John (Jack) Warren <jpwarren@hamilton.edu> wrote:
+
+
+def p1
+  use_synth_defaults
+  6.times do
+    tick :alto_clock
+    alto_part = (ring :E3, :C3)
+    play alto_part.look(:alto_clock)
+    sleep 1
+  end
+end
+
+
+
+def p2
+  6.times do
+    alto_part = (ring :E3, :C3)
+    play alto_part.tick
+  end
+end
+
+def notes
+  list = [rrand_i(50,60), rrand_i(61,70), rrand_i(71,80)].ring
+  play list.tick, amp: 4
+  sleep 1
+end
+
+
+loop do
+  notes
+end
