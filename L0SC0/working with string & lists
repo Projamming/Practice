@@ -1,0 +1,17 @@
+;;working with strings and lists
+(defn apply_string
+“Combines every element in the list”
+[lst1]
+(apply str lst1)
+
+
+   (apply_string `(“i” “a” “n”)   
+
+;;=> “ian”
+
+   (apply_string `("h" "a" "m" "i" "l" "t" "o" "n"))
+   
+;;=> "hamilton"
+   (apply_string `("1" "8" "1" "2"))
+   
+;;=> "1812"
