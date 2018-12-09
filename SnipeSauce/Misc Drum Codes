@@ -1,0 +1,17 @@
+##| Welcome to Sonic Pi v3.1
+blip = :elec_blip
+bell = :elec_bell
+
+loop do
+  tick(:bc)
+  beat = (ring blip, bell)
+  beat.look(:bc)
+  sleep 0.5
+end
+
+loop do
+  tick(:drum_clock)
+  sample :drum_bass_soft if use_this.look(:drum_clock) == 0
+  sample :tabla_ghe1 if use_this.look(:drum_clock) == 1
+  sleep 0.25
+end
