@@ -1,0 +1,29 @@
+Review:
+(def primes '(2 3 5 7 11 13))
+(for [cat primes dog '(2 3 4)] (+ cat dog))
+
+(def list '("a" "b" "c" "d" "e" "f" "g"))
+(for [k '(1 3 5)] (nth list k)) 
+(map dec '(4 10 25))
+(map + '(5 6 7) '(1 2 3 4) '(9 9 9 9 9 9 9))
+
+(def numbers (range 5))
+(+ 0 1 2 3 4)
+(+ numbers) ;; will not work
+(apply + '(0 1 2 3 4))
+(apply + (range 5))
+(apply + numbers)
+
+Write a function for factorial
+Map vs apply 
+What do I enter to test this?
+(defn this-one
+  [word1]
+  (str (subs word1 1 (count word1)) (first word1) "op ")
+)
+(for [x '(1 3 5) y '(4 5)] (list x y))
+-	Creates all possible pairs
+-	((1 4) (1 5) (3 4) (3 5) (5 4) (5 5))
+(map list '(1 3 6 7) '(9 6 3 2))
+-	Creates pairs of the firsts, seconds, thirds, and fourths
+-	((1 9) (3 6) (6 3) (7 2))
