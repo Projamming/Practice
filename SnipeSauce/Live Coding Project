@@ -1,0 +1,197 @@
+use_bpm 140
+
+
+def intro
+  use_synth :beep
+  notes = [ :Ds4, :Ds4, :Fs4, :Cs4, :r, :Cs4, :Fs4, :Fs3,
+            :r, :Fs3, :Ds3, :As3, :Ds4, :Fs4, :r, :Fs4 ]
+  durations = [ 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,
+                0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 ]
+  play_pattern_timed notes, durations
+  sleep 8
+end
+
+def intro_2
+  use_synth :beep
+  notes = [ :Ds4, :Ds4, :Fs4, :Cs4, :r, :Cs4, :Fs4, :Fs3,
+            :r, :Fs3, :Ds3, :As4, :Fs4, :Ds4, :r, :As4 ]
+  durations = [ 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,
+                0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 ]
+  play_pattern_timed notes, durations
+  sleep 8
+end
+
+##| def random_intro
+##|   use_random_seed 36
+##|   use_synth :fm
+##|   notes = [ :r, :Ds4, :Fs4, :Cs4, :Fs3, :Ds3, :As3]
+##|   16.times do
+##|     play choose(notes)
+##|     sleep 0.5
+##|   end
+##|   sleep 8
+##| end
+
+def vocal
+  use_synth :pluck
+  notes = [:r, :Fs4, :Fs4,
+           :r, :Fs4, :Fs4]
+  durations = [1, 1.5, 1.5,
+               1, 1.5, 1.5]
+  play_pattern_timed notes, durations
+end
+
+def bass_line
+  use_synth :fm
+  notes = [ :Ds3, :Ds3, :Ds3, :r, :Ds3, :Ds3,
+            :Ds3, :r, :Ds3, :Ds3, :Ds3,
+            :Cs3, :Cs3, :Cs3, :r, :Cs3, :Cs3,
+            :Cs3, :r, :Cs3, :Cs3, :Cs3,
+            :B2, :B2, :B2, :r, :B2, :B2,
+            :B2, :r, :B2, :B2, :B2,
+            :Cs3, :Cs3, :Cs3, :r, :Cs3, :Cs3,
+            :Cs3, :r, :Cs3, :Cs3, :Cs3,
+            :Ds3, :Ds3, :Ds3, :r, :Ds3, :Ds3,
+            :Ds3, :r, :Ds3, :Ds3, :Ds3,
+            :Fs3, :Fs3, :Fs3, :r, :Fs3, :Fs3,
+            :Fs3, :r, :Fs3, :Fs3, :Fs3,
+            :Fs3, :Fs3, :Fs3, :r, :Fs3, :Fs3,
+            :Fs3, :r]
+  durations = [0.5, 0.5, 1, 1, 0.5, 0.5,
+               1, 1, 0.5, 0.5, 1,
+               0.5, 0.5, 1, 1, 0.5, 0.5,
+               1, 1, 0.5, 0.5, 1,
+               0.5, 0.5, 1, 1, 0.5, 0.5,
+               1, 1, 0.5, 0.5, 1,
+               0.5, 0.5, 1, 1, 0.5, 0.5,
+               1, 1, 0.5, 0.5, 1,
+               0.5, 0.5, 1, 1, 0.5, 0.5,
+               1, 1, 0.5, 0.5, 1,
+               0.5, 0.5, 1, 1, 0.5, 0.5,
+               1, 1, 0.5, 0.5, 1,
+               0.5, 0.5, 1, 1, 0.5, 0.5,
+               1, 3]
+  play_pattern_timed notes, durations
+end
+
+def outro
+  use_synth :fm
+  notes = [ :r, :Fs5, :As6,
+            :Gs5, :Ds5, :Fs5]
+  durations = [ 3, 0.5, 0.5,
+                1, 1, 2 ]
+  play_pattern_timed notes, durations
+end
+
+def chord_prog
+  [chord(:B3, :major),
+   chord(:Cs4, :major),
+   chord(:Ds4, :minor)]
+end
+
+
+def my_chords
+  use_synth :fm
+  4.times do
+    calling = (ring, 0, 1, 2, 1)
+    tick
+    play chord_prog[calling.look], sustain: 2.5
+    sleep 4
+  end
+end
+
+
+def melody_1
+  use_synth :fm
+  notes = [ :r, :Fs4, :Fs4, :Gs4, :As4,
+            :Fs4, :Fs4, :Fs4, :As4, :Gs4, :Fs4,
+            :Fs4,
+            :r, :Fs4, :Fs4, :Gs4, :As4,
+            :Fs4, :Fs4, :Fs4, :Fs4, :Fs4, :As4,
+            :As4, :Gs4, :Fs4, :Fs4, :Fs4,
+            :Ds4,
+            :r, :Cs5, :Cs5, :Cs5, :Cs5,
+            :Cs5, :As4, :Gs4, :Fs4, :Ds4,
+            :Ds4, :As4, :B4, :Gs4, :As4, :Fs4,
+            :Fs4, :r,
+            :r, :Fs4, :Fs4, :Gs4, :As4,
+            :Fs4, :Fs4, :Fs4, :Fs4, :Fs4, :As4,
+            :As4, :Cs5]
+  durations = [1.5, 0.5, 1, 0.5, 0.5,
+               1, 0.5, 0.5, 0.75, 0.75, 0.5,
+               4,
+               1.5, 0.5, 1, 0.5, 0.5,
+               1, 0.5, 0.5, 0.5, 1, 0.5,
+               0.5, 0.5, 1, 1.5, 0.5,
+               4,
+               1, 0.5, 1, 1, 0.5,
+               0.5, 1, 1, 1, 0.5,
+               0.5, 1, 0.5, 1, 0.5, 0.5,
+               3, 1,
+               1.5, 0.5, 1, 0.5, 0.5,
+               1, 0.5, 0.5, 0.5, 1, 0.5,
+               0.5, 3.5]
+  play_pattern_timed notes, durations
+end
+
+
+##| def choose_intro
+##|   loop do
+##|     random_number = dice(2)
+
+##|     use_this = intro if random_number == 1
+##|     use_this = random_intro if random_number == 2
+
+##|     1.times do
+##|       use_this
+##|     end
+##|   end
+##| end
+
+
+##################
+## The Play Pen ##
+##################
+
+
+in_thread do
+  3.times do
+    intro
+  end
+  intro_2
+end
+
+in_thread do
+  sleep 8
+  bass_line
+end
+
+in_thread do
+  sleep 8
+  6.times do
+    vocal
+  end
+end
+
+in_thread do
+  sleep 58
+  outro
+end
+
+
+in_thread do
+  sleep 66
+  melody_1
+end
+
+in_thread do
+  sleep 66
+  4.times do
+    my_chords
+  end
+end
+
+in_thread do
+  sleep 126
+  outro
+end
