@@ -1,7 +1,3 @@
-;; NAME: Megan Baumgartner
-;; ASSIGNMENT: Project 7 - Clojure Without Music
-;; DUE DATE: November 12, 2018
-
 ;; Q1: Mystery function
 (defn mystery
 "Outputs the denominator of a given ratio"
