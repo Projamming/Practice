@@ -1,0 +1,436 @@
+(ns final.core
+  (:use [overtone.core]))
+
+;; I was just messing around with a lot of code! I tried to change parameters to instruments, and downloaded some samples to try and use.
+
+(defn to-freq
+    "Converts a note in :A4 form to its frequency."
+    [my-note]
+    (midi->hz (note my-note)))
+
+(defn notes-to-freq
+    "Converts a list of notes in :A4 form to their frequencies."
+    [my-notes]
+    (map to-freq my-notes))
+
+(definst guitar [freq 440 amp 1.0 dur 1.5 decay 15 coef 0.3 gate 1]
+  (let [noize (* 0.3 (white-noise))
+        dly   (/ 1 freq)
+        plk   (pluck noize gate dly dly decay coef)
+        dist  (distort plk)
+        filt  (rlpf dist (* 12 freq) 0.6)
+        clp   (clip2 filt 0.8)
+        reverb (free-verb clp 0.4 0.8 0.2)]
+    (* amp (env-gen (perc 0.0000001 dur) :action 0) reverb))) ;made perc smaller to make a harsher sound.
+
+(defsynth elec-piano [freq 200 dur 0.5]
+  (let [src (saw [freq (* freq 1.01) (* 0.99 freq)])
+        low (sin-osc (/ freq 2))
+        filt (lpf src (line:kr (* 10 freq) freq 10))
+        env (env-gen (perc 0.1 dur) :action FREE)]
+    (out 0 (pan2 (* 0.6 low env filt)))))
+
+(defn play-guitar
+    "Plays a list of notes in :A4 form (as a chord) with the guitar."
+    [my-notes]
+    (println "playing guitar chord!")
+    (map guitar (notes-to-freq my-notes)))
+
+(definst string [note 60 amp 1.0 dur 0.5 decay 30 coef 0.3 gate 1]
+  (let [freq (midicps note)
+        noize (* 0.8 (white-noise))
+       dly   (/ 1.0 freq)
+        plk   (pluck noize gate dly dly decay coef)
+        dist  (distort plk)
+       filt  (rlpf dist (* 12 freq) 0.6)
+        clp   (clip2 filt 0.8)
+       reverb (free-verb clp 0.4 0.8 0.2)]
+    (* amp (env-gen (perc 0.0001 dur) :action 0) reverb)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn play-guitar
+    "Plays a list of notes in :A4 form (as a chord) with the guitar."
+    [my-notes]
+    (println "playing guitar chord!")
+    (map guitar (notes-to-freq my-notes)))
+
+
+;(def c-major (list :C4 :G3 :C3))
+;(play-guitar c-major)
+
+(def c-chord '(:C4 :G3 :C3))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(definst supersaw [freq 440 amp 0.5]
+  (let [input  (lf-saw freq)
+        shift1 (lf-saw 4)
+        shift2 (lf-saw 7)
+        shift3 (lf-saw 5)
+        shift4 (lf-saw 2)
+        comp1  (> input shift1)
+        comp2  (> input shift2)
+        comp3  (> input shift3)
+        comp4  (> input shift4)
+        output (+ (- input comp1) (- input comp2) (- input comp3) (- input comp4))
+        output (- output input)
+        output (leak-dc:ar (* output 0.25))]
+    (* amp output)))
+
+(definst daf-bass [freq 440 gate 1 amp 1 out-bus 0]
+  (let [harm [1 1.01 2 2.02 3.5 4.01 5.501]
+        harm (concat harm (map #(* 2 %) harm))
+        snd  (* 2 (distort (sum (sin-osc (* freq harm)))))
+        snd  (+ snd (repeat 2 (sum (sin-osc (/ freq [1 2])))))
+        env  (env-gen (adsr 0.001 0.2 0.9 0.25) gate amp :action FREE)]
+    (* snd env)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(definst bass [note 40 amp 1.0 osc-mix 0.0 cutoff 0.35 sustain 0.2 release 0.15 fil-dec 0.85 fil-amt 1500]
+  (let [freq (midicps note)
+        sub-freq (midicps (- note 12))
+        osc1 (saw:ar freq)
+        osc2 (pulse sub-freq 0.5)
+        osc (+ (* osc-mix osc2) (* (- 1 osc-mix) osc1))
+        snd [osc osc]
+        fil-env (env-gen (adsr 0.0 fil-dec 0.1 fil-dec))
+        snd (lpf snd (+ (* fil-env fil-amt) (lin-exp cutoff 0.0 1.0 20.0 20000.0)))
+        env (env-gen (env-lin 0.01 sustain release) 1 1 0 1 FREE)]
+    (out 0 (* amp env snd))))
+
+(definst lead [note 60 release 0.30 amp 0.3 sub-gate 0.3]
+  (let [freq  (midicps note)
+        freq2 (midicps (- note 0.08))
+        freq3 (midicps (+ note 0.22))
+        freq4 (midicps (+ note 0.40))
+        osc   (saw [freq freq2 freq3 freq4])
+        sub   (lpf (pulse (* freq 0.5) 0.3) 500)
+        osc   (+ (* sub-gate sub) (* amp osc))
+        mix   (mix osc)
+        env   (env-gen (env-lin 0.015 0.20 release) :action FREE)]
+    (pan2 (* mix env))))
+
+
+(def met (metronome 112))
+(defn leadt
+  "Lead guitar for eye of the tiger."
+  [time sleeps melody]
+  (at time (guitar (to-freq (first melody))))
+  (let [new-time (+ time (* 500 (first sleeps)))]
+    (apply-by new-time 
+              leadt [new-time
+                    (rest sleeps)
+                    (rest melody)])))
+
+;I used 'list' bc I dont want to repeat multiple times.
+(leadt (now)
+ (list  0 0 0.5
+         1.5
+         0 0 0.5
+         0.25
+         0 0 0.5
+         0.25
+         0 0 0.5
+         2
+         0 0 0.5
+         0.25
+         0 0 0.5
+         0.25
+         0 0 0.5
+         2
+         0 0 0.75
+         0 0 0.75
+         0 0 0 4.5
+
+         0 0 0.5
+         1.5
+         0 0 0.5
+         0.25
+         0 0 0.5
+         0.25
+         0 0 0.5
+         2
+         0 0 0.5
+         0.25
+         0 0 0.5
+         0.25
+         0 0 0.5
+         2
+         0 0 0.75
+         0 0 0.75
+         0 0 0 4.5)
+ (list :C3 :G3 :C4
+         0
+         :C3 :G3 :C4
+         0
+         :A#2 :F3 :A#3
+         0
+         :C3 :G3 :C4
+         0
+         :C3 :G3 :C4
+         0
+         :A#2 :F3 :A#3
+         0
+         :C3 :G3 :C4
+         0
+         :C3 :G3 :C4
+         :A#2 :F3 :A#3
+         :G#2 :D#3 :G#3 :C4
+
+         :C3 :G3 :C4
+         0
+         :C3 :G3 :C4
+         0
+         :A#2 :F3 :A#3
+         0
+         :C3 :G3 :C4
+         0
+         :C3 :G3 :C4
+         0
+         :A#2 :F3 :A#3
+         0
+         :C3 :G3 :C4
+         0
+         :C3 :G3 :C4
+         :A#2 :F3 :A#3
+         :G#2 :D#3 :G#3 :C4))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn leadt2
+  "Lead guitar for eye of the tiger."
+  [time sleeps melody]
+  (at time (guitar (to-freq (first melody))))
+  (let [new-time (+ time (* 500 (first sleeps)))]
+    (apply-by new-time 
+              leadt2 [new-time
+                    (rest sleeps)
+                    (rest melody)])))
+
+;I used 'list' bc I dont want to repeat multiple times.
+(leadt2 (now)
+   (list 32
+   	     0 0 0 0.5
+         1
+         0 0 0 0 0.25
+         0 0 0 0 0.25
+         0 0 0 0.5
+         0.25
+         0 0 0 0.5
+         0.25
+         0 0 0 1
+         1
+
+         0 0 0 0 0.25
+         0 0 0 0 0.25
+         0 0 0 0.5
+         0.25
+         0 0 0 0.5
+         0.25
+         0 0 0 1
+         1
+
+         0 0 0 0 0.25
+         0 0 0 0 0.25
+         0 0 0.75
+         0 0 0.75
+         0 0 0 3.5
+         0.5
+         0 0.5)
+   
+   (list 0
+   	     :C3 :G3 :C4 :D#4
+         0
+         :E4 :B3 :G3 :D3 :A2
+         :E4 :B3 :G3 :D3 :A2
+         :C3 :G3 :C4 :D#4
+         0
+         :A#2 :F3 :A#3 :Db4
+         0
+         :C3 :G3 :C4 :D#4
+         0
+
+         :E4 :B3 :G3 :D3 :A2
+         :E4 :B3 :G3 :D3 :A2
+         :C3 :G3 :C4 :D#4
+         0
+         :A#2 :F3 :A#3 :Db4
+         0
+         :C3 :G3 :C4 :D#4
+         0
+
+         :E4 :B3 :G3 :D3 :A2
+         :E4 :B3 :G3 :D3 :A2
+         :C3 :G3 :C4
+         :A#2 :F3 :A#3
+         :G#2 :D#3 :G#3 :A#3
+         0
+         :Eb3 :Gb3))
+;;;;;;;;;;;;;;;
+;(leadt (now) 
+;    (cycle [1 0.5 0.25 0.625 1.625
+;            0.5 0.5 0.5 0.5 0.5 2.5
+;            0.25 0.625 0.125 0.5 0.5 0.25 0.5 0.625 0.125
+;            1 0.5 3.25 0.25 0.125 0.25 0.75 0.5 0.5 0.5]) 
+;    (cycle [:r :G3 :A#3 :G3 0 :r 
+;           :F3 :D#3 :G3 :F3 :D3 :r
+;           :F3 :D#3 :r :F3 0 :F3 :G3 :r 
+;           :F3 :D#3 :r 
+;           :G3 :r :A#3 :C4 :G3 :F3 :D#3]))
+
+;(leadt (now)
+;  (cycle [0 0 0.5   1.5   0 0 0.5   0.25   0 0 0.5   0.25   0 0 0.5   2    0 0 0.5   0.25                      0 0 0.5   0.25   0 0 0.5   2    0 0 0.5   0.25   0 0 0.5   0 0.25   0 0 0 0.5   0 0 4
+
+;          0 0 0 0.5   1   0 0 0 0 0.25   0 0 0 0 0.25   0 0 0 0.5  0.25   0 0 0   0.5    0.25        ;          0 0 0   1   1   
+ ;         0 0 0 0 0.25   0 0 0 0 0.25   0 0 0.5   0.25   0 0 0.5   0 0.25   0 0 0 0 0 ()     0    ;()])
+;  (cycle [:C4 :G3 :C3   0 :C4 :G3 :C3  0   :A#2 :F3 :A#3    0   :C4 :G3 :C3  0  :C4 :G3 :C3    0    ;           :A#2 :F3 :A#3    0 :C4 :G3 :C3  0 :C4 :G3 :C3  :C4 :A#2 :F3 :A#3 :F3 :A#3 :G#2 :D#3 :G#3 ;             :C4 :G#2 :D#3 :G#3 
+;
+;       :C4 :G3 :C3 :D#4 0 :E4 :B3 :G3 :D3 :A2 :E4 :B3 :G3 :D3 :A2 :C4 :G3 :C3 :D#4 0 :A#2 :F3       ;        :A#3 :Db4 0 :C4 :G3 :C3 :D#4 0
+;
+ ;      :E4 :B3 :G3 :D3 :A2 :E4 :B3 :G3 :D3 :A2 :C4 :G3 :C3 :C4 :A#2 :F3 :A#3 :F3 :A#3 :G#2 :D#3      ;  :G#3 :G#2 :D#3 :G#3 :A#3 0 :Db3 :Gb3]))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;(def c-chord {:C3 :G4 :C3})
+
+; (def subby (sample (freesound-path 25649)))
+
+; ; (def ring-hat (freesound 12912))
+; (def snare (freesound 26903))
+; (def edm1 (freesound-path 398164))
+; (def wop (freesound 85291))
+; (def abass (freesound 320046))
+; (def song (freesound 431181))
+
+; ; (defn play-pattern [time pattern sound]
+; ;   (at time (when (= 1 (first pattern))
+; ;                (sound)))
+; ;   (let [new-time (+ (now) 200)]
+; ;     (apply-by new-time #'play-pattern [new-time 200 (rest pattern) sound])))
+
+; ; (defn sequencer [time sleep pattern]
+; ;   (at time (when (= 1 (first pattern)) (subby)))
+; ;   (let [new-time (+ time sleep)]
+; ;     (apply-by new-time #'sequencer [new-time sleep (rest pattern)])))
+
+; ; (def pats {subby [1 1 0 1 0 1 0 0]
+; ; 	      wop   [1 0 0 1 0 0 1 0]})
+	      
+
+
+
+; (def pats {subby [1 0 0 1 0 0 1 0]
+;            snare [1 0 0 1 0 0 0 1]})
+
+; ;; For this, we can modify our simple sequencer to work with arbitrary
+; ;; sounds:
+
+; (defn play-pattern [curr-t sep-t pattern sound]
+;   (at curr-t (when (= 1 (first pattern))
+;                (sound)))
+;   (let [new-t (+ curr-t sep-t)]
+;     (apply-by new-t #'play-pattern [new-t sep-t (rest pattern) sound])))
+
+; ;; We can then create a multi-patterned sequencer:
+
+; (defn sequencer [sep-t sequence]
+;   (let [t (+ (now) 400)]
+;     (doseq [[sound pattern] sequence]
+;       (play-pattern t sep-t (cycle pattern) sound))))
+
+; ;(sequencer 200 pats)
+; ;(song)
+
+; (def met (metronome 112))
+
+; (defn my-beat
+;     "Plays sound at each beat counted out by the metronome this-metro."
+;     [this-metro sound]
+;     (let [beat (this-metro)]            ; beat = current number on this-metro
+;         (println (str "beat: " beat)) ; for our sakes, print beat
+;         (at (this-metro beat) (sound))  ; (at <time> <run-this-function>)
+;         (apply-by (this-metro (inc beat)) my-beat this-metro sound [])))
+; ; (my-beat pats-metro subby)
+; ; (song)
+
+;;;;;;;;;;;;;;;;;;;;
+
+(defn drops-left
+  "Lead gui."
+  [time sleeps melody]
+  (at time (elec-piano (to-freq (first melody))))
+  (let [new-time (+ time (* 20000 (first sleeps)))]
+    (apply-by new-time 
+              leadt2 [new-time
+                    (rest sleeps)
+                    (rest melody)])))
+(drops-left (now)
+	(list
+	      0 0 0 1.75
+		  0.75
+		  0 0 0 0.75
+		  0 0 0.5
+		  0.25
+          0 1.75
+		  0.5
+		  0.25
+		  0 0.5
+		  0.25
+		  0 0 0.5
+		  0.25
+		  0 0 1.75
+		  0.5
+		  0.25
+		 0 0 0.5
+		  0.25
+		 0 0 0.5
+		  0.25
+		  0 0 0.25
+		  1.75
+		  0.5
+		  0.25
+		  0 0 0.5
+		  0.25
+		  0 0 0.5
+		  0.25)
+	
+          
+	(list 
+		  :C3 :G3 :C4 :E4
+          :C3
+		  :C3 :G3 :C4 :E4
+		  :G3 :C4 :F4
+		  :G2
+		  :G3 :D4
+		  :G2
+		  :G2
+		  :G3 :D4
+		  :G2
+		  :G3 :D4 :E4
+		  :F2
+		  :F3 :G3 :C4
+		  :F2
+		  :F2
+		  :F3 :G3 :C4
+		  :F2
+		  :F3 :G3 :C4
+		  :F2
+		  :F3 :G3 :C4
+		  :A3
+		  :F2
+		  :F2
+		  :F3 :A3 :C4
+		  :F2
+		  :F3 :A3 :D4
+		  :C2))
+
+
+
+
+
+(drops (now)
+	(cycle 
+		[0 0 0 1.75  0.75  0 0 0 0.75  0 0 0.5  0.25  0 1.75  0.5  0.25  0 0.5  0.25  0 0 0.5  0.25  0 0 1.75  0.5 
+	 0.25  0 0 0.5  0.25  0 0 0.5  0.25  0 0 0.25  1.5  0.5  0.25  0 0 0.5  0.25  0 0 0.5  0.25])
+	
+          
+	(cycle  
+		  [:C3 :G3 :C4 :E4  :C3  :C3 :G3 :C4 :E4  :G3 :C4 :F4  :G2  :G3 :D4  :G2  :G2  :G3 :D4  :G2  :G3 :D4 :E4  :F2
+		   :F3 :G3 :C4  :F2  :F2  :F3 :G3 :C4  :F2  :F3 :G3 :C4  :F2  :F3 :G3 :C4  :A3   :F2  :F2  :F3 :A3 :C4 :F2  :F3 :A3 
+		   :D4  :C2]))
+
+
