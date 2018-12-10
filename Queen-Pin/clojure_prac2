@@ -1,0 +1,20 @@
+(defn initials
+"Returns initials of three names"
+[str1 str2 str3]
+(str (first str1) (first str2) (first str3))
+)
+;; (intials "first" "middle" "last")
+
+(defn something
+"Deletes first character of a string and repeats the process with the substring five times and returns all the substrings together"
+[strg]
+(apply str (for [k (range 5)] (subs strg k (count strg))))
+)
+;; (something "lollipop")
+
+(defn something_else
+"Duplicates initials and then performs something on the new string"
+[str1 str2 str3]
+(something (conj (str (initials str1 str2 str3) (initials str1 str2 str3))))
+)
+;; (something_else "big" "orange" "opal")
