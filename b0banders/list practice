@@ -1,0 +1,13 @@
+;;11/15
+;;List Practice - Idea from L0SCO
+
+;;Write in the proper code so that you get...
+
+;;the 9th value in this list (0 1 2 3 4 5 6 7 8 9)
+(take 1 (drop 8 '(0 1 2 3 4 5 6 7 8 9 10)))
+
+;;the 4 and 5 values in this list (0 1 2 3 4 5 6 7 8 9)
+(take 2 (drop 4 '(0 1 2 3 4 5 6 7 8 9)))
+
+;;the last 4 values from this list (0 1 2 3 4 5 6 7 8 9)
+(drop 6 '(0 1 2 3 4 5 6 7 8 9))
