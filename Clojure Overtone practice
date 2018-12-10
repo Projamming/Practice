@@ -1,0 +1,60 @@
+(ns final.core
+  (:use [overtone.core]))
+
+(defn to-freq
+    "Converts a note in :A4 form to its frequency."
+    [my-note]
+    (midi->hz (note my-note)))
+
+(defn notes-to-freq
+    "Converts a list of notes in :A4 form to their frequencies."
+    [my-notes]
+    (map to-freq my-notes))
+
+(definst guitar [freq 440 amp 1.0 dur 1.5 decay 15 coef 0.3 gate 1]
+  (let [noize (* 0.3 (white-noise))
+        dly   (/ 1 freq)
+        plk   (pluck noize gate dly dly decay coef)
+        dist  (distort plk)
+        filt  (rlpf dist (* 12 freq) 0.6)
+        clp   (clip2 filt 0.8)
+        reverb (free-verb clp 0.4 0.8 0.2)]
+    (* amp (env-gen (perc 0.0000001 dur) :action 0) reverb))) ;made perc smaller to make a harsher sound.
+
+(defsynth elec-piano [freq 200 dur 0.5]
+  (let [src (saw [freq (* freq 1.01) (* 0.99 freq)])
+        low (sin-osc (/ freq 2))
+        filt (lpf src (line:kr (* 10 freq) freq 10))
+        env (env-gen (perc 0.1 dur) :action FREE)]
+    (out 0 (pan2 (* 0.6 low env filt)))))
+
+(defn play-guitar
+    "Plays a list of notes in :A4 form (as a chord) with the guitar."
+    [my-notes]
+    (println "playing guitar chord!")
+    (map guitar (notes-to-freq my-notes)))
+
+(definst string [note 60 amp 1.0 dur 0.5 decay 30 coef 0.3 gate 1]
+  (let [freq (midicps note)
+        noize (* 0.8 (white-noise))
+       dly   (/ 1.0 freq)
+        plk   (pluck noize gate dly dly decay coef)
+        dist  (distort plk)
+       filt  (rlpf dist (* 12 freq) 0.6)
+        clp   (clip2 filt 0.8)
+       reverb (free-verb clp 0.4 0.8 0.2)]
+    (* amp (env-gen (perc 0.0001 dur) :action 0) reverb)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Define my own chord
+(defn play-guitar
+    "Plays a list of notes in :A4 form (as a chord) with the guitar."
+    [my-notes]
+    (println "playing guitar chord!")
+    (map guitar (notes-to-freq my-notes)))
+
+
+;(def c-major (list :C4 :G3 :C3))
+;(play-guitar c-major)
+
+(def c-chord '(:C4 :G3 :C3))
