@@ -1,0 +1,23 @@
+(defn initials
+"Returns initials of three names"
+[str1 str2 str3]
+(str (first str1) (first str2) (first str3))
+)
+;; (intials "first" "middle" "last")
+
+(defn greater
+"Returns whether m is greater or less than n"
+[m n]
+(if (> m n)
+(str m " is greater than " n)
+(str m " is less than " n))
+)
+;; (greater 14 7)
+;; (greater 4 7)
+
+(defn something
+"Deletes first character of a string and repeats the process with the sbstring five times and returns all the substrings together"
+[strg]
+(apply str (for [k (range 5)] (subs strg k (count strg))))
+)
+;; (something "fruitloop")
