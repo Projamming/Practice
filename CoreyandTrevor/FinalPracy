@@ -1,0 +1,31 @@
+
+#Some examples and practice for final exam
+
+Simple built-in functions:
+
+Range → returns sequence of numbers from start to end
+	Ex. (range) → (0-n)
+	Ex. (range 10) → (0 1 2 3 4 5 6 7 8 9)
+	Ex. (range -5 5) → (-5 -4 -3 -2 -1 0 1 2 3 4)
+	Ex. (range 0 7 2) → (0 2 4 6)
+Count → returns the number of items in a collection
+	Ex. (count [1 2 3]) → 3
+First → returns the first item in a collection 
+	Ex. (first [1 2]) → 1
+	Ex. (first [1 2] [3 4]) → [1 2]
+	Ex. (first `(:alpha :bravo :charlie)) → :alpha
+Last → returns last item in a collection
+Rest → returns sequence of items after the first
+	Ex. (rest [1 2 3 4 5]) → (2 3 4 5)
+Drop → returns sequence of all but first n items in collection
+	Ex. (drop 0 [1 2 3 4]) → [1 2 3 4]
+	Ex. (drop 2 [1 2 3 4]) → [3 4]
+	Ex. (take 3 (drop 5 (range 1 11))) → (6 7 8)
+Take → returns sequence of first n items in collection
+	Ex. (take 3 `(1 2 3 4 5 6)) → (1 2 3)
+Inc → returns number one greater than number
+	Ex. (inc 1) → 2
+Dec → returns number one less than number
+	Ex. (dec 3) → 2
+Str → combines shit
+	Ex. (str 1 2 3) → “123”
