@@ -1,0 +1,35 @@
+;; NAME: Megan Baumgartner
+;; ASSIGNMENT: Project 7 - Clojure Without Music
+;; DUE DATE: November 12, 2018
+
+;; Q1: Mystery function
+(defn mystery
+"Outputs the denominator of a given ratio"
+[my_ratio]
+(int (/ 1 (/ my_ratio (numerator my_ratio))))
+)
+
+;; Q2: A function that calls another
+(defn longer
+"Returns true if word1 is longer than word2."
+[word1 word2]
+(> (count word1) (count word2))
+)
+
+(defn first_longer
+"Returns true if the nth entry of lst1 is longer than the nth entry of lst2."
+[lst1 lst2 n]
+(longer (nth lst1 n) (nth lst2 n))
+)
+
+;; Q3: Scrambled words Part II
+(defn shuffler
+"Returns a shuffled version of strg."
+[strg]
+(apply str (shuffle (seq strg))))
+
+(defn scrambler
+"Returns a scrambled version of strg with the same first and last characters"
+[strg]
+(str (str (first strg)) (shuffler (rest (drop-last strg))) (str (last strg)))
+)
