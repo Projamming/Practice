@@ -1,0 +1,128 @@
+# # String "" ''
+# # puts "Hello"
+# # puts "Jiin"
+# # print "Hello"
+# # print "Jiin"
+# # print "What's your name?"
+# # input = gets.chomp
+# # puts input.downcase
+# # puts input.upcase
+
+# # Integer.
+# # puts 40 + 20
+# # puts 40 + "20".to_i
+# # puts 40.to_s + "20"
+# # puts "4020"
+
+#Q1
+# def greet
+#   print "What is your name? "
+#   name = gets.chomp
+#   print "Where are you from?"
+#   location = gets.chomp
+# puts "Hello, #{name} from #{location}!"
+# end
+
+# # def untill100
+# # print "Current age: "
+# # age = gets.chomp
+# # # puts age.class
+# # year100 = 2018 + (100 - age.to_i)
+# # puts "You will be 100 in year #{year100}"
+# # end
+
+# # untill100
+
+# # print "Who are you?"
+# # input = gets.chomp
+
+# # def test 
+# # print "hi"
+# # end
+
+# # test
+
+# # Rock paper scissor with the computer!
+# def rps
+# print "Rock Paper or Scissor? "
+# response = gets.chomp
+
+# # List
+# options = ["Rock", "Paper", "Scissor"]
+# pc_choice = options.sample
+# puts "You chose #{response.upcase}"
+# puts "The computer chose #{pc_choice.upcase}"
+
+# # If statements
+# if pc_choice == "Rock"
+#   if response == "Paper"
+#     puts "Win! :)"
+#   elsif response == "Rock"
+#     puts "Tie"
+#   else 
+#     puts "Lose"
+#   end
+#   end
+# if pc_choice == "Paper"
+#   if response == "Scissor"
+#     puts "Win! :)"
+#   elsif response == "Paper"
+#     puts "Tie"
+#   else 
+#     puts "Lose"
+#   end
+#   end
+# if pc_choice == "Scissor"
+#     if response == "Rock"
+#       puts "Win! :)"
+#     elsif response == "Scissor"
+#       puts "Tie"
+#     else puts "Lose"
+#     end
+#   end
+# end
+
+#Q2
+# def password
+# print "What is your parents first name?"
+# first_name = gets.chomp
+# print "How old is #{first_name}?"
+# age = gets.chomp
+# print "Your password is #{first_name}#{age}."
+# end
+
+#Q3
+# def flip
+# options = ["heads", "tails"]
+# pc_choice = options.sample
+#  print "The computer flipped #{pc_choice}."
+# end
+
+#Q4
+def flip2
+print "heads or tails?"
+response = gets.chomp
+options = ["heads", "tails"]
+pc_choice = options.sample
+puts "The computer flipped #{pc_choice}"
+if pc_choice == "heads" 
+  if response == "heads"
+    puts "You guessed correctly!"
+  end
+  end
+if pc_choice == "tails"
+  if response == "tails"
+    puts "You guessed correctly!"
+  end
+  end
+if pc_choice == "heads"
+  if response == "tails"
+    puts "You guessed incorrectly :("
+  end
+  end
+if pc_choice == "tails"
+  if response == "heads"
+    puts "You guessed incorrectly :("
+  end
+  end
+end
