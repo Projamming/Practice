@@ -1,0 +1,42 @@
+use_random_seed 71
+
+swash = :perc_swash
+snap = :perc_snap
+bell = :perc_bell
+r = :r
+
+melody_1 = (ring snap, snap, swash, r, snap, snap, swash, r)
+melody_2 = (ring snap, swash, snap, swash, r, snap, r, swash, bell)
+
+loop do
+  random_number = dice(2)
+  
+  use_this = melody_1 if random_number == 1
+  use_this = melody_2 if random_number == 2
+  
+  16.times do
+    sample use_this.tick
+    sleep 0.25
+  end
+  
+end
+
+
+snare = :drum_snare_hard
+bass = :drum_bass_hard
+sleep = :r
+
+drums_1 = (ring snare, bass, bass, snare, bass, bass, snare, sleep)
+drums_2 = (ring bass, bass, snare, snare, sleep, bass, sleep, snare)
+
+loop do
+  random_number = dice(2)
+  
+  use_this = drums_1 if random_number == 1
+  use_this = drums_2 if random_number == 2
+  
+  16.times do
+    sample use_this.tick
+    sleep 0.25
+  end
+end
