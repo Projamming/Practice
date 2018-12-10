@@ -1,0 +1,38 @@
+;; ;; Practice for Final 
+
+;; These are some questions I came up with to help prepare for the final exam
+
+;; ;; What are the outputs of the following? 
+
+;; (drop 5 (take 6 (range 15)))
+;; ;; 5 
+
+;; (inc 6)
+;; ;; 7 
+
+;; (str "Ham" "il" "ton")
+;; ;; Hamilton 
+
+;; (count [4 :Ham :ilton])
+;; ;; 3 
+
+;; What is the ouput if (fact 5) is used? 
+
+;; (defn fact 
+;;   "returns n!"
+;;   [n]
+;;   (apply * (rest (range(inc n))))
+;; )
+
+;; 120
+
+
+
+;; What is the output from this for function? 
+
+;; (for [x '(0 10 20 30)
+;;   y '(5 8 25 32)]
+;;   ( * x y) 
+;; )
+
+;; (0 0 0 0 50 80 250 320 100 160 500 640 150 240 750 960)
