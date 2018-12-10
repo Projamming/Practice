@@ -27,5 +27,5 @@ Inc → returns number one greater than number
 	Ex. (inc 1) → 2
 Dec → returns number one less than number
 	Ex. (dec 3) → 2
-Str → combines shit
+Str → combines
 	Ex. (str 1 2 3) → “123”
