@@ -1,0 +1,19 @@
+;; 11/6 A coule of questions I created and then answered
+
+;;What are the outputs of the following mathematical operations? 
+
+(map / '(1 2 3) '(2 4 6) '(4 8 12))
+
+;; answer: (1/8 1/16 1/24)
+
+(map + '(1 2 3) '(2 4 6) '(4 8 12))
+
+;; answer: (1/8 1/16 1/24)
+
+(map * '(1 2 3) '(2 4 6) '(4 8 12))
+
+;; answer: (8 64 216)
+
+(map - '(1 2 3) '(2 4 6) '(4 8 12))
+
+;; answer: (-5 -10 -15)
