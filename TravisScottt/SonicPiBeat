@@ -1,0 +1,21 @@
+use_random_seed 71
+
+snare = :drum_snare_hard
+bass = :drum_bass_hard
+sleep = :r
+
+drums_1 = (ring bass, bass, snare, sleep, bass, bass, snare, sleep)
+drums_2 = (ring bass, snare, bass, snare, sleep, bass, sleep, snare)
+
+loop do
+  random_number = dice(2)
+  
+  use_this = drums_1 if random_number == 1
+  use_this = drums_2 if random_number == 2
+  
+  16.times do
+    sample use_this.tick
+    sleep 0.25
+  end
+  
+end
