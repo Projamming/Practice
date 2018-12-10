@@ -1,0 +1,82 @@
+;; 11.1.18
+
+;; warm up
+;; (range (last (range 10))) ;; -> (0 1 2 3 4 5 6 7 8)
+
+;; More things we can do with lists:
+;; (conj '(1 2 3 4) 9)
+
+;; A symbol is a string preceded by a colon: 
+(list :C4 :D4 :E4 :F4)
+(def notes (list :C4 :D4 :E4 :F4))
+
+;; We will eventually do stuff like this:
+;; (play-chord (chord (:C4 major)))
+
+;; The big big deal in Clojure is defining
+;; our own functions:
+
+;; syntax: (defn <function-name> [argument(s)] body)
+;; where body is the code we want to run on the arguments
+
+;; defn is a contraction
+(defn doubler [n] (* n 2))
+
+;; Clojure data is "immutable" (we cannot change it
+;; permanently once it is assigned to a variable)
+
+(defn tripler [n] (* n 3))
+
+;; Without using *, find a way to write a function 
+;; that multiplies n by 6:
+(defn hexer [n] (tripler (doubler n)))
+
+(defn greet [name] (str "Hello " name))
+(defn greeter [name city] (str "Hello " name " from " city))
+(def my_name "Dave")
+
+;; Q: What is this function's job:
+(defn lc [lst1 lst2] (> (count lst1) (count lst2)))
+;; Determines which list has more terms and outputs true or false
+
+;; We usually write long ffunctions with indentation, and we can
+;; add an in-function comment called a 'docstring':
+(defn lc_snazzy
+  "Returns true if the length of lst1 exceeds that of lst2"
+  [lst1 lst2]
+  (> (count lst1) (count lst2)))
+
+;; Q: Write a function that takes two arguments [m n] and 
+;; returns true if n divides evenly into m. Hint: (mod )
+
+(defn divide
+  "Returns true if n divdes equally into m."
+  [m n]
+  (= 0 (mod m n)))
+
+;; Q: Write a function that takes two lists [lst1 lst2]
+;; and returns true if the last element of lst1 equals
+;; the first element of lst2.
+
+(defn list_link
+  "Returns true if the last element of lst1 equals the first element of lst2"
+  [lst1 lst2]
+  (= (last lst1) (first lst2)))
+
+;; Q1. Write the function 'addy' that takes three arguments 
+;; [i j k] and returns 'true' if i = j + k
+
+(defn addy
+  "Returns true if i = j + k"
+  [i j k]
+  (= i (+ j k)))
+
+;; Q2. Write the function 'longer_than' that takes two
+;; arguments [lst n] and returns 'true' if the length of lst
+;; is longer than n.
+
+(defn longer_than
+  "Returns true if the length of lst is longer than n"
+  [lst n]
+  (> (count lst) n))
+  
