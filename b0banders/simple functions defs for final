@@ -1,0 +1,28 @@
+;; Simple functions for the final exam. 
+
+;; Range: outputs sequence of numbers from first specified integer to the second
+
+;; First: outputs first listed element
+
+;; Last: outputs last listed element
+
+;; Rest → omits first element and then outputs the rest of the collection of elements
+
+;; Drop → removes specified elements from the output based on how many you would like to drop. 
+
+;; Take → only returns elements that the take function is applied to in the output. 
+
+;; Inc → output is one greater than the element the function is being applied to. 
+
+;; Dec → output is one less than the element the function is being applied to. 
+
+;; Str → combines specified elements into one element with no spacing. 
+
+;; Subs → cuts string off at desired point and returns the corresponding output. 
+
+;; conj → Adds a specified number at the beginning of the list. 
+
+;; mod → returns the remainder of one element being divided into the other. If there is no remainder the output is 0. 
+
+
+
