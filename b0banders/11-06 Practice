@@ -1,0 +1,43 @@
+;; Using code from 11/06 class notes to practice
+;; I used the functions we learned in different capacities in this practice. 
+
+;; What is the output? 
+
+(def primes '(2 3 5 7 11 13))
+(conj (range 5) (last primes))
+
+;; (13 0 1 2 3 4)
+
+;; for function - in this case, it applies the mathematical equation to each element in dog with every element in cat. I changed the code from class to divide each element in dog with each element in cat to see what the product would be. also changed the numbers. 
+
+(for [cat '(2 3 5 7 11 13) dog '(2 3 4)] (/ cat dog))
+
+(for [dog '(2 3 4) cat '(2 3 5 7 11 13)] (/ cat dog))
+
+;;(1 2/3 1/2 3/2 1 3/4 5/2 5/3 5/4 7/2 7/3 7/4 11/2 11/3 11/4 13/2 13/3 13/4)
+;;(1 3/2 5/2 7/2 11/2 13/2 2/3 1 5/3 7/3 11/3 13/3 1/2 3/4 5/4 7/4 11/4 13/4)
+
+
+;; Each element in apple is paired with each element in orange in this function. I could change the list function to anything else to apply a different operation to the two lists. 
+
+(for [apple '(2 4 6) orange '(3 5 7)] (list apple orange))
+
+;; ((2 3) (2 5) (2 7) (4 3) (4 5) (4 7) (6 3) (6 5) (6 7))
+
+;; map function applies the operation dec to every element in this list in this scenario  
+
+(map dec '(1 3 6 7))
+
+;; here are some other things I did with map 
+
+(map * '(2 4 6 8) '(1 3 5 7))
+;; each element is multiplied by the element in the corresponding position in the other list 
+
+(map / '(2 4 6 8) '(1 3 5 7))
+;; each element is divided by the element in the corresponding position in the other list 
+
+(map mod '(2 4 6 8) '(1 3 5 7))
+;; each element is divided by the element in the corresponding position in the other list and the remainder is outputed. If there is no remainder the output is 0
+
+(map - '(2 4 6 8) '(1 3 5 7))
+;; each element is subtracted by the element in the corresponding position in the other list 
