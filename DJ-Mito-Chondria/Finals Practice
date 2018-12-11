@@ -1,0 +1,53 @@
+;; range = (range 100) -> 0-99
+;; count = outputs a # for the length of a word.
+;; first = (first "dog") outputs the first letter of a word
+;; last = (last "dog") outputs last letter of word
+;; rest = outputs 1 to end of the list or word
+;; drop = (drop 2 '(1 2 3 4))-> (3 4)
+;; take = (take 3 '(2 3 4 5))-> (2 3 4)
+;; inc = +1 to each number in a lst
+;; dec = -1 to each 
+;; str = string together things
+;; subs = (subs "jodi" 1 3)-> "od"
+;; conj = puts thing at beginning
+;; def = define a variable -> (def banana '(1 2 6))--> (apply + 
+;;                                                     banana) = 10
+;; defn = define function--> can write doc strngs
+;; mod = return the remainder of dividing b into a. 
+;; float = decimal 
+
+;; for
+;; if
+;; map 
+;; apply
+
+(defn doubler [n] (* n 2))
+(def primes '(2 3 5 7 11 13))
+
+(def daves_list '("a" "b" "c" "d" "e" "f" "g"))
+(for [k '(1 3 5)] (nth daves_list k))
+
+
+(for 
+  [x '(:C4 :D4 :E4) 
+   y '(1 0.5 0.5)] 
+  (list x y)
+)
+
+(map list '(1 3 6 7) '(9 6 3 2))
+
+(map + '(5 6 7) '(1 2 3 4) ' (9 9 9 9 9 9))
+
+(mod 4 3)
+
+(defn quest
+[lst]
+(conj (rest lst) (last lst)))
+
+(str '(1 2 3 4) '(2 3 4 5))
+
+(apply str '("dog" "cat"))
+
+(def banana '(1 2 3 4))
+
+(str (last "dog"))  ;;"g"
