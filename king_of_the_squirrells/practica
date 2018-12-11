@@ -1,0 +1,21 @@
+;; Function that takes two arguments (m n) and returns true if n divides evenly into m
+ (defn divider
+   "Returns true if n divides equally into m"
+      [m n]
+        (= 0 (mod m n))
+        )
+        
+  ;; Function takes two lists [list1 list2] 
+  ;; and returns true if the last element of list1 equals 
+  ;; the first element of list2
+  (defn aa
+  "Returns true if last element list1 = first element list2"
+  [list1 list2]
+  (= (last list1) (first list2))
+  )
+
+(defn addy
+  "Returns true if i = j + k"
+  [i j k]
+  (= i (+ j k))
+  )
