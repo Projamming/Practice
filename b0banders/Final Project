@@ -1,0 +1,55 @@
+;; Completed with Jason Brochu and Ian Nichols 
+
+;Used prof. perkins code for straightjacket as a base for this song. It is from 
+; the "A melody with note durations" Google Document posted on Piazza.
+;We've created the song jingle bells using the electric piano instrument synth
+
+(ns myproj.core
+  (:use [overtone.core]))
+
+;electric piano synth
+(defsynth elec-piano [freq 200 dur 0.5]
+  (let [src (saw [freq (* freq 1.01) (* 0.99 freq)])
+        low (sin-osc (/ freq 2))
+        filt (lpf src (line:kr (* 10 freq) freq 10))
+        env (env-gen (perc 0.1 dur) :action FREE)]
+    (out 0 (pan2 (* 0.6 low env filt)))))
+
+
+(defn to-freq
+    "Converts a note in :A4 form to its frequency."
+    [my-note]
+    (midi->hz (note my-note))
+    )
+
+
+
+(defn jinglebells
+  [time sleeps melody]
+  (at time (elec-piano (to-freq (first melody)) (first sleeps)))
+  (let [new-time (+ time (* 1000 (first sleeps)))]
+    (apply-by new-time
+              jinglebells [new-time
+                             (rest sleeps)
+                             (rest melody)])))
+
+
+;notes and durations for jingle bells
+(jinglebells (now)
+    (cycle [1/4 1/4 1/4 1/4 3/4 1/8 1/8 1/4 1/4 1/4 1/4 4/4
+      1/4 1/4 1/4 1/4 4/4 1/4 1/4 1/4 1/4 4/4
+      1/4 1/4 1/4 1/4 4/4 1/4 1/4 1/4 1/4 3/4 1/4
+      1/4 1/4 1/4 1/4 1/4 1/4 1/4 1/4 1/4 1/4 1/4 1/4 4/4
+      1/4 1/4 2/4 1/4 1/4 2/4 1/4 1/4 3/8 1/8 4/4
+      1/4 1/4 3/8 1/8 1/4 1/4 1/4 1/8 1/8 1/4 1/4 1/4 1/4 1/2 1/2
+      1/4 1/4 1/2 1/4 1/4 1/2 1/4 1/4 3/8 1/8 4/4
+      1/4 1/4 3/8 1/8 1/4 1/4 1/4 1/8 1/8 1/4 1/4 1/4 1/4 4/4])
+    (cycle [:D4 :B4 :A4 :G4 :D4 :D4 :D4 :D4 :B4 :A4 :G4 :E4
+      :E4 :C5 :B4 :A4 :F#4 :D5 :D5 :C5 :A4 :B4
+      :D4 :B4 :A4 :G4 :D4 :D4 :B4 :A4 :G4 :E4 :E4
+      :E4 :C5 :B4 :A4 :D5 :D5 :D5 :D5 :E5 :D5 :C5 :A4 :G4
+      :B4 :B4 :B4 :B4 :B4 :B4 :B4 :D5 :G4 :A4 :B4
+      :C5 :C5 :C5 :C5 :C5 :B4 :B4 :B4 :B4 :B4 :A4 :A4 :B4 :A4 :D5
+      :B4 :B4 :B4 :B4 :B4 :B4 :B4 :D5 :G4 :A4 :B4
+      :C5 :C5 :C5 :C5 :C5 :B4 :B4 :B4 :B4 :D5 :D5 :C5 :A4 :G4]))
+
