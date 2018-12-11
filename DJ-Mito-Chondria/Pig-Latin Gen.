@@ -1,0 +1,13 @@
+;; Clojure Practice
+
+(defn pig_word
+  "Alters words into piglatin. Takes the first letter of a word and combines it with -ay, then puts it at the end of the word to create a fabricated suffix for piglatin."
+  [word1]
+  (str (subs word1 1 (count word1)) (first word1) "ay ")
+)
+
+(defn piglatin
+  "Translates a list of words into the piglatin language so you can talk in code during Thanksgiving dinner!"
+  [lst1]
+  (apply str (map pig_word lst1))
+)
