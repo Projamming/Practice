@@ -1,0 +1,179 @@
+# def rock_paper_scissor
+# print "Rock Paper or Scissor?"
+# response = gets.chomp
+
+# #List
+# options = ["Rock", "Paper", "Scissor"]
+# pc_choice = options.sample
+# puts "You chose #{response.upcase}"
+# puts "The computer chose #{pc_choice.upcase}"
+
+# #if statements
+# if pc_choice == "Rock"
+# if response == "Paper"
+# puts "Win! :)"
+# elsif response == "Rock"
+# puts "Tie"
+# else
+# puts "Lose"
+# end
+
+# elsif pc_choice == "Paper"
+# if response == "Scissor"
+# puts "Win! :)"
+# elsif respomse == "Paper"
+# puts "Tie"
+# else
+# puts "Lose"
+# end
+
+# elsif response == "Rock"
+# puts "Win"
+# elsif response == "Scissor"
+# puts "Tie"
+# else
+# puts "Lose"
+# end
+
+# end
+
+# def greet
+# print "What is your name? "
+# name = gets.chomp 
+# print "Where are you from?"
+# place = gets.chomp
+# puts "Hello, #{name} from #{place}"
+# end
+
+# def password
+# print "What is the name of your parents?"
+# name = gets.chomp
+# print "How old are you?"
+# age = gets.chomp
+# puts "Your password is #{name}#{age}"
+# end
+
+# def flipping_a_coin
+# print "Pick heads or tails"
+# side = gets.chomp
+# puts "The computer flipped tails you flipped #{side}"
+# end
+
+# def flipping_a_coin
+# print "Choose heads or tails"
+# side = gets.chomp
+
+# options = ["Heads", "Tails"]
+# pc_choice = options.sample
+# puts "You chose #{side.upcase}"
+# puts "The computer chose #{pc_choice.upcase}"
+
+# if pc_choice == "Heads"
+# if side == "Heads"
+# puts "You guessed correctly!"
+# elsif side == "Tails"
+# puts "You didn't guess correctly"
+# end
+
+# if pc_choice == "Tails"
+# if side == "Tails"
+# puts "You guessed correctly!"
+# elsif side == "Heads"
+# puts "You didn't guess correctly"
+# end
+# end
+
+# def quack_quack
+# print "How many ducks do you have?"
+# num_ducks = gets.chomp.to_i
+# num_ducks.times do
+# puts "Quack"
+# end
+# end
+
+# def ducks_and_cows
+#   print "How many ducks do you have?"
+#   num_ducks = gets.chomp.to_i 
+#   print "How many cows do you have?"
+#   num_cows = gets.chomp.to_i
+# if num_ducks > num_cows
+#   num_ducks.times do
+#   puts "Quack"
+# end
+# else
+#   num_cows.times do
+#   puts "Moo"
+# end
+# end
+#   if num_ducks == num_cows
+#   puts "Moo_Quack"
+# end
+# end
+
+# BOOLEAN DATA TYPE: TRUE OR FALSE #
+# "puts 1+1 == 2 if it's true you get a true"
+
+# def range_and_sample
+#   ai_range = (1 ... 100).to_a  #a = array
+#   puts ai_range.sample #sample picks a number between 1-100 
+# end
+
+# Let's write a guessing game in which the AI chooses
+# a number between 1 and 100 and then we try and guess
+# what it is
+
+# def guess
+#   ai_range = (1 ... 100).to_a
+#   ai_pick = ai_range.sample
+#   counter = 0 #initialize a counter
+#   loop do #keeps asking the player to guess a number
+#     print "Enter a guess:"
+#     player_guess = gets.chomp.to_i
+#     counter += 1 #increment the counter
+#     if player_guess > ai_pick
+#     puts "You guessed too high"
+#     elsif player_guess < ai_pick
+#     puts "You guessed too low!"
+#     else
+#     puts "You got it in #{counter} guesses!"
+#     break #stops the code from running
+#     end
+#   end
+# end
+
+#Write a program that asks the user to choose two numnbers.
+#The program should then choose a random number between them
+#and print "Quack" that many times
+# def quack
+#   print "Pick a number"
+#   number_1 = gets.chomp.to_i
+#   print "Pick another number"
+#   number_2 = gets.chomp.to_i
+#   ai_range = (number_1 ... number_2).to_a
+#   ai_pick = ai_range.sample
+#   ai_pick.times do
+#   puts "Quack"
+# end
+# end
+#this is how you do that
+
+#puts "a" < "c" #letters are like numbers: a is before c so 
+               #it's true
+#puts "c" < "b" #c is not before b so it's false
+
+def guess
+  ai_range = ("a" ... "z").to_a
+  ai_pick = ai_range.sample
+  loop do #keeps asking the player to guess a number
+    print "Enter a guess:"
+    player_guess = gets.chomp
+    if player_guess > ai_pick
+    puts "You guessed too high"
+    elsif player_guess < ai_pick
+    puts "You guessed too low!"
+    else
+    puts "You got it!"
+    break #stops the code from running
+    end
+  end
+end
