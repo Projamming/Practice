@@ -1,0 +1,22 @@
+;; 11/1 practice - some code from 11/1 classcode
+
+;; conj outputs the list with the number specified now at the beginning of said list 
+(conj '(2 4 6 8) 10)
+;; (10 2 4 6 8)
+
+;; creating our own functions practice 
+
+;; ;; Q: Write a function that takes two arguments [m n] and
+;; ;; returns true if n divides evenly into m. Hint: (mod )
+;; (defn is_div_by
+;;  "Returns true if n divides evenly into m."
+;;  [m n]
+;;  (= (mod m n) 0))
+
+;; I tried to make a function with 3 arguments [m n o] and returns true if n divides evenly into m and also o. 
+
+(defn is_div_by
+  "Returns true if n divides evenly into m and o"
+  [m n o]
+  (= (mod m n) 0) (= (mod o n) 0)
+  )
