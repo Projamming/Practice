@@ -9,7 +9,7 @@ in_thread do
                  chord(:C3, :major),
                  chord(:A4, :minor)]
     
-    calling = (ring 0, 1, 2, 3, 1, 2, 3, 0, 0)
+    calling = (ring 0, 1, 2, 3, 1, 2, 3, 0, 0) ;;the 0 refers to the first entry of the list (the minor chord of E)
     play_pattern_timed my_chords [calling.look], 0.25
   end
 end
