@@ -1,0 +1,56 @@
+;;(defn tripler [n] (* n 3))
+
+;;Without using *, find a way to write a function that multiplies n by 6
+;;(defn sixer [n] (tripler (doubler n)))
+
+(defn greet [name] (str "hello" name))
+;;remember to have a space after hello and before and after from so 
+;; that there's actually spaces between the words 
+(defn greeter [name city] (str "Hello " name " from " city))
+
+;;If you type greeter my_name "Verona" it will know that your name
+;;is neha because you defined it here
+(def my_name "Neha")
+
+;;When you run the function >/< on numbers the answer is true/false
+;;Q What is the function's job?
+(defn lc [lst1 lst2] (>(count lst1) (count lst2))) ;;Seeing whether there are more entries in lst1 or lst2
+;;you need to put in numbers for lst1 and lst2
+
+;;We usually write long functions with indentatin, and we can
+;;add an in-function comment called a 'docstring':
+(defn lc_snazzy 
+  "Returns true if the length of lst1 exceeds that of lst2" ;;tells you what the function is about
+  [lst1 lst2]
+  (> (count lst1) (count lst2)))
+
+  ;; Q: Write a function that takes two arguments [m n] and
+  ;;returns true if n divides evenly into m. Hint: (mod )
+  (defn lc_n 
+  "Returns true if n divides evenly into m"
+  [m n]
+  (= (mod m n) 0)) ;;is the divider remainder thing
+
+  ;; Q. Write a function that takes two lists [lst1 lst2]
+  ;; and returns true if the last element of lst1 equals
+  ;; the first element of lst2
+  (defn lst_one
+  "Returns true if the last element of lst1 equals the first element of lst2"
+  [lst1 lst2]
+  (= (last lst1) (first lst2)))
+
+;;Q. Write the function "addy" that takes three arguments [i j k] and 
+;; returns 'true' if i = j+k
+
+(defn addy
+"Returns true if i = j + k"
+[i j k]
+( = i ( + j k)))
+
+;;Write the function "longer_than" that takes two arguments lst n
+;; returns true if the length of 1st is longer than n
+
+(defn longer_than 
+"Returns true if the legnth of lst is longer than n"
+[lst n]
+(> lst n))
