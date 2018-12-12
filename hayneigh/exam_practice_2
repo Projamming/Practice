@@ -1,0 +1,78 @@
+Mathematical functions:
+=  >  < :the output for these are either true/false
+Example: (= 6 3) = false
+Example: (> 6 3) = true
+ 
++ - * / :the output is a numerical answer that appears just like that
+Example: (* 4 3) = 12
+Example: (+ 4 3) = 7
+Example: (-4 3) = 1
+Example: (/ 4 3) = 4/3 ;;appears as a fraction, if you want to change it to a decimal: "float"
+;;Equations can also be combined:
+Example: (- (/ 8 2) (* 2 1)) = 2
+;; 8 is divided by 2 and then subtracted from the product of 2 and 1 
+
+first: returns the first entry in a list 
+Example: (first ‘(a b c)) = a
+ 
+last: returns the last entry in a list
+Example: (last ‘(a b c) = c
+    
+count: returns the number of characters in the string or it counts the number of entries in a list
+Example: (count “computer”) = 7
+Example: (count '(1 2 3 4 6) = 5
+ 
+range: returns a list of numbers that starts from the first number but goes to one less than the last number
+Example: (range 5 10) = (5 6 7 8 9)
+Example: (range 2) = (0 1) ;;if it just has one number then it starts from 0 and goes up to one less than the number
+
+inc: increases the entry by 1
+Example: (inc 4) = 5
+ 
+dec: decreases the entry by 1
+Example: (dec 4) = 3
+ 
+rest: returns all but the first entry in a list
+Example: (rest ‘(1 2 3 4 5) = (2 3 4 5)
+ 
+drop: drops the number of elements of the list as specified 
+Example: (drop 2 ‘(1 2 3 4 5)) = (3 4 5) ;;the number that you want to drop can be before or after the list
+ 
+take: returns the first "number" of entries of the list
+Example: (take 3  ‘(1 2 3 4 5)) = (1 2 3) ;;the number that you want to take can be before or after the list
+ 
+str: creates a single string from the entries
+Example: (str “hay” “neigh”) = “hayneigh” ;;no spaces between the two words
+ 
+subs: returns the specified part of a string
+Example: (subs “computer” 2 6) = “mput”
+Example: (subs "computer" 2) = "mputer" ;;if there isn't an end number then it starts from the number 
+                                        ;;as specified and goes till the end of the word
+ 
+conj: adds an entry that's given to the front of the list
+Example: (conj ‘(b c d e f) a) = (a b c d e f)
+ 
+def: defines a function
+Example: (def numbers (list 1 2 3 4 5))
+ 
+defn: defines an original function
+Example: 
+(defn factor
+"Returns true if n divides evenly into m"
+[m n]
+(= (mod m n) 0))
+ 
+mod: divides the two numbers and if they aren't perfectly divisible it returns the remainder of a/b
+Example: (mod 20 3) = 2
+ 
+Functions with a more complicated structure: 
+for: loop
+Example: (for [i (range 5)] (+ i 2)) = (2 3 4 5 6)
+ 
+map: applies a function to each entry in a list
+Example: (map inc '(1 2 3 4)) = (2 3 4 5)
+Example: (map list '(1 3 6 7) '(9 6 3 2)) = ((1 9) (3 6) (6 3) (7 2))
+Example: (map + '(5 6 7) '(1 2 3 4) '(9 9 9 9 9 9 9)) = (15 17 19)
+
+apply: applies a function to a list, treats each entry as an argument
+Example: (apply + (inc ‘(1 2 3 4 5))) = 20 ;;first increases each number by one and then adds them all together 2+3+4+5+6
