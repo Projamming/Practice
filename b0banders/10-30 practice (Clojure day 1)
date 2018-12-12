@@ -1,0 +1,49 @@
+;;  10/30 Practice after first day of Clojure, some code used from 10-30 classcode
+
+;; Basic mathematical functions in Clojure
+(+ 4 3) ;; add 4 to 3 
+
+(- 10 5) ;; 5 is subtracted from 10 
+
+(/ 20 2) ;; 20 is divided by 2
+
+(* 4 5) ;; 4 is multiplied by 5
+
+;; Equations can be combined and a form of order of operations ensues 
+
+(+ (* 6 2) (* 2 1))
+;; 2 is multiplied by 1 and then added to the product of 6 multiplied by 2
+
+(/ (+ 5 5) (* 2 1))
+;; 2 is multiplied by 1 and then divided int the sum of 5 plus 5
+
+
+;; mod function is about remainders 
+
+( mod 12 6) 
+;;no remainder here so output is zero 
+
+( mod 20 6)
+;; remainder is 2 so output is 2
+
+;; = is used for true false 
+;; ex. from class 
+(= (mod 14 3) (mod 19 5))
+;; the remainder of 14/3 is not equal to the remainder of 19/5 therefore the output is false 
+
+(= (mod 12 2) (mod 10 5))
+;; both remainders are 0 in this example so the output is true
+
+(= (* 12 2) (* 8 3))
+;; product of first set is equal to product of second set so the utput is true. 
+
+
+;; Q4. What is a number that could go in the blank to make
+;; this statement return "true"?
+;; (> (mod 11 4) (mod 5 __))
+
+(> (mod 11 4) (mod 5 5))
+;;inputed 5 to answer this question from class since the (mod 5 5) = 0 
+
+
+
