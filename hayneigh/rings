@@ -1,3 +1,5 @@
+;;Rings mean that things can start at different times but when they're playing together they sound good. They all end at the same time
+
 use_bpm 500 #beats per minute
 use_synth :piano
 
