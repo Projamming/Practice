@@ -1,0 +1,31 @@
+HW practice
+
+
+;; Output is the 
+(defn mystery
+  "You write the docstring!"
+  [my_ratio]
+  (int (/ 1 (/ my_ratio (numerator my_ratio)))))
+
+
+;; ;; Q3
+;; def shuffle
+;;  print "Enter a word: "
+;;  word = gets.chomp.upcase.chars
+;;  first = word.take(1)
+;;  # print first.join(' ')
+;;  # print (' ')
+;;  second = word.take(word.length() - 1).drop(1)
+;;  scrambled2 = second.shuffle
+;;  # print scrambled2.join(' ')
+;;  # print (' ')
+;;  third = word.drop(word.length() - 1)
+;;  # print third.join(' ')
+;;  # print (' ')
+;;  print "Scrambled version: #{first.join(' ')}#{scrambled2.join('')}#{third.join(' ')}"
+;; end
+
+;; (defn shuffler
+;;   "Returns a shuffled version of strg."
+;;   [strg]
+;;   (apply str (shuffle (seq strg))))

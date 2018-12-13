@@ -1,0 +1,46 @@
+(def primes '(2 3 5 7 11 13))
+(conj (range 5)(last primes))
+
+;; today: for loops, if statements
+
+(for [i (range 10)] (* i 2))
+(for [i (range 10)] (* 1 2))
+
+;; Every cat variable is added to every dog variable
+(for [cat primes dog '(2 3 4)] (+ cat dog))
+;; Flipping the varibales will create a new output
+(for [cat '(2 3 4) dog primes] (+ cat dog))
+
+;; Works like mod, so grabs the k specified entries
+;; Of daves list the 1st 2nd and 5th list were grabbed
+(def daves_list '("a" "b" "c" "d" "e" "f" "g"))
+(for [k '(1 2 5)] (nth daves_list k))
+
+;; Ruby Version
+;; daves_list = ["a", "b", "c", "d", "e", "f", "g"]
+;; for k in [1, 3, 5]
+;;   puts daves_list[k]
+;; end
+
+(for [x '(1 2 3) y '(4 5)] (list x y))
+
+(for
+  x '(:C4 :D4))
+
+
+(defn longer_list
+  "Return true if lst1 has more entried than lst2."
+  [lst1 lst 2]
+  (if (> (count lst1) (count lst2))
+    "list 1 is longer!"
+    "List 1 is not longer."
+  )
+)
+
+;; map
+
+(map dec '(1 3 6 7))
+
+(map list '(1 3 6 7) '(9 6 3 2))
+(map list '(:C4 :D4 :E4) '(1 2 3))
+(map + '(5 6 7) '(1 2 3))

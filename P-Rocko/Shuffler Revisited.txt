@@ -1,0 +1,22 @@
+;; (defn mystery
+;;   "You write the docstring!"
+;;   [my_ratio]
+;;   (int (/ 1 (/ my_ratio (numerator my_ratio)))))
+
+;; (defn fact
+;;   "Returns n!"
+;;   [n]
+;;   (apply * (rest (range (inc n)))))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (defn shuffler
+;;   "Returns a shuffled version of string."
+;;   [strg]
+;;   (apply str (shuffle (seq strg))))
+
+;; (defn scrambler
+;;   "Returns first and last letters of word as original does while shuffling the middle."
+;;   [word]
+;;   (str (first word) (shuffler (subs word 1 (- (count word) 1))) (last word)))
+
+(drop 2 '(1 1 1))
+(drop -2 '(1 2 3))

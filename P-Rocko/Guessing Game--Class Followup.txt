@@ -1,0 +1,72 @@
+# Let's write a guessing game in which the AI chooses a # number between 1 and 100 and then we try to guess what # it is
+def guess
+  ai_range = (1 ... 100).to_a #a = array
+  ai_pick = ai_range.sample
+  ai_pick2 = ai_range.sample
+  num_ducks = gets.chomp.to_i
+  num_ducks.times do
+    puts "Quack!"
+  # puts ("The AI picked #(ai_pick)") 
+  loop do
+    print "Enter a guess: "
+    player_guess = gets.chomp.to_i
+    if player_guess > ai_pick
+      puts "You guessed too high!"
+    elsif player_guess < ai_pick
+      puts "You guessed too low!"
+    else
+      puts "You got it"
+    end
+  end
+end
+
+# def range_and_sample
+#   #ai_choice = [1, 2, 3, 4, 5].sample
+#   #alternative way to write a list
+#   ai_range = (1 ... 100).to_a #a = array
+#   puts ai_range.sample
+# end
+
+# def ducks_and_cows
+#   print "How many cows do you have?"
+#   num_cows = gets.chomp.to_i
+#   print "How many ducks do you have?"
+#   num_ducks = gets.chomp.to_i
+
+
+#   if num_ducks > num_cows
+#     num_ducks.times do
+#       puts "Quack!"
+#     end
+#   else num_cows > num_ducks
+#     num_cows.times do
+#       puts "Moo!"
+#     end
+#   # else
+#   #   puts "Chaos!"
+#   end
+# end
+
+# def how_many
+#   print "How many cows do you have?"
+#   num_ducks = gets.chomp.to_i
+#   num_ducks.times do
+#     puts "Quack!"
+#   end
+# end
+
+def how_many
+  print "How many ducks do you have?"
+  num_ducks = gets.chomp.to_i
+  num_ducks.times do
+    puts "Quack!"
+  end
+end
+
+# # def how_many
+# # print "How many ducks do you have?"
+# # num_ducks = gets.chomp
+# # 5.times do
+# # puts "Quack!"
+# # end
+# # end

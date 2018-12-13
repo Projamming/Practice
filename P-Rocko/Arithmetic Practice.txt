@@ -1,0 +1,49 @@
+# (+ 1 2)
+(+ 1/2 1/4)
+
+(float 1/2)
+
+list( 1 2 3 4 5 6 7 8 9)
+
+
+
+;; (nth '(1 2 3 4 5 6 7 8 9) 6)
+;; (+ 1 2)
+;; (+ 1/2 1/4)
+;; (+ 4 5)
+;; (float 1/2)
+
+;; Let's try to grab the sub-list (5 6 7) from 
+;; the master list (1 2 3 4 5 6 7 8 9)
+;; (drop 4 '(1 2 3 4 5 6 7 8 9)) ;; -> (5 6 7 8 9)
+;; (take 3 (drop 4 '(1 2 3 4 5 6 7 8 9))) ;; -> (5 6 7)
+
+;; This is the answer
+;; (take 3 '(5 6 7 8 9))
+
+
+
+
+;; To make this faster
+;; (range 30)
+;; (range 10, 20)
+
+;; (def bananas)
+;; Question 1
+(- (/ 18 3) (* 3 2))
+;; Question 2
+(+ (/ 81 5) (/ 54 4))
+;;Question 3
+(= (mod 14 3) (mod 19 5))
+;;Question 4
+(> (mod 11 4) (mod 5 4))
+
+;;Question 5
+(range 20)
+(take 5 (range 20))
+(drop 5 (take 5 (range 20)))
+
+(defn mystery
+  "You write the docstring!"
+  [my_ratio]
+  (int (/ 1 (/ my_ratio (numerator my_ratio)))))

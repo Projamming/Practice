@@ -1,0 +1,27 @@
+# def shuffle
+#   print "Enter a word: "
+#   word = gets.chomp.upcase
+#   take 1 (Enter a word)
+#   take -1 (Enter a word)
+#   scrambled = word.chars.shuffle.join
+#   puts "#{scrambled}"
+# end
+
+# def shuffle
+#   print "Enter a word: "
+#   word = gets.chomp.upcase
+#   scrambled = word.chars.shuffle.join
+#   puts "#{scrambled}"
+# end
+
+a = [1, 2, 3, 4, 5, 0]
+a.take(3)
+
+def shuffle
+  print "Enter a word: "
+  word = gets.chomp.upcase
+  scrambled = word.chars.shuffle.join
+  puts "#{scrambled}"
+end
+
+

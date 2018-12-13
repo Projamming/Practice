@@ -1,0 +1,19 @@
+Exam Practice
+;; (defn this-one
+;;   [word1]
+;;   (str (subs word1 2 (count word1)) "Nil")) 
+
+;; (defn that-one
+;;   [lst1]
+;;   (apply str (map this-one lst1)))
+
+
+;; (defn doubler
+;;   [s]
+;;   (str s s))
+
+;; (defn doubler-list
+;;   [lst1]
+;;   (map doubler (lst1)))
+
+(if (> 2 3) "false" "true") = "true"

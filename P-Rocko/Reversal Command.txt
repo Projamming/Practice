@@ -1,0 +1,30 @@
+Had to look up reversal command
+
+(defn rev
+  "Outputs word1 in reverse."
+  [word1]
+  (apply str (reverse word1))  ;; If I don't apply str, then I get: (\t \a \c).
+)
+
+(defn backwards
+  "Outputs a list of reverse words in reverse."
+  [lst1]
+  (reverse (map reversal lst1))
+
+;; I decided to write a function that will reverse the letters in a word and then reverse 
+;; the order of those words in a list.
+;; I don't think we were formally taught the reverse function, but I decided to type in reverse
+;; and see what happened...luckily it does what it calls for!:)
+
+;; (defn reversal
+;;   "Outputs word1 in reverse."
+;;   [word1]
+;;   (apply str (reverse word1))  ;; If I don't apply str, then I get: (\t \a \c).
+;; )
+
+;; (defn backwards
+;;   "Outputs a list of reverse words in reverse."
+;;   [lst1]
+;;   (reverse (map reversal lst1))  ;; Applies the function, reversal, to each word in the list,
+                                    ;; then reverses the order of the list.
+;; )
