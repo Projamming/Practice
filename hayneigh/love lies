@@ -1,0 +1,78 @@
+# TITLE:  Love Lies by Khalid & Normani
+
+use_bpm 150
+
+def right_hand
+  use_synth :blade                                         #the melody plays with a different synth
+  43.times do
+    controller = 1
+    use_synth_defaults pan: rrand(-1,1) if controller == 1 #plays each note of
+    tick                                                   #the melody in different ears
+    notes = (ring :Ab4, :Bb4, :Bb4, :Ab4, :r,              #randomly if controller = 1
+             :Ab4, :Ab4, :Gb4, :F4, :Eb4,
+             :Eb4, :r, :Db4, :Eb4, :r, :r,
+             :Db4, :Eb4, :Eb4, :Ab4, :Bb4,
+             :Ab4, :Ab4, :r, :Ab4, :Ab4, :Ab4,
+             :Gb4, :F4, :Eb4, :r, :Eb4, :r,
+             :F4, :Eb4, :Db4, :r, :Ab4, :r,
+             :Db4, :Db4, :Db4, :r,)
+    sleep_rest = (ring 0.5, 0.5, 0.5, 0.5, 0.5,
+                  1, 0.5, 0.5, 0.5, 1.5, 1.5, 3,
+                  1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5,
+                  0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,
+                  0.5, 0.5, 1, 1, 1, 0.5, 0.5, 0.5,
+                  0.5, 0.5, 1.5, 0.5, 0.5, 0.5, 0.5, 1)
+    sustain_1 = (ring 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,
+                 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0,
+                 0, 1, 0)
+    play notes.look, sustain: sustain_1.look
+    sleep sleep_rest.look
+  end
+end
+
+
+def midnotes_1
+  use_synth :piano
+  52.times do
+    tick
+    midnotes = (ring :r, :Gb3, :Bb3, :Gb3, :r, :Db3, :Gb3, :Bb3,
+                :r, :Cb3, :Gb3, :Db4, :r,
+                :r, :Gb3, :Bb3, :Gb3, :r, :Db3, :Gb3, :Bb3,
+                :r, :Cb3, :Gb3, :Db4, :r,)
+    middurations = (ring 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,
+                    0.5, 0.5, 0.5, 0.5, 2,
+                    0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,
+                    0.5, 0.5, 0.5, 0.5, 2)
+    play midnotes.look
+    sleep middurations.look
+  end
+end
+
+
+def left_hand
+  use_synth :piano
+  12.times do
+    controller = 0
+    use_synth_defaults amp: rrand(0.1,3) if controller == 1  #plays each note at a random
+    tick                                                     #amp between 0.1-3 if controller = 1
+    lownotes = (ring :Eb3, :Gb2, :Cb2, :Eb3, :Db2, :Cb2)
+    lowdurations = (ring 2, 2, 4, 2, 2, 4)
+    lowsustain = (ring 1.5, 1.5, 3.5, 1.5, 1.5, 3.5)
+    play lownotes.look, sustain: lowsustain.look
+    sleep lowdurations.look
+  end
+end
+
+
+### play song ###
+
+in_thread do
+  right_hand
+end
+
+in_thread do
+  midnotes_1
+end
+
+left_hand
