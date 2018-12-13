@@ -1,0 +1,33 @@
+##I looked at someone else's code and was inspired to try it out myself. Being able to control what drum is playing is exciting
+##and I also realized that you could add more of a melody and have complete control over what plays. 
+
+soft = :drum_bass_soft
+hard = :drum_bass_hard
+
+define :drum_1 do
+  3.times do
+    beats = (ring soft, hard, hard, soft, hard, hard)
+    sleep 0.5
+  end
+end
+
+define :drum_2 do
+  5.times do
+    beats = (ring hard, soft, hard, soft)
+    sleep 0.25
+  end
+end
+
+define :drum_3 do
+  9.times do
+    beats = (ring soft, soft, soft, hard, hard)
+    sleep 0.5
+  end
+end
+
+live_loop :control do
+  controller = 3
+  drum_1 if controller == 1
+  drum_2 if controller == 2
+  drum_3 if controller == 3
+end
