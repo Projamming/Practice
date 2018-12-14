@@ -1,0 +1,20 @@
+Experimenting with code and guitar sounds discussed in class 
+
+(ns notes.core
+  (:use [overtone.core]))
+
+(definst guitar [freq 220 amp 2.0 dur 0.55 decay 30 coef 0.3 gate 1]
+  (let [noize (* 0.8 (white-noise))
+        dly   (/ 1.0 freq)
+        plk   (pluck noize gate dly dly decay coef)
+        dist  (distort plk)
+        filt  (rlpf dist (* 12 freq) 0.6)
+
+(defn play-guitar
+    [my-notes]
+    (println "playing guitar chord!")
+    (map guitar (notes-to-freq my-notes)))
+
+; always play (guitar)
+
+
