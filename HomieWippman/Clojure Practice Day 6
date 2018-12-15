@@ -1,0 +1,13 @@
+;Messing around with different sounds and frequencies from "Various instruments for Overtone" File
+
+(definst xylophone [note 50]
+  (let [sound-src (sin-osc (midicps note))
+    env (env-gen (perc 0.01 1.0) :action FREE)] ; sam uses :free
+    (* sound-src env)))
+
+(defsynth elec-piano [freq 400 dur 0.3]
+  (let [src (saw [freq (* freq 1.01) (* 0.99 freq)])
+        low (sin-osc (/ freq 2))
+        filt (lpf src (line:kr (* 10 freq) freq 10))
+        env (env-gen (perc 0.1 dur) :action FREE)]
+    (out 0 (pan2 (* 0.6 low env filt)))))
