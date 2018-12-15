@@ -1,0 +1,22 @@
+; Figured out how to set the frequency for 66 bpm and 100 bpm respectively
+
+(defn melodyA
+   "Plays a melody using sleeps as durations on instrument."
+   [time sleeps melody instrument]
+   (at time (instrument (to-freq (first melody))))
+   (let [new-time (+ time (* 909.090909 (first sleeps)))]
+     (apply-by new-time 
+           melodyA [new-time
+                              (rest sleeps)
+                              (rest melody)
+                              instrument])))
+          
+(defn melodyB
+   [time sleeps melody instrument]
+   (at time (instrument (to-freq (first melody))))
+   (let [new-time (+ time (* 600 (first sleeps)))]
+     (apply-by new-time 
+           melodyB [new-time
+                              (rest sleeps)
+                              (rest melody)
+                              instrument])))
