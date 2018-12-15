@@ -1,0 +1,32 @@
+;Testing and experimentation from "An introduction to the Metronome!" File
+
+(ns metro.core
+  (:use [overtone.core])) 
+
+(defn my-hat-beat
+    [this-metro]
+    (let [beat (this-metro)]            
+        (println (str "beat: " beat))   
+        (at (this-metro beat) (c-hat)) 
+        (apply-by (this-metro (inc beat)) my-hat-beat this-metro [])))
+        ; (apply-by <time> <run-this-function> arguments [])
+        ; (my-hat-beat hat-metro)
+
+(defn my-beat
+    [this-metro sound]
+    (let [beat (this-metro)]           
+        (println (str "beat: " beat))  
+        (at (this-metro beat) (sound))
+        (apply-by (this-metro (inc beat)) my-beat this-metro sound []))) 
+        print beat (at <time> <run-this-function>)
+        ; sound is (my-beat hat-metro c-hat)
+         
+(definst steel-drum [note 60 amp 0.8]
+  (let [freq (midicps note)]
+    (* amp
+       (env-gen (perc 0.01 0.2) 1 1 0 1 :action FREE)
+       (+ (sin-osc (/ freq 2))
+      (rlpf (saw freq) (* 1.1 freq) 0.4)))))
+      ; (my-beat hat-metro steel-drum)
+      ; Add faster metronome (def steel-metro (metronome 120))
+      ; (my-beat steel-metro steel-drum)
